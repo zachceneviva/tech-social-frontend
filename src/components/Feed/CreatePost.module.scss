@@ -1,0 +1,102 @@
+@import "../partials/variables";
+
+.postCard {
+    width: 100%;
+    min-height: 200px;
+    display: block;
+    overflow: auto;
+    margin-top: 50px;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: white;
+
+    h1 {
+        font-size: 25px;
+        margin: 0;
+    }
+
+    span {
+        font-size: 20px;
+        margin-right: 5px;
+        margin-left: 5px;
+        float: left;
+    }
+
+    hr {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+}
+
+.createContent {
+    width: 100%;
+    min-height: 100px;
+    overflow: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.createPostImage {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: antiquewhite;
+    margin-right: 10px;
+
+    img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+}
+
+.textContent {
+    min-height: 80px;
+    width: 100%;
+    overflow: auto;
+}
+
+.postTextArea {
+    width: 100%;
+    resize: none;
+    height: 80px;
+    border: none;
+    white-space: pre-wrap;
+}
+
+.submitPost {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.postAddons {
+    margin-left: 5px;
+
+    span {
+        cursor: pointer;
+        font-size: 25px;
+        margin-right: 20px;
+    }
+}
+
+
+.postBtn {
+    color: $off-white;
+    background-color: $primary-color;
+    border: none;
+    transition: all 0.5s ease;
+    font-weight: 600;
+    width: 100px;
+    height: 40px;
+    font-size: 17px;
+    border-radius: 50px;
+
+    &:hover {
+        color: $off-white;
+        background-color: $primary-shadow;
+    }
+}
