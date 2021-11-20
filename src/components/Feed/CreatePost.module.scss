@@ -5,18 +5,18 @@
     min-height: 200px;
     display: block;
     overflow: auto;
-    margin-top: 50px;
+    margin-top: 25px;
     border-radius: 5px;
     padding: 15px;
     background-color: white;
 
     h1 {
-        font-size: 25px;
+        font-size: 17.5px;
         margin: 0;
     }
 
     span {
-        font-size: 20px;
+        font-size: 15px;
         margin-right: 5px;
         margin-left: 5px;
         float: left;
@@ -39,22 +39,22 @@
 }
 
 .createPostImage {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     background-color: antiquewhite;
     margin-right: 10px;
 
     img {
-        width: 80px;
-        height: 80px;
+        width: 60px;
+        height: 60px;
         border-radius: 50%;
         object-fit: cover;
     }
 }
 
 .textContent {
-    min-height: 80px;
+    min-height: 85px;
     width: 100%;
     overflow: auto;
 }
@@ -62,12 +62,13 @@
 .postTextArea {
     width: 100%;
     resize: none;
-    height: 80px;
+    height: 85px;
     border: none;
     white-space: pre-wrap;
 }
 
 .submitPost {
+    margin-top: -10px;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -78,7 +79,7 @@
 
     span {
         cursor: pointer;
-        font-size: 25px;
+        font-size: 20px;
         margin-right: 20px;
     }
 }
@@ -90,9 +91,9 @@
     border: none;
     transition: all 0.5s ease;
     font-weight: 600;
-    width: 100px;
-    height: 40px;
-    font-size: 17px;
+    width: 75px;
+    height: 35px;
+    font-size: 15px;
     border-radius: 50px;
 
     &:hover {

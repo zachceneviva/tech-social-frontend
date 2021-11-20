@@ -1,5 +1,5 @@
 import styles from "./CreatePost.module.scss";
-import { BsPencilFill, BsImage, BsGithub, BsLink } from "react-icons/bs";
+import { BsPencilFill, BsImage, BsGithub, BsLink, BsCodeSlash } from "react-icons/bs";
 import { Form, Button } from "react-bootstrap";
 
 export default function CreatePost() {
@@ -32,6 +32,7 @@ export default function CreatePost() {
                     <span><BsImage/></span>
                     <span><BsGithub/></span>
                     <span><BsLink/></span>
+                    <span><BsCodeSlash/></span>
                 </div>
                 <Button className={styles.postBtn}>Post</Button>
             </div>
