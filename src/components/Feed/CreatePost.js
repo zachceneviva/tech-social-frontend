@@ -22,6 +22,7 @@ export default function CreatePost() {
                 <div className={styles.textContent}>
                         <Form.Control
                             as="textarea"
+                            style={{fontSize: "14px"}}
                             placeholder="Type here..."
                             className={styles.postTextArea}
                         />
