@@ -61,7 +61,7 @@
 
 .postTextContent {
     overflow: auto;
-    min-height: 100px;
+    min-height: 50px;
     font-size: 14px;
 }
 
@@ -105,6 +105,11 @@
     .light {
         margin-left: 40px;
         color: rgb(216, 216, 77);
+    }
+
+    p {
+        font-size: 10px;
+        color: $primary-dark-text-color;
     }
 }
 

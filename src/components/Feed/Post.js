@@ -23,9 +23,9 @@ export default function Post () {
             </div>
             <hr/>
             <div className={styles.postInteract}>
-                <span ><FaRegComment/></span>
-                <span className={styles.heart}><BsHeart/></span>
-                <span className={styles.light}><BsLightbulb/></span>
+                <span ><FaRegComment/></span><p>5</p>
+                <span className={styles.heart}><BsHeart/></span><p>10</p>
+                <span className={styles.light}><BsLightbulb/></span><p>50</p>
             </div>
             <hr/>
             <div className={styles.postCreateComment}>
