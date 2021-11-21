@@ -1,0 +1,57 @@
+@import "../partials/variables";
+
+.comments {
+    margin-top: 35px;
+    width: 100%;
+}
+
+.commentCard {
+    width: 100%;
+    margin: 0;
+    color: $primary-dark-text-color;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    overflow: auto;
+    min-height: 75px;
+    margin-top: 10px;
+
+    img {
+        height: 40px;
+        width: 40px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+}
+
+.commentContent {
+    width: 100%;
+    margin-left: 5px;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    padding: 5px;
+    overflow: auto;
+    min-height: 75px;
+
+    p {
+        font-size: 13px;
+        margin-bottom: 5px;
+    }
+
+}
+
+.commentUserName {
+    margin-bottom: 10px;
+
+    h4 {
+        font-size: 14px;
+        margin-bottom: 0px;
+    }
+
+    p {
+        font-size: 10px;
+        color: $primary-accent-text-color;
+        margin-bottom: 0px;
+    }
+}

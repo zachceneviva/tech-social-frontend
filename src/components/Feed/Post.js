@@ -1,4 +1,5 @@
 import styles from "./Post.module.scss"
+import Comments from "./Comment"
 import { Form, Button } from "react-bootstrap"
 import {FaRegComment } from "react-icons/fa"
 import { BsHeart, BsHeartFill, BsLightbulb, BsLightbulbFill } from "react-icons/bs"
@@ -38,6 +39,7 @@ export default function Post () {
                         />
                 <Button className={styles.sendBtn}>Send</Button>
             </div>
+            <Comments/>
         </div>
     )
 }

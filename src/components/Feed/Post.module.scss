@@ -13,6 +13,7 @@
 
     hr {
         margin-top: 5px;
+        color: $primary-accent-text-color;
     }
 }
 
@@ -86,9 +87,10 @@
     justify-content: flex-start;
     align-items: center;
     margin-top: -15px;
+    margin-bottom: -5px;
 
     span {
-        font-size: 25px;
+        font-size: 15px;
         margin-left: 10px;
 
         &:hover {
@@ -108,7 +110,7 @@
     }
 
     p {
-        font-size: 10px;
+        font-size: 8px;
         color: $primary-dark-text-color;
     }
 }
