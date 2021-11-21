@@ -6,7 +6,7 @@ export default function Navigation() {
     return (
         <Navbar className={styles.navBar} collapseOnSelect expand="lg" variant="dark">
             <Container className={styles.container}>
-                <Navbar.Brand className="mb-1" href="#"><span id={styles.logo}><FaConnectdevelop /></span>Tech Social</Navbar.Brand>
+                <Navbar.Brand className="mb-1" href="#"><span id={styles.logo}><FaConnectdevelop /></span>Techonnect</Navbar.Brand>
                 <Navbar.Toggle className={styles.navBarCollapse} aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse className={styles.navBarCollapse} id="responsive-navbar-nav">
                     <Nav className={styles.navLinks}>

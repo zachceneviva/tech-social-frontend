@@ -4,11 +4,37 @@
     width: 100%;
     height: 100%;
     margin: 0;
+}
+
+.mainContentContainer {
+    width: 100%;
+    height: 100%;
+    margin: 0;
     background-color: whitesmoke;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-shrink: inherit;
 }
 
 .mainSection {
     width: 50%;
     height: 100%;
     margin: 0 auto;
+    margin-top: 25px;
+}
+
+.leftSection {
+    width: 22.5%;
+    height: 100%;
+    margin: 0 auto;
+    margin-top: 25px;
+}
+
+.rightSection {
+    width: 22.5%;
+    height: 100%;
+    margin: 0 auto;
+    margin-top: 25px;
 }
