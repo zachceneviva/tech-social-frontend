@@ -19,8 +19,8 @@ export default function Profile () {
                     <Post />
                 </div>
                 <div className={styles.rightSection} >
-                    <Meetup />
-                    <GroupsBanner />
+                    <Meetup title="Your Meetups"/>
+                    <GroupsBanner title="Your Groups"/>
                 </div>
             </div>
         </div>

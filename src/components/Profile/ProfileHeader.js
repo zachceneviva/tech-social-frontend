@@ -13,7 +13,7 @@ export default function ProfileHeader () {
                     <h2>Zach Ceneviva</h2>
                     <h6>Full-Stack Software Engineer</h6>
                     <h5>Nashville, TN</h5>
-                    <p>100 followers | 50 following</p>
+                    <p>50 Techonnections</p>
                 </div>
             </div>
         </div>

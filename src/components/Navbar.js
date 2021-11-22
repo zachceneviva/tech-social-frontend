@@ -3,14 +3,15 @@ import { Navbar, Nav, Container, NavDropdown} from "react-bootstrap"
 import { FaConnectdevelop } from "react-icons/fa"
 
 export default function Navigation() {
+
     return (
         <Navbar className={styles.navBar} collapseOnSelect expand="lg" variant="dark" fixed="top">
             <Container className={styles.container}>
-                <Navbar.Brand className="mb-1" href="#"><span id={styles.logo}><FaConnectdevelop /></span>Techonnect</Navbar.Brand>
+                <Navbar.Brand className="mb-1" href="/"><span id={styles.logo}><FaConnectdevelop /></span>Techonnect</Navbar.Brand>
                 <Navbar.Toggle className={styles.navBarCollapse} aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse className={styles.navBarCollapse} id="responsive-navbar-nav">
                     <Nav className={styles.navLinks}>
-                        <Navbar.Text><a href="#">Home</a></Navbar.Text>
+                        <Navbar.Text><a href="/">Home</a></Navbar.Text>
                         <Navbar.Text><a href="#">Explore</a></Navbar.Text>
                         <Navbar.Text><a href="#">Groups</a></Navbar.Text>
                         <Navbar.Text><a href="#">Meetups</a></Navbar.Text>
@@ -20,7 +21,7 @@ export default function Navigation() {
                             title="Zach Ceneviva"
                             id="collasible-nav-dropdown"
                         >
-                            <NavDropdown.Item href="#">
+                            <NavDropdown.Item href="/profile">
                                 My Profile
                             </NavDropdown.Item>
                             <NavDropdown.Item href="#">

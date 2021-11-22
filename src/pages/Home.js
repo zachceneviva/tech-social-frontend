@@ -1,12 +1,13 @@
+import React, {useState} from "react"
 import styles from "./Home.module.scss"
 import Feed from "../containers/Feed"
-import Navigation from "../components/Navbar"
 import BannerProfileCard from "../components/Feed/BannerProfileCard"
 import PeopleBanner from "../components/Feed/PeopleBanner"
 import Meetup from "../components/Feed/Meetup"
 import GroupsBanner from "../components/Feed/GroupsBanner"
 
 export default function Home () {
+
     return (
         <div className={styles.mainContainer}>
             <div className={styles.mainContentContainer}>
@@ -18,8 +19,8 @@ export default function Home () {
                     <Feed/>
                 </div>
                 <div className={styles.rightSection} >
-                    <Meetup/>
-                    <GroupsBanner />
+                    <Meetup title="Top Meetups"/>
+                    <GroupsBanner title="Top Groups"/>
                 </div>
             </div>
         </div>

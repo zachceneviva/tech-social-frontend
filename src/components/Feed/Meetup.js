@@ -1,9 +1,10 @@
+import { propTypes } from "react-bootstrap/esm/Image"
 import styles from "./Meetup.module.scss"
 
-export default function Meetup () {
+export default function Meetup (props) {
     return (
         <div className={styles.peopleBannerCard}>
-            <h2>Top Meetups</h2>
+            <h2>{props.title}</h2>
             <hr/>
             <div className={styles.people}>
                 <div className={styles.meetupDate}>

@@ -6,7 +6,7 @@ export default function BannerProfileCard () {
         <div className={styles.profileCard}>
             <h2>Zach Ceneviva</h2>
             <h4>Nashville, TN</h4>
-            <h6>100 followers | 50 following</h6>
+            <h6>50 Techonnections</h6>
             <hr/>
             <div className={styles.create}>
                 <p><BsPeopleFill/></p>

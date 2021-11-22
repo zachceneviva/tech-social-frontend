@@ -1,13 +1,12 @@
 import './App.scss';
-import Home from './pages/Home';
 import Navigation from './components/Navbar';
-import Profile from './pages/Profile';
+import AppRoutes from './routes/routes';
 
 function App() {
   return (
     <div className="App">
       <Navigation />
-      <Profile/>
+      <AppRoutes />
     </div>
   );
 }
