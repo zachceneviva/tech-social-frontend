@@ -3,8 +3,8 @@ import styles from "./Home.module.scss"
 import Feed from "../containers/Feed"
 import BannerProfileCard from "../components/Feed/BannerProfileCard"
 import PeopleBanner from "../components/Feed/PeopleBanner"
-import Meetup from "../components/Feed/Meetup"
 import GroupsBanner from "../components/Feed/GroupsBanner"
+import MeetupBanner from "../components/Feed/MeetupBanner"
 
 export default function Home () {
 
@@ -19,7 +19,7 @@ export default function Home () {
                     <Feed/>
                 </div>
                 <div className={styles.rightSection} >
-                    <Meetup title="Top Meetups"/>
+                    <MeetupBanner title="Top Meetups"/>
                     <GroupsBanner title="Top Groups"/>
                 </div>
             </div>

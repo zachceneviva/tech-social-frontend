@@ -1,9 +1,9 @@
 import styles from "./Profile.module.scss";
 import ProfileHeader from "../components/Profile/ProfileHeader";
-import Meetup from "../components/Feed/Meetup";
 import Post from "../components/Feed/Post";
 import PeopleBanner from "../components/Feed/PeopleBanner";
 import GroupsBanner from "../components/Feed/GroupsBanner";
+import MeetupBanner from "../components/Feed/MeetupBanner";
 
 export default function Profile () {
     return (
@@ -19,7 +19,7 @@ export default function Profile () {
                     <Post />
                 </div>
                 <div className={styles.rightSection} >
-                    <Meetup title="Your Meetups"/>
+                    <MeetupBanner title="Your Meetups"/>
                     <GroupsBanner title="Your Groups"/>
                 </div>
             </div>
