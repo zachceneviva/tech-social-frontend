@@ -7,6 +7,16 @@
     background-color: white;
     text-align: center;
     border-radius: 5px;
+    
+    a {
+        text-decoration: none;
+        color: $primary-dark-text-color;
+
+        &:active {
+            color: white;
+            background-color: $primary-color;
+        }
+    }
 
     h2 {
         margin-top: 10px;
