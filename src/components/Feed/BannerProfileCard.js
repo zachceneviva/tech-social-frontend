@@ -10,7 +10,7 @@ export default function BannerProfileCard () {
             <hr/>
             <div className={styles.create}>
                 <p><BsPeopleFill/></p>
-                <h4>People</h4>
+                <h4>Find Connections</h4>
             </div>
             <hr/>
             <div className={styles.create}>
