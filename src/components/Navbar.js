@@ -13,8 +13,8 @@ export default function Navigation() {
                     <Nav className={styles.navLinks}>
                         <Navbar.Text><a href="/">Home</a></Navbar.Text>
                         <Navbar.Text><a href="#">Explore</a></Navbar.Text>
-                        <Navbar.Text><a href="#">Groups</a></Navbar.Text>
-                        <Navbar.Text><a href="#">Meetups</a></Navbar.Text>
+                        <Navbar.Text><a href="/groups">Groups</a></Navbar.Text>
+                        <Navbar.Text><a href="/meetups">Meetups</a></Navbar.Text>
                         <Navbar.Text><a href="#">Messages</a></Navbar.Text>
                         <img className={styles.navUserImage} src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png" alt="user" />
                         <NavDropdown
