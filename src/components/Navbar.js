@@ -4,7 +4,7 @@ import { FaConnectdevelop } from "react-icons/fa"
 
 export default function Navigation() {
     return (
-        <Navbar className={styles.navBar} collapseOnSelect expand="lg" variant="dark">
+        <Navbar className={styles.navBar} collapseOnSelect expand="lg" variant="dark" fixed="top">
             <Container className={styles.container}>
                 <Navbar.Brand className="mb-1" href="#"><span id={styles.logo}><FaConnectdevelop /></span>Techonnect</Navbar.Brand>
                 <Navbar.Toggle className={styles.navBarCollapse} aria-controls="responsive-navbar-nav" />

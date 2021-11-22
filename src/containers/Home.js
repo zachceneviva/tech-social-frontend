@@ -3,6 +3,8 @@ import Feed from "./Feed"
 import Navigation from "../components/Navbar"
 import BannerProfileCard from "../components/Feed/BannerProfileCard"
 import PeopleBanner from "../components/Feed/PeopleBanner"
+import Meetup from "../components/Feed/Meetup"
+import GroupsBanner from "../components/Feed/GroupsBanner"
 
 export default function Home () {
     return (
@@ -17,7 +19,8 @@ export default function Home () {
                     <Feed/>
                 </div>
                 <div className={styles.rightSection} >
-                    
+                    <Meetup/>
+                    <GroupsBanner />
                 </div>
             </div>
         </div>
