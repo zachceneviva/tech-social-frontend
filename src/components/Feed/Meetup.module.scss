@@ -47,9 +47,26 @@
     }
 }
 
+.meetupDate {
+    margin-left: 20px;
+
+    h4 {
+        font-size: 17.5px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        color: $primary-color;
+    }
+
+    p {
+        font-size: 10px;
+        margin-top: -5px;
+        margin-bottom: 0px;
+    }
+}
+
 .userInfo {
     margin-bottom: 0px;
-    margin-left: 7.5px;
+    margin-left: 12.5px;
     text-align: left;
 
     h4 {
