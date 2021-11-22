@@ -6,7 +6,6 @@ export default function Feed () {
         <>
             <CreatePost/>
             <Post />
-            <Post />
         </>
     )
 }

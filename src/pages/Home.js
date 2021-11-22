@@ -1,5 +1,5 @@
 import styles from "./Home.module.scss"
-import Feed from "./Feed"
+import Feed from "../containers/Feed"
 import Navigation from "../components/Navbar"
 import BannerProfileCard from "../components/Feed/BannerProfileCard"
 import PeopleBanner from "../components/Feed/PeopleBanner"
@@ -9,7 +9,6 @@ import GroupsBanner from "../components/Feed/GroupsBanner"
 export default function Home () {
     return (
         <div className={styles.mainContainer}>
-            <Navigation/>
             <div className={styles.mainContentContainer}>
                 <div className={styles.leftSection} >
                     <BannerProfileCard/>

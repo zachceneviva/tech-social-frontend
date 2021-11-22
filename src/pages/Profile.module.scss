@@ -1,0 +1,46 @@
+@import '../components/partials/variables';
+
+.mainContainer {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.topContainer {
+    width: 100%;
+    height: 450px;
+    display: flex;
+    margin: 0;
+}
+
+
+.mainContentContainer {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-shrink: inherit;
+}
+
+.mainSection {
+    width: 50%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.leftSection {
+    width: 22.5%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.rightSection {
+    width: 22.5%;
+    height: 100%;
+    margin: 0 auto;
+    margin-top: 25px;
+}
