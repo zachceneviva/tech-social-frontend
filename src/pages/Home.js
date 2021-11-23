@@ -11,6 +11,12 @@ import axios from "axios"
 export default function Home () {
     const [postContent, setPostContent] = useState('')
     const [allPosts, setAllPosts] = useState([])
+    const [postImage, setPostImage] = useState('')
+    const [postGh, setPostGh] = useState('')
+    const [postLink, setPostLink] = useState('')
+    const [imageUrl, setImageUrl] = useState('none')
+    const [ghUrl, setGhUrl] = useState('none')
+    const [linkUrl, setLinkUrl] = useState('none')
 
     useEffect(() => {
         fetchData()
@@ -24,12 +30,45 @@ export default function Home () {
     const handlePost = (e) => {
         e.preventDefault()
         axios.post('http://localhost:4000/api/v1/techonnect/posts',
-        {content: postContent}).then( res => setAllPosts([res.data.post, ...allPosts]))
+        {content: postContent, image: `https://${postImage}`, github: `https://github.com/${postGh}`, link: `https://${postLink}`}).then( res => setAllPosts([res.data.post, ...allPosts]))
         setPostContent('')
+        setPostImage('')
+        setPostGh('')
+        setPostLink('')
+        setImageUrl('none')
+        setGhUrl('none')
+        setLinkUrl('none')
     }
 
     const handleChange = (e) => {
         setPostContent(e.target.value)
+    }
+
+    const handleImageChange = (e) => {
+        setPostImage(e.target.value)
+    }
+
+    const handleGhChange = (e) => {
+        setPostGh(e.target.value)
+    }
+
+    const handleLinkChange = (e) => {
+        setPostLink(e.target.value)
+    }
+
+    const showImageUrl = () => {
+        if (imageUrl === "none") setImageUrl("initial")
+        else setImageUrl('none')
+    }
+
+    const showGhUrl = () => {
+        if (ghUrl === "none") setGhUrl("initial")
+        else setGhUrl('none')
+    }
+
+    const showLinkUrl = () => {
+        if (linkUrl === "none") setLinkUrl("initial")
+        else setLinkUrl('none')
     }
 
     const post = allPosts.map((post, idx) => {
@@ -44,7 +83,7 @@ export default function Home () {
                     <PeopleBanner />
                 </div>
                 <div className={styles.mainSection}>
-                    <CreatePost handlePost={handlePost} text={postContent} handleChange={handleChange}/>
+                    <CreatePost handlePost={handlePost} text={postContent} handleChange={handleChange} postImage={postImage} postGh={postGh} postLink={postLink} handleImageChange={handleImageChange} handleGhChange={handleGhChange} handleLinkChange={handleLinkChange} showGhUrl={showGhUrl} showImageUrl={showImageUrl} showLinkUrl={showLinkUrl} imageUrl={imageUrl} ghUrl={ghUrl} linkUrl={linkUrl}/>
                     {post ? post : "No posts to show!"}
                     <div style={{width: "100%", height: "100px"}}/>
                 </div>

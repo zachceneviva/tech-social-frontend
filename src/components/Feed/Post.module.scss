@@ -64,6 +64,10 @@
     overflow: auto;
     min-height: 50px;
     font-size: 14px;
+
+    p {
+        white-space: pre-wrap;
+    }
 }
 
 .postImage {

@@ -66,6 +66,16 @@
     white-space: pre-wrap;
 }
 
+.additonalInput {
+    color: $primary-dark-text-color;
+    
+    h4 {
+        font-size: 15px;
+        margin-left: 6px;
+        margin-bottom: 2.5px;
+    }
+}
+
 .submitPost {
     margin-top: -10px;
     width: 100%;

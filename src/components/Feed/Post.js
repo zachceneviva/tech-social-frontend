@@ -3,7 +3,7 @@ import styles from "./Post.module.scss"
 import Comments from "./Comment"
 import { Form, Button } from "react-bootstrap"
 import {FaRegComment } from "react-icons/fa"
-import { BsFillHeartFill, BsHeart, BsHeartFill, BsLightbulb, BsLightbulbFill } from "react-icons/bs"
+import { BsHeart, BsHeartFill, BsLightbulb, BsLightbulbFill } from "react-icons/bs"
 import { formatDistanceToNow }from "date-fns"
 import axios from "axios"
 
@@ -68,7 +68,7 @@ export default function Post (props) {
                 <div className={styles.postTextContent}>
                     <p>{props.post.content}</p>
                 </div>
-                {props.post.image ? 
+                {props.post.image !== 'https://' ? 
                 <div className={styles.postImage}>
                     <img src={props.post.image} alt="post" />
                 </div> : null }
