@@ -61,12 +61,27 @@
 
 
 .postTextContent {
-    overflow: auto;
     min-height: 50px;
     font-size: 14px;
+    margin-bottom: 10px;
 
     p {
         white-space: pre-wrap;
+    }
+
+    a {
+        text-decoration: none;
+        color: $primary-color;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    h6 {
+        font-size: 17.5px;
+        display: inline;
+        margin-right: 25px;
     }
 }
 

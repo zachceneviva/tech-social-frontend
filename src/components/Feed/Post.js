@@ -67,11 +67,17 @@ export default function Post (props) {
                 </div>
                 <div className={styles.postTextContent}>
                     <p>{props.post.content}</p>
+                    {props.post.github !== "https://github.com/" ? 
+                    <h6><a target="_blank" href={props.post.github}>GitHub Repository</a></h6> : null}
+                    {props.post.link !== "https://" ?
+                    <h6><a target="_blank" href={props.post.link}>Live Demo</a></h6> : null}
                 </div>
+
                 {props.post.image !== 'https://' ? 
                 <div className={styles.postImage}>
                     <img src={props.post.image} alt="post" />
                 </div> : null }
+
                 <hr/>
                 <div className={styles.postInteract}>
                     <span onClick={showComments}><FaRegComment/></span><p>{commentsNum}</p>
