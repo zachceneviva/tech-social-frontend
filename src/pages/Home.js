@@ -32,6 +32,10 @@ export default function Home () {
         setPostContent(e.target.value)
     }
 
+    const post = allPosts.map((post, idx) => {
+        return <Post post={post} idx={idx} />
+    })
+
     return (
         <div className={styles.mainContainer}>
             <div className={styles.mainContentContainer}>
@@ -41,7 +45,8 @@ export default function Home () {
                 </div>
                 <div className={styles.mainSection}>
                     <CreatePost handlePost={handlePost} text={postContent} handleChange={handleChange}/>
-                    <Post posts={allPosts}/>
+                    {post ? post : "No posts to show!"}
+                    <div style={{width: "100%", height: "100px"}}/>
                 </div>
                 <div className={styles.rightSection} >
                     <Meetup title="Top Meetups"/>

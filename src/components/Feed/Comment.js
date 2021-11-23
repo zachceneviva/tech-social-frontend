@@ -2,7 +2,7 @@ import styles from "./Comment.module.scss"
 
 export default function Comments () {
     return (
-        <div className={styles.comments}>
+        <div className={styles.comments} >
             <div className={styles.commentCard}>
                 <img src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png" alt="comment" />
                 <div className={styles.commentContent}>

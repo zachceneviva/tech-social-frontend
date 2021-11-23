@@ -7,31 +7,39 @@ import { BsHeart, BsHeartFill, BsLightbulb, BsLightbulbFill } from "react-icons/
 import { formatDistanceToNow }from "date-fns"
 
 export default function Post (props) {
+    const [commentDisplay, setCommentDisplay] = useState ("none")
+
+    const showComments = () => {
+        if (commentDisplay === "none") setCommentDisplay('initial')
+        else setCommentDisplay('none')
+    }
+
+
     console.log(props.posts)
-    let post = props.posts.map((post, idx) => {
+
         return (
-            <div className={styles.post} key={idx}>
+            <div className={styles.post} key={props.idx}>
                 <div className={styles.postHeader}>
                     <div className={styles.postUserImage}>
                         <img src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png" alt="user" />
                     </div>
                     <div className={styles.postUserName}>
                         <h4>Zach Ceneviva</h4>
-                        <p>{formatDistanceToNow(new Date(post.createdAt))} ago</p>
+                        <p>{formatDistanceToNow(new Date(props.post.createdAt))} ago</p>
                     </div>
                 </div>
                 <div className={styles.postTextContent}>
-                    <p>{post.content}</p>
+                    <p>{props.post.content}</p>
                 </div>
-                {post.image ? 
+                {props.post.image ? 
                 <div className={styles.postImage}>
-                    <img src={post.image} alt="post" />
+                    <img src={props.post.image} alt="post" />
                 </div> : null }
                 <hr/>
                 <div className={styles.postInteract}>
-                    <span ><FaRegComment/></span><p>{post.comments.length}</p>
-                    <span className={styles.heart}><BsHeart/></span><p>{post.likes}</p>
-                    <span className={styles.light}><BsLightbulb/></span><p>{post.lightbulbs}</p>
+                    <span onClick={showComments}><FaRegComment/></span><p>{props.post.comments.length}</p>
+                    <span className={styles.heart}><BsHeart/></span><p>{props.post.likes}</p>
+                    <span className={styles.light}><BsLightbulb/></span><p>{props.post.lightbulbs}</p>
                 </div>
                 <hr/>
                 <div className={styles.postCreateComment}>
@@ -44,13 +52,9 @@ export default function Post (props) {
                             />
                     <Button className={styles.sendBtn}>Send</Button>
                 </div>
-                <Comments/>
+                <div style={{display: commentDisplay}}>
+                    <Comments />
+                </div>
             </div>
-        )})
-
-        return (
-            <>
-            {post ? post : "Loading..."}
-            </>
         )
 }
