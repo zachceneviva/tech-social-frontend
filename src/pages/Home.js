@@ -33,7 +33,7 @@ export default function Home () {
     }
 
     const post = allPosts.map((post, idx) => {
-        return <Post post={post} idx={idx} />
+        return <Post post={post} key={idx} />
     })
 
     return (
