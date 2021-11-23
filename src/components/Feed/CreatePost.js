@@ -2,7 +2,7 @@ import styles from "./CreatePost.module.scss";
 import { BsPencilFill, BsImage, BsGithub, BsLink, BsCodeSlash } from "react-icons/bs";
 import { Form, Button } from "react-bootstrap";
 
-export default function CreatePost() {
+export default function CreatePost(props) {
     return (
         <div className={styles.postCard}>
             <h1>
@@ -25,6 +25,9 @@ export default function CreatePost() {
                             style={{fontSize: "14px"}}
                             placeholder="Hello World..."
                             className={styles.postTextArea}
+                            name="post"
+                            value={props.text}
+                            onChange={props.handleChange}
                         />
                 </div>
             </div>
@@ -35,7 +38,7 @@ export default function CreatePost() {
                     <span><BsLink/></span>
                     <span><BsCodeSlash/></span>
                 </div>
-                <Button className={styles.postBtn}>Post</Button>
+                <Button className={styles.postBtn} onClick={props.handlePost}>Post</Button>
             </div>
         </div>
     );
