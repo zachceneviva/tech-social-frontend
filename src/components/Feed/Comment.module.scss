@@ -1,9 +1,5 @@
 @import "../partials/variables";
 
-.comments {
-    margin-top: 35px;
-    width: 100%;
-}
 
 .commentCard {
     width: 100%;
@@ -33,6 +29,7 @@
     padding: 5px;
     overflow: auto;
     min-height: 75px;
+    white-space: pre-wrap;
 
     p {
         font-size: 13px;
