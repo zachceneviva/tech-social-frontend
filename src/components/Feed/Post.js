@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Post.module.scss";
-import Comments from "./Comment";
+import Comment from "./Comment";
 import { FaRegComment } from "react-icons/fa";
 import {
     BsHeart,
@@ -27,7 +27,8 @@ export default function Post(props) {
 
     useEffect(() => {
         fetchComments();
-    }, []);
+        console.log("Fetching....")
+    }, [props.post]);
 
     const update = (like, lightbulb) => {
         axios
@@ -99,7 +100,7 @@ export default function Post(props) {
     console.log(allComments.length);
 
     const comment = allComments.map((comment, idx) => {
-        return <Comments comment={comment} key={idx} />;
+        return <Comment comment={comment} key={idx} />;
     });
 
     return (

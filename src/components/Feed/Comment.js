@@ -1,7 +1,7 @@
 import styles from "./Comment.module.scss"
 import { formatDistanceToNow }from "date-fns"
 
-export default function Comments (props) {
+export default function Comment (props) {
     return (
             <div className={styles.commentCard}>
                 <img src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png" alt="comment" />
