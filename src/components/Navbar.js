@@ -16,8 +16,6 @@ export default function Navigation() {
                         <Navbar.Text><a href="/groups">Groups</a></Navbar.Text>
                         <Navbar.Text><a href="/meetups">Meetups</a></Navbar.Text>
                         <Navbar.Text><a href="#">Messages</a></Navbar.Text>
-                        <Button className={styles.signUp}>Sign Up</Button>
-                        <Button className={styles.signIn}>Login</Button>
                         {/* <img className={styles.navUserImage} src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png" alt="user" />
                         <NavDropdown
                             title="Zach Ceneviva"
@@ -35,6 +33,8 @@ export default function Navigation() {
                             </NavDropdown.Item>
                         </NavDropdown> */}
                     </Nav>
+                    <Button href="/register" className={styles.signUp}>Sign Up</Button>
+                    <Button href="/login" className={styles.signIn}>Login</Button>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
