@@ -4,9 +4,9 @@ import CreatePost from "../components/Feed/CreatePost"
 import Post from "../components/Feed/Post"
 import BannerProfileCard from "../components/Feed/BannerProfileCard"
 import PeopleBanner from "../components/Feed/PeopleBanner"
-import Meetup from "../components/Feed/Meetup"
 import GroupsBanner from "../components/Feed/GroupsBanner"
 import axios from "axios"
+import MeetupBanner from "../components/Feed/MeetupBanner"
 
 export default function Home () {
     const [postContent, setPostContent] = useState('')
@@ -101,7 +101,7 @@ export default function Home () {
                     <div style={{width: "100%", height: "100px"}}/>
                 </div>
                 <div className={styles.rightSection} >
-                    <Meetup title="Top Meetups"/>
+                    <MeetupBanner title="Top Meetups"/>
                     <GroupsBanner title="Top Groups"/>
                 </div>
             </div>

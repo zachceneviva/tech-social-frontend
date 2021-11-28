@@ -1,5 +1,4 @@
 import styles from "./ProfileHeader.module.scss";
-import Meetup from "../Feed/Meetup";
 
 export default function ProfileHeader () {
     return (

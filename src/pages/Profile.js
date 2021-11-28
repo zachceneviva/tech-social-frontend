@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
 import styles from "./Profile.module.scss";
 import ProfileHeader from "../components/Profile/ProfileHeader";
-import Meetup from "../components/Feed/Meetup";
 import Post from "../components/Feed/Post";
 import PeopleBanner from "../components/Feed/PeopleBanner";
 import GroupsBanner from "../components/Feed/GroupsBanner";
 import axios from "axios";
+import MeetupBanner from "../components/Feed/MeetupBanner";
 
 export default function Profile () {
     const [allPosts, setAllPosts] = useState([])
@@ -37,7 +37,7 @@ export default function Profile () {
                     <div style={{width: "100%", height: "100px"}}/>
                 </div>
                 <div className={styles.rightSection} >
-                    <Meetup title="Your Meetups"/>
+                    <MeetupBanner title="Your Meetups"/>
                     <GroupsBanner title="Your Groups"/>
                 </div>
             </div>

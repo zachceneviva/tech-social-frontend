@@ -13,8 +13,8 @@ export default function Navigation() {
                     <Nav className={styles.navLinks}>
                         <Navbar.Text><a href="/">Home</a></Navbar.Text>
                         <Navbar.Text><a href="#">Explore</a></Navbar.Text>
-                        <Navbar.Text><a href="#">Groups</a></Navbar.Text>
-                        <Navbar.Text><a href="#">Meetups</a></Navbar.Text>
+                        <Navbar.Text><a href="/groups">Groups</a></Navbar.Text>
+                        <Navbar.Text><a href="/meetups">Meetups</a></Navbar.Text>
                         <Navbar.Text><a href="#">Messages</a></Navbar.Text>
                         <Button className={styles.signUp}>Sign Up</Button>
                         <Button className={styles.signIn}>Login</Button>
