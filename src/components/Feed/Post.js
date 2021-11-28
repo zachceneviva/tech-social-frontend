@@ -16,12 +16,8 @@ export default function Post(props) {
     const [commentDisplay, setCommentDisplay] = useState("none");
     const [likes, setLikes] = useState(props.post.likes);
     const [lightbulbs, setLightbulbs] = useState(props.post.lightbulbs);
-    const [likedDisplay, setLikedDisplay] = useState(<BsHeart />);
-    const [lightbulbedDisplay, setLightbulbedDisplay] = useState(
-        <BsLightbulb />
-    );
-    const [liked, setLiked] = useState(false);
-    const [lightbulbed, setLightbulbed] = useState(false);
+    const [liked, setLiked] = useState(props.liked);
+    const [lightbulbed, setLightbulbed] = useState(props.bulbed);
     const [allComments, setAllComments] = useState([]);
     const [commentText, setCommentText] = useState("");
 
@@ -29,6 +25,7 @@ export default function Post(props) {
         fetchComments();
         console.log("Fetching....")
     }, [props.post]);
+
 
     const update = (like, lightbulb) => {
         axios
@@ -55,29 +52,29 @@ export default function Post(props) {
 
     const likePost = () => {
         if (liked === false) {
-            setLikedDisplay(<BsHeartFill />);
             setLikes(likes + 1);
             setLiked(true);
             update(likes + 1, lightbulbs);
+            props.rerenderParentLike()
         } else {
-            setLikedDisplay(<BsHeart />);
             setLikes(likes - 1);
             setLiked(false);
             update(likes - 1, lightbulbs);
+            props.rerenderParentLike()
         }
     };
 
     const bulbedPost = () => {
         if (lightbulbed === false) {
-            setLightbulbedDisplay(<BsLightbulbFill />);
             setLightbulbs(lightbulbs + 1);
             setLightbulbed(true);
             update(likes, lightbulbs + 1);
+            props.rerenderParentBulb()
         } else {
-            setLightbulbedDisplay(<BsLightbulb />);
             setLightbulbs(lightbulbs - 1);
             setLightbulbed(false);
             update(likes, lightbulbs - 1);
+            props.rerenderParentBulb()
         }
     };
 
@@ -151,13 +148,13 @@ export default function Post(props) {
                 </span>
                 <p>{allComments.length}</p>
                 <span className={styles.heart} onClick={likePost}>
-                    {likedDisplay}
+                    {liked ? <BsHeartFill /> : <BsHeart />}
                 </span>
-                <p>{likes}</p>
+                <p>{props.post.likes}</p>
                 <span className={styles.light} onClick={bulbedPost}>
-                    {lightbulbedDisplay}
+                    {lightbulbed ? <BsLightbulbFill /> : <BsLightbulb />}
                 </span>
-                <p>{lightbulbs}</p>
+                <p>{props.post.lightbulbs}</p>
             </div>
             <hr />
             <CreateComment

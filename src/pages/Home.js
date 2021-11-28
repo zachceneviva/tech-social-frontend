@@ -17,11 +17,13 @@ export default function Home () {
     const [imageUrl, setImageUrl] = useState('none')
     const [ghUrl, setGhUrl] = useState('none')
     const [linkUrl, setLinkUrl] = useState('none')
+    const [rerenderLike, setRerenderLike] = useState(false)
+    const [rerenderBulb, setRerenderBulb] = useState(false)
 
     useEffect(() => {
         fetchData()
         console.log('this is fetching my data')
-    },[])
+    },[rerenderLike, rerenderBulb])
 
     const fetchData = () => {
         axios.get('http://localhost:4000/api/v1/techonnect/posts').then((res) => setAllPosts(res.data.posts))
@@ -71,9 +73,20 @@ export default function Home () {
         else setLinkUrl('none')
     }
 
+    
     const post = allPosts.map((post, idx) => {
-        return <Post post={post} key={idx} />
+        const rerenderParentLike = () => {
+            if (rerenderLike === false) setRerenderLike(true)
+            else setRerenderLike(false)
+        }
+    
+        const rerenderParentBulb = () => {
+            if (rerenderBulb === false) setRerenderBulb(true)
+            else setRerenderBulb(false)
+        }
+        return <Post post={post} key={idx} rerenderParentLike={rerenderParentLike} rerenderParentBulb={rerenderParentBulb} liked={rerenderLike} bulbed={rerenderBulb} />
     })
+
 
     return (
         <div className={styles.mainContainer}>
