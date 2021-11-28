@@ -1,5 +1,5 @@
 import styles from "./Navbar.module.scss";
-import { Navbar, Nav, Container, NavDropdown} from "react-bootstrap"
+import { Navbar, Nav, Container, NavDropdown, Button} from "react-bootstrap"
 import { FaConnectdevelop } from "react-icons/fa"
 
 export default function Navigation() {
@@ -16,7 +16,9 @@ export default function Navigation() {
                         <Navbar.Text><a href="#">Groups</a></Navbar.Text>
                         <Navbar.Text><a href="#">Meetups</a></Navbar.Text>
                         <Navbar.Text><a href="#">Messages</a></Navbar.Text>
-                        <img className={styles.navUserImage} src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png" alt="user" />
+                        <Button className={styles.signUp}>Sign Up</Button>
+                        <Button className={styles.signIn}>Login</Button>
+                        {/* <img className={styles.navUserImage} src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png" alt="user" />
                         <NavDropdown
                             title="Zach Ceneviva"
                             id="collasible-nav-dropdown"
@@ -31,7 +33,7 @@ export default function Navigation() {
                             <NavDropdown.Item href="#">
                                 Logout
                             </NavDropdown.Item>
-                        </NavDropdown>
+                        </NavDropdown> */}
                     </Nav>
                 </Navbar.Collapse>
             </Container>
