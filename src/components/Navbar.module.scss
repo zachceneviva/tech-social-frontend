@@ -56,3 +56,30 @@
     }
 }
 
+.signUp {
+    color: $primary-color;
+    background-color: white;
+    border: none;
+    font-weight: 500;
+    margin-right: 5px;
+    border-radius: 10px;
+
+    &:hover {
+        background-color: white;
+        color: $primary-color
+    }
+}
+
+.signIn {
+    color: white;
+    background-color: $primary-shadow;
+    border: none;
+    font-weight: 500;
+    margin-right: 5px;
+    border-radius: 10px;
+
+    &:hover {
+        background-color: white;
+        background-color: $primary-shadow;
+    }
+}
