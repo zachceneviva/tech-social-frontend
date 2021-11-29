@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./Signup.module.scss";
 import axios from "axios";
 import { Form, Button, Row, Col } from "react-bootstrap";
-import {Navigate} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 
 export default function Signin(props) {
     const [fName, setFName] = useState('')
@@ -14,6 +14,7 @@ export default function Signin(props) {
     const [state, setState] = useState('')
     const [avatar, setAvatar] = useState('')
     const [coverPhoto, setCoverPhoto] = useState('')
+    const navigate = useNavigate();
 
 
     const handleSubmit = (e) => {
@@ -29,7 +30,7 @@ export default function Signin(props) {
             city: city,
             state: state,
         }).then(res => console.log(res));
-        <Navigate to="/login" />
+        navigate('/login')
     }
 
     const handleFName = (e) => {
