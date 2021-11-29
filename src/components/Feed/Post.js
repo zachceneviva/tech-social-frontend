@@ -11,6 +11,8 @@ import {
 import { formatDistanceToNow } from "date-fns";
 import axios from "axios";
 import CreateComment from "./CreateComment";
+import { userState } from "../../recoil/atom";
+import { useRecoilState } from "recoil";
 
 export default function Post(props) {
     const [commentDisplay, setCommentDisplay] = useState("none");
@@ -20,11 +22,14 @@ export default function Post(props) {
     const [lightbulbed, setLightbulbed] = useState(props.bulbed);
     const [allComments, setAllComments] = useState([]);
     const [commentText, setCommentText] = useState("");
+    const [busy, setBusy] = useState(true)
+    const user = useRecoilState(userState)[0]
 
     useEffect(() => {
         fetchComments();
+        setBusy(false)
         console.log("Fetching....")
-    }, [props.post]);
+    }, [props.post, busy]);
 
 
     const update = (like, lightbulb) => {
@@ -37,8 +42,8 @@ export default function Post(props) {
             .then((res) => console.log(res));
     };
 
-    const fetchComments = () => {
-        axios
+    const fetchComments = async () => {
+        await axios
             .get(
                 `http://localhost:4000/api/v1/techonnect/comments/${props.post._id}`
             )
@@ -87,11 +92,12 @@ export default function Post(props) {
         axios
             .post(
                 `http://localhost:4000/api/v1/techonnect/comments/${props.post._id}`,
-                { content: commentText, post: props.post._id }
+                { content: commentText, post: props.post._id, user: user }
             )
             .then((res) => setAllComments([res.data.comment, ...allComments]));
         setCommentText("");
         setCommentDisplay("initial");
+        setBusy(true)
     };
 
     console.log(allComments.length);
@@ -105,12 +111,12 @@ export default function Post(props) {
             <div className={styles.postHeader}>
                 <div className={styles.postUserImage}>
                     <img
-                        src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png"
+                        src={props.post.user.avatar}
                         alt="user"
                     />
                 </div>
                 <div className={styles.postUserName}>
-                    <h4>Zach Ceneviva</h4>
+                    <h4>{props.post.user.firstName} {props.post.user.lastName}</h4>
                     <p>
                         {formatDistanceToNow(new Date(props.post.createdAt))}{" "}
                         ago
@@ -163,7 +169,7 @@ export default function Post(props) {
                 handleCommentCreation={handleCommentCreation}
             />
             <div style={{ display: commentDisplay, paddingTop: "45px" }}>
-                {comment}
+                {busy && !allComments ? "loading..." : comment}
             </div>
         </div>
     );

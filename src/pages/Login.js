@@ -3,22 +3,35 @@ import styles from './Login.module.scss'
 import {Form, Button} from "react-bootstrap"
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { userState } from '../recoil/atom';
+import { useRecoilState } from 'recoil';
 
 export default function Login () {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate();
+    const [user, setUser] = useRecoilState(userState)
+
+    
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        axios.post("http://localhost:4000/api/v1/techonnect/users/login", {email: email, password: password})
-        .then(res => res)
+        await axios.post("http://localhost:4000/api/v1/techonnect/users/login", {email: email, password: password})
+        .then(res => res.data)
         .then((response) => {
             console.log(response);
-            localStorage.setItem("uid", response.data.token);
+            localStorage.setItem("uid", response.token);
         });
-        navigate('/home')
+        await axios.get("http://localhost:4000/api/v1/techonnect/users/profile", {
+            headers: {authorization: `Bearer ${localStorage.uid}`},
+        })
+        .then(res => res.data)
+        .then(res => {
+            console.log(res)
+            setUser(res.user)
+            navigate('/')
+        })
     }
 
     const handleEmail = (e) => {

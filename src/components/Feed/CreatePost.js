@@ -7,8 +7,11 @@ import {
     BsLink,
 } from "react-icons/bs";
 import { Form, Button, InputGroup, FormControl } from "react-bootstrap";
+import { userState } from "../../recoil/atom";
+import { useRecoilState } from "recoil";
 
 export default function CreatePost(props) {
+    const user = useRecoilState(userState)[0]
 
     return (
         <div className={styles.postCard}>
@@ -22,7 +25,7 @@ export default function CreatePost(props) {
             <div className={styles.createContent}>
                 <div className={styles.createPostImage}>
                     <img
-                        src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png"
+                        src={user.avatar}
                         alt="user"
                     />
                 </div>

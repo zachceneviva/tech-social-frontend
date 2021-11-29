@@ -7,20 +7,32 @@ import AllGroups from "../pages/AllGroups";
 import AllMeetups from "../pages/AllMeetups";
 import Signup from "../pages/Signup";
 import Login from "../pages/Login"
-import { RecoilRoot } from "recoil";
+import { useRecoilValue } from "recoil";
+import { loggedInState } from "../recoil/selector";
+import Navigation from "../components/Navbar";
+
+
 
 export default function AppRoutes () {
+
+    const loggedIn = useRecoilValue(loggedInState)
+
     return (
         <BrowserRouter>
+            <Navigation/>
             <Routes>
-                <Route path='/' element={<Home />} />
                 <Route path='register' element={<Signup/>} />
                 <Route path='login' element={<Login/>} />
+            </Routes>
+                {loggedIn ?
+            <Routes>
+                <Route path='/' element={<Home />} />
                 <Route path='profile' element={<Profile />} />
                 <Route path='people' element={<People />} />
                 <Route path='groups' element={<AllGroups/>} />
                 <Route path='meetups' element={<AllMeetups />} />
             </Routes>
+                : null}
         </BrowserRouter>
     )
 }

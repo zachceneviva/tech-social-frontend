@@ -7,6 +7,9 @@ import PeopleBanner from "../components/Feed/PeopleBanner"
 import GroupsBanner from "../components/Feed/GroupsBanner"
 import axios from "axios"
 import MeetupBanner from "../components/Feed/MeetupBanner"
+import { userState } from "../recoil/atom"
+import { useRecoilState } from "recoil";
+import { FaTruckLoading } from "react-icons/fa"
 
 export default function Home () {
     const [postContent, setPostContent] = useState('')
@@ -19,20 +22,25 @@ export default function Home () {
     const [linkUrl, setLinkUrl] = useState('none')
     const [rerenderLike, setRerenderLike] = useState(false)
     const [rerenderBulb, setRerenderBulb] = useState(false)
+    const [isBusy, setBusy] = useState(true)
+    const user = useRecoilState(userState)[0]
+
 
     useEffect(() => {
         fetchData()
+        setBusy(false)
         console.log('this is fetching my data')
-    },[rerenderLike, rerenderBulb])
+    },[isBusy])
+
 
     const fetchData = () => {
         axios.get('http://localhost:4000/api/v1/techonnect/posts').then((res) => setAllPosts(res.data.posts))
     }
 
-    const handlePost = (e) => {
+    const handlePost = async (e) => {
         e.preventDefault()
-        axios.post('http://localhost:4000/api/v1/techonnect/posts',
-        {content: postContent, image: `https://${postImage}`, github: `https://github.com/${postGh}`, link: `https://${postLink}`}).then( res => setAllPosts([res.data.post, ...allPosts]))
+        await axios.post('http://localhost:4000/api/v1/techonnect/posts',
+        {content: postContent, image: `https://${postImage}`, github: `https://github.com/${postGh}`, link: `https://${postLink}`, user: user}).then( res => setAllPosts([res.data.post, ...allPosts]))
         setPostContent('')
         setPostImage('')
         setPostGh('')
@@ -40,6 +48,7 @@ export default function Home () {
         setImageUrl('none')
         setGhUrl('none')
         setLinkUrl('none')
+        setBusy(true)
     }
 
     const handleChange = (e) => {
@@ -92,12 +101,12 @@ export default function Home () {
         <div className={styles.mainContainer}>
             <div className={styles.mainContentContainer}>
                 <div className={styles.leftSection} >
-                    <BannerProfileCard/>
+                    <BannerProfileCard />
                     <PeopleBanner />
                 </div>
                 <div className={styles.mainSection}>
                     <CreatePost handlePost={handlePost} text={postContent} handleChange={handleChange} postImage={postImage} postGh={postGh} postLink={postLink} handleImageChange={handleImageChange} handleGhChange={handleGhChange} handleLinkChange={handleLinkChange} showGhUrl={showGhUrl} showImageUrl={showImageUrl} showLinkUrl={showLinkUrl} imageUrl={imageUrl} ghUrl={ghUrl} linkUrl={linkUrl}/>
-                    {post ? post : "No posts to show!"}
+                    {isBusy && !allPosts ? "Loading..." : post}
                     <div style={{width: "100%", height: "100px"}}/>
                 </div>
                 <div className={styles.rightSection} >
