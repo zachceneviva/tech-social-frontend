@@ -9,7 +9,6 @@ import axios from "axios"
 import MeetupBanner from "../components/Feed/MeetupBanner"
 import { userState } from "../recoil/atom"
 import { useRecoilState } from "recoil";
-import { FaTruckLoading } from "react-icons/fa"
 
 export default function Home () {
     const [postContent, setPostContent] = useState('')

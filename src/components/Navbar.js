@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import styles from "./Navbar.module.scss";
-import { Navbar, Nav, Container, NavDropdown, Button} from "react-bootstrap"
+import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap"
 import { FaConnectdevelop } from "react-icons/fa"
 import { useRecoilState } from "recoil";
 import { userState } from "../recoil/atom";

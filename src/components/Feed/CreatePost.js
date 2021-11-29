@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React from "react"
 import styles from "./CreatePost.module.scss";
 import {
     BsPencilFill,
@@ -6,7 +6,7 @@ import {
     BsGithub,
     BsLink,
 } from "react-icons/bs";
-import { Form, Button, InputGroup, FormControl } from "react-bootstrap";
+import { Form, Button, InputGroup } from "react-bootstrap";
 import { userState } from "../../recoil/atom";
 import { useRecoilState } from "recoil";
 
