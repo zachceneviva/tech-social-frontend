@@ -56,39 +56,3 @@
     }
 }
 
-.signUp {
-    color: $primary-color;
-    background-color: white;
-    border: none;
-    font-weight: 500;
-    border-radius: 10px;
-    margin-right: 5px;
-    padding-top: 8px;
-    text-decoration: none;
-
-    &:hover {
-        background-color: white;
-        color: $primary-color,;
-        text-decoration: none;
-    }
-}
-
-.signIn {
-    color: white;
-    background-color: $primary-shadow;
-    border: none;
-    font-weight: 500;
-    border-radius: 10px;
-    padding-top: 8px;
-    text-decoration: none;
-
-    &:hover {
-        background-color: white;
-        background-color: $primary-shadow;
-        text-decoration: none;
-    }
-
-    @media screen and (max-width: 992px) {
-        margin-top: 5px;
-    }
-}

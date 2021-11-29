@@ -33,8 +33,6 @@ export default function Navigation() {
                             </NavDropdown.Item>
                         </NavDropdown> */}
                     </Nav>
-                    <Button href="/register" className={styles.signUp}>Sign Up</Button>
-                    <Button href="/login" className={styles.signIn}>Login</Button>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
