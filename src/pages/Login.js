@@ -1,21 +1,24 @@
 import React, {useState} from 'react';
-import styles from './Signup.module.scss'
+import styles from './Login.module.scss'
 import {Form, Button} from "react-bootstrap"
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login () {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const navigate = useNavigate();
 
 
     const handleSubmit = (e) => {
         e.preventDefault()
         axios.post("http://localhost:4000/api/v1/techonnect/users/login", {email: email, password: password})
-        .then(res => res.json())
+        .then(res => res)
         .then((response) => {
             console.log(response);
-            localStorage.setItem("uid", response.signedJwt);
-          });
+            localStorage.setItem("uid", response.data.token);
+        });
+        navigate('/home')
     }
 
     const handleEmail = (e) => {

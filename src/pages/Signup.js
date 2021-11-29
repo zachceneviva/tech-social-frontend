@@ -150,7 +150,7 @@ export default function Signin(props) {
 
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formGridAvatar">
-                            <Form.Label>Avatar *</Form.Label>
+                            <Form.Label>Avatar</Form.Label>
                             <Form.Control autoComplete="off" name="avatar" value={avatar} onChange={handleAvatar}/>
                         </Form.Group>
 

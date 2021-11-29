@@ -7,6 +7,7 @@ import AllGroups from "../pages/AllGroups";
 import AllMeetups from "../pages/AllMeetups";
 import Signup from "../pages/Signup";
 import Login from "../pages/Login"
+import { RecoilRoot } from "recoil";
 
 export default function AppRoutes () {
     return (
