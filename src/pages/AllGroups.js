@@ -1,8 +1,21 @@
+import React, {useEffect, useState} from "react"
 import styles from "./AllGroups.module.scss"
 import BannerProfileCard from "../components/Feed/BannerProfileCard"
 import Groups from "../components/AllGroups/Groups"
+import axios from "axios"
 
 export default function AllGroups () {
+    const [allGroups, setAllGroups] = useState([])
+
+    useEffect(() => {
+        axios.get(`http://localhost:4000/api/v1/techonnect/groups`).then((res) => res.data).then(res => setAllGroups(res.groups))
+    }, [])
+    
+
+    const group = allGroups.map((group, idx) => {
+        return <Groups group={group} key={idx}/>
+    })
+
     return (
         <div className={styles.mainContainer}>
             <div className={styles.mainContentContainer}>
@@ -10,7 +23,9 @@ export default function AllGroups () {
                     <BannerProfileCard/>
                 </div>
                 <div className={styles.mainSection}>
-                    <Groups />
+                    <div className={styles.allGroups}>
+                        {!allGroups ? "Loading..." : group}
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,21 +1,5 @@
 @import "../partials/variables";
 
-.allGroups {
-    width: 100%;
-    min-height: 100%;
-    background-color: white;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
-    align-content: flex-start;
-    border-radius: 5px;
-    color: $primary-dark-text-color;
-    padding: 25px;
-    padding-left: 35px;
-    padding-right: 35px;
-}
 
 .allGroupsCard {
     border: 1px solid whitesmoke;
@@ -44,21 +28,6 @@
     text-align: center;
     border-radius: 5px;
     margin-bottom: 0px;
-
-    button {
-        margin-top: 0px;
-        border-radius: 25px;
-        width: 75px;
-        font-size: 15px;
-        color: white;
-        background-color: $primary-color;
-        font-weight: 500;
-        border: none;
-
-        &:hover {
-            background-color: $primary-shadow
-        }
-    }
 }
 
 
@@ -84,3 +53,17 @@
 
 }
 
+.viewBtn {
+        margin-top: 0px;
+        border-radius: 25px;
+        width: 75px;
+        font-size: 15px;
+        color: white;
+        background-color: $primary-color;
+        font-weight: 500;
+        border: none;
+
+        &:hover {
+            background-color: $primary-shadow
+        }
+}

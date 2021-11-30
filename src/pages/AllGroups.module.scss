@@ -6,6 +6,23 @@
     margin: 0;
 }
 
+.allGroups {
+    width: 100%;
+    min-height: 100%;
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    border-radius: 5px;
+    color: $primary-dark-text-color;
+    padding: 25px;
+    padding-left: 35px;
+    padding-right: 35px;
+}
+
 .mainContentContainer {
     width: 90%;
     height: 100%;
