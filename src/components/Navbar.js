@@ -49,7 +49,7 @@ export default function Navigation() {
                             title={`${user.firstName} ${user.lastName}`}
                             id="collasible-nav-dropdown"
                         >
-                            <NavDropdown.Item href="/profile">
+                            <NavDropdown.Item href={`/profile/${user._id}`}>
                                 My Profile
                             </NavDropdown.Item>
                             <NavDropdown.Item href="#">

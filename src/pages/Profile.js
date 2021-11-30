@@ -6,9 +6,11 @@ import PeopleBanner from "../components/Feed/PeopleBanner";
 import GroupsBanner from "../components/Feed/GroupsBanner";
 import axios from "axios";
 import MeetupBanner from "../components/Feed/MeetupBanner";
+import { useParams } from "react-router";
 
 export default function Profile () {
     const [allPosts, setAllPosts] = useState([])
+    const params = useParams()
 
     useEffect(() => {
         fetchData()
@@ -16,7 +18,7 @@ export default function Profile () {
     },[])
 
     const fetchData = () => {
-        axios.get('http://localhost:4000/api/v1/techonnect/posts').then((res) => setAllPosts(res.data.posts))
+        axios.get(`http://localhost:4000/api/v1/techonnect/posts/${params.id}`).then((res) => setAllPosts(res.data.posts))
     }
 
     const post = allPosts.map((post, idx) => {

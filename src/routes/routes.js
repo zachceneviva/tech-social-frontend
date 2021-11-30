@@ -27,7 +27,7 @@ export default function AppRoutes () {
                 {loggedIn ?
             <Routes>
                 <Route path='/' element={<Home />} />
-                <Route path='profile' element={<Profile />} />
+                <Route path='profile/:id' element={<Profile />} />
                 <Route path='people' element={<People />} />
                 <Route path='groups' element={<AllGroups/>} />
                 <Route path='meetups' element={<AllMeetups />} />
