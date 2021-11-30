@@ -3,13 +3,11 @@ import {Button} from "react-bootstrap"
 import { userState } from "../../recoil/atom"
 import { useRecoilState } from "recoil"
 import axios from "axios"
-import { useState } from "react"
 
 export default function AllPeople (props) {
     const user = useRecoilState(userState)[0]
 
     const techonnect = async (e) => {
-        props.rerender()
         e.preventDefault()
         let newTechonnections = [...user.techonnections];
         newTechonnections.push(props.person._id)
