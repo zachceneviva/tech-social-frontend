@@ -1,18 +1,22 @@
 import styles from "./ProfileHeader.module.scss";
+import { userState } from "../../recoil/atom";
+import { useRecoilState } from "recoil";
 
 export default function ProfileHeader () {
+    const user = useRecoilState(userState)[0]
+
     return (
         <div className={styles.header}>
             <div className={styles.bannerImage}>
-                <img src="https://www.nashvilleroot.com/wp-content/themes/nashvilleroot/_photos/photo1.jpg" alt="banner" />
+                <img src={user.coverPhoto} alt="banner" />
             </div>
             <div className={styles.headerContent}>
-                <img src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png" alt="user" />
+                <img src={user.avatar} alt="user" />
                 <div className={styles.headerInformation}>
-                    <h2>Zach Ceneviva</h2>
+                    <h2>{user.firstName} {user.lastName}</h2>
                     <h6>Full-Stack Software Engineer</h6>
-                    <h5>Nashville, TN</h5>
-                    <p>50 Techonnections</p>
+                    <h5>{user.city}, {user.state}</h5>
+                    <p>{user.techonnections.length} Techonnections</p>
                 </div>
             </div>
         </div>

@@ -15,15 +15,13 @@ import { userState } from "../../recoil/atom";
 import { useRecoilState } from "recoil";
 
 export default function Post(props) {
+    const user = useRecoilState(userState)[0]
     const [commentDisplay, setCommentDisplay] = useState("none");
-    const [likes, setLikes] = useState(props.post.likes);
-    const [lightbulbs, setLightbulbs] = useState(props.post.lightbulbs);
-    const [liked, setLiked] = useState(props.liked);
-    const [lightbulbed, setLightbulbed] = useState(props.bulbed);
     const [allComments, setAllComments] = useState([]);
     const [commentText, setCommentText] = useState("");
     const [busy, setBusy] = useState(true)
-    const user = useRecoilState(userState)[0]
+    const [likes, setLikes] = useState(props.post.likes.length)
+    const [lights, setLights] = useState(props.post.lightbulbs.length)
 
     useEffect(() => {
         fetchComments();
@@ -32,14 +30,56 @@ export default function Post(props) {
     }, [props.post, busy]);
 
 
-    const update = (like, lightbulb) => {
-        axios
-            .put(
-                `http://localhost:4000/api/v1/techonnect/posts/${props.post._id}`,
-                { lightbulbs: lightbulb, likes: like },
-                { "Content-Type": "application/json" }
-            )
-            .then((res) => console.log(res));
+    const updateLikes = () => {
+        let newLikes = props.post.likes
+        if (props.post.likes.includes(user._id) === false) {
+            newLikes.push(user._id)
+            axios
+                .put(
+                    `http://localhost:4000/api/v1/techonnect/posts/${props.post._id}`,
+                    {likes: newLikes},
+                    { "Content-Type": "application/json" }
+                )
+                .then((res) => console.log(res));
+                setLikes(likes + 1)
+        } else {
+            let index = props.post.likes.indexOf(user._id)
+            newLikes.splice(index,1)
+            axios
+                .put(
+                    `http://localhost:4000/api/v1/techonnect/posts/${props.post._id}`,
+                    {likes: newLikes},
+                    { "Content-Type": "application/json" }
+                )
+                .then((res) => console.log(res));
+                setLikes(likes - 1)
+        }
+    };
+
+    const updateLightbulb = () => {
+        let newLights = props.post.lightbulbs
+        if (props.post.lightbulbs.includes(user._id) === false) {
+            newLights.push(user._id)
+            axios
+                .put(
+                    `http://localhost:4000/api/v1/techonnect/posts/${props.post._id}`,
+                    { lightbulbs: newLights},
+                    { "Content-Type": "application/json" }
+                )
+                .then((res) => console.log(res));
+                setLights(lights + 1)
+        } else {
+            let index = props.post.lightbulbs.indexOf(user._id)
+            newLights.splice(index, 1)
+            axios
+                .put(
+                    `http://localhost:4000/api/v1/techonnect/posts/${props.post._id}`,
+                    { lightbulbs: newLights},
+                    { "Content-Type": "application/json" }
+                )
+                .then((res) => console.log(res));
+                setLights(lights - 1)
+        }
     };
 
     const fetchComments = async () => {
@@ -55,33 +95,6 @@ export default function Post(props) {
         else setCommentDisplay("none");
     };
 
-    const likePost = () => {
-        if (liked === false) {
-            setLikes(likes + 1);
-            setLiked(true);
-            update(likes + 1, lightbulbs);
-            props.rerenderParentLike()
-        } else {
-            setLikes(likes - 1);
-            setLiked(false);
-            update(likes - 1, lightbulbs);
-            props.rerenderParentLike()
-        }
-    };
-
-    const bulbedPost = () => {
-        if (lightbulbed === false) {
-            setLightbulbs(lightbulbs + 1);
-            setLightbulbed(true);
-            update(likes, lightbulbs + 1);
-            props.rerenderParentBulb()
-        } else {
-            setLightbulbs(lightbulbs - 1);
-            setLightbulbed(false);
-            update(likes, lightbulbs - 1);
-            props.rerenderParentBulb()
-        }
-    };
 
     const handleCommentChange = (e) => {
         setCommentText(e.target.value);
@@ -153,14 +166,14 @@ export default function Post(props) {
                     <FaRegComment />
                 </span>
                 <p>{allComments.length}</p>
-                <span className={styles.heart} onClick={likePost}>
-                    {liked ? <BsHeartFill /> : <BsHeart />}
+                <span className={styles.heart} onClick={updateLikes}>
+                    {props.post.likes.includes(user._id) ? <BsHeartFill /> : <BsHeart />}
                 </span>
-                <p>{props.post.likes}</p>
-                <span className={styles.light} onClick={bulbedPost}>
-                    {lightbulbed ? <BsLightbulbFill /> : <BsLightbulb />}
+                <p>{props.post.likes.length}</p>
+                <span className={styles.light} onClick={updateLightbulb}>
+                    {props.post.lightbulbs.includes(user._id) ? <BsLightbulbFill /> : <BsLightbulb />}
                 </span>
-                <p>{props.post.lightbulbs}</p>
+                <p>{props.post.lightbulbs.length}</p>
             </div>
             <hr />
             <CreateComment
