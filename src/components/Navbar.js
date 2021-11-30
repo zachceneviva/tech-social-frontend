@@ -20,8 +20,9 @@ export default function Navigation() {
             headers: {authorization: `Bearer ${localStorage.uid}`},
         })
         .then(res => res.data)
-        .then(res => {
-            setUser(res.user)})
+        .then((res) => {
+            setUser(res.user)
+            })
         }
     },[])
 
