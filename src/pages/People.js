@@ -7,15 +7,22 @@ import axios from "axios"
 
 export default function People (props) {
     const [allPeople, setAllPeople] = useState([])
+    const [rerender, setRerender] = useState(0)
 
     useEffect(() => {
         axios.get(`http://localhost:4000/api/v1/techonnect/users`, {
             headers: {authorization: `Bearer ${localStorage.uid}`},
         }).then((res) => res.data).then(res => setAllPeople(res.allUsers))
-    }, [])
+    }, [rerender])
+    
+
+    const rerenderParent = () => {
+
+        setRerender(rerender + 1)
+    }
 
     const people = allPeople.map((person, idx) => {
-        return <AllPeople person={person} key={idx}/>
+        return <AllPeople person={person} key={idx} rerender={rerenderParent}/>
     })
     return (
         <div className={styles.mainContainer}>

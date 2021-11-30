@@ -109,7 +109,7 @@ export default function Home () {
                     <div style={{width: "100%", height: "100px"}}/>
                 </div>
                 <div className={styles.rightSection} >
-                    <MeetupBanner title="Top Meetups"/>
+                    <MeetupBanner title="Upcoming Meetups"/>
                     <GroupsBanner title="Top Groups"/>
                 </div>
             </div>
