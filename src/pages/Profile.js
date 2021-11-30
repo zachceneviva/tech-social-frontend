@@ -44,8 +44,8 @@ export default function Profile () {
                     <div style={{width: "100%", height: "100px"}}/>
                 </div>
                 <div className={styles.rightSection} >
-                    <MeetupBanner title="Your Meetups"/>
-                    <GroupsBanner title="Your Groups"/>
+                    {foundUser === null ? "Loading" : <MeetupBanner title={`${foundUser.firstName}'s Meetups`}/>}
+                    {foundUser === null ? "Loading" : <GroupsBanner title={`${foundUser.firstName}'s Groups`}/>}
                 </div>
             </div>
         </div>

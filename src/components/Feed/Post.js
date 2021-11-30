@@ -129,7 +129,7 @@ export default function Post(props) {
                     />
                 </div>
                 <div className={styles.postUserName}>
-                    <h4>{props.post.user.firstName} {props.post.user.lastName}</h4>
+                    <h4><a href={`/profile/${props.post.user._id}`}>{props.post.user.firstName} {props.post.user.lastName}</a></h4>
                     <p>
                         {formatDistanceToNow(new Date(props.post.createdAt))}{" "}
                         ago
