@@ -19,14 +19,16 @@ export default function BannerProfileCard (props) {
             </div>
             </a>
             <hr/>
-            <div className={styles.create}>
+            <a href="/group/create">
+            <div className={styles.create} style={props.location ==="/group/create" ? {backgroundColor: "#007cc7", color: "white" }: null}>
                 <p><BsPlusCircleFill/></p>
-                <h4>Create a group</h4>
+                <h4 style={props.location ==="/group/create" ? {color: "white" }: null}>Create a group</h4>
             </div>
+            </a>
             <hr/>
-            <div className={styles.create}>
+            <div className={styles.create} style={props.location ==="/meetup/create" ? {backgroundColor: "#007cc7", color: "white" }: null}>
                 <p><BsPlusCircleFill/></p>
-                <h4>Create a meetup</h4>
+                <h4 style={props.location ==="/meetup/create" ? {color: "white" }: null}>Create a meetup</h4>
             </div>
         </div>
     )

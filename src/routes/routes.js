@@ -10,7 +10,7 @@ import Login from "../pages/Login"
 import { useRecoilValue } from "recoil";
 import { loggedInState } from "../recoil/selector";
 import Navigation from "../components/Navbar";
-
+import CreateGroup from "../pages/CreateGroup";
 
 
 export default function AppRoutes () {
@@ -31,6 +31,7 @@ export default function AppRoutes () {
                 <Route path='people' element={<People />} />
                 <Route path='groups' element={<AllGroups/>} />
                 <Route path='meetups' element={<AllMeetups />} />
+                <Route path='group/create' element={<CreateGroup />} />
             </Routes>
                 : null}
         </BrowserRouter>
