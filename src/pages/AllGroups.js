@@ -6,10 +6,13 @@ import axios from "axios"
 
 export default function AllGroups () {
     const [allGroups, setAllGroups] = useState([])
+    const [busy, setBusy] = useState(true)
 
     useEffect(() => {
+        console.log("fetching...")
         axios.get(`http://localhost:4000/api/v1/techonnect/groups`).then((res) => res.data).then(res => setAllGroups(res.groups))
-    }, [])
+        setBusy(false)
+    }, [busy])
     
 
     const group = allGroups.map((group, idx) => {
@@ -24,7 +27,7 @@ export default function AllGroups () {
                 </div>
                 <div className={styles.mainSection}>
                     <div className={styles.allGroups}>
-                        {!allGroups ? "Loading..." : group}
+                        {!allGroups && busy ? "Loading..." : group}
                     </div>
                 </div>
             </div>

@@ -13,7 +13,7 @@ export default function Create (props) {
                             <Form.Control
                                 onChange={props.handleName}
                                 name="groupName"
-                                placeholder="e.g. John"
+                                placeholder="e.g. JS Rocks"
                                 autoComplete="off"
                                 value={props.groupName}
                             />
