@@ -6,7 +6,7 @@ export default function Create (props) {
 
     return(
         <div className={styles.formCreate}>
-            <Form>
+            <Form onSubmit={props.handleSubmit}>
         
                         <Form.Group controlId="formGridName" className="mb-3">
                             <Form.Label>Group Name*</Form.Label>

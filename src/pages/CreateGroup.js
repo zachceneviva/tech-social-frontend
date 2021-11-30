@@ -4,14 +4,17 @@ import BannerProfileCard from "../components/Feed/BannerProfileCard";
 import Create from "../components/Create/Create";
 import { userState } from "../recoil/atom";
 import { useRecoilState } from "recoil";
+import axios from "axios";
+import { useNavigate } from "react-router";
 
 
 export default function CreateGroup () {
     const user = useRecoilState(userState)[0]
     const [groupName, setGroupName] = useState('')
     const [description, setDescription] = useState('')
-    const [photo, setPhoto] = useState('')
-    const [ coverPhoto, setCoverPhoto] = useState('')
+    const [photo, setPhoto] = useState(null)
+    const [coverPhoto, setCoverPhoto] = useState(null)
+    const navigate = useNavigate()
 
 
     const handleName = (e) => {
@@ -31,7 +34,17 @@ export default function CreateGroup () {
     }
 
 
-
+    const handleGroupCreate = (e) => {
+        e.preventDefault()
+        axios.post('http://localhost:4000/api/v1/techonnect/groups', {
+            name: groupName,
+            description: description,
+            photo: photo,
+            coverPhoto: coverPhoto,
+            user: user._id,
+        }).then(res => console.log(res))
+        navigate('/groups')
+    }
 
     return(
         <div className={styles.mainContainer}>
@@ -41,7 +54,7 @@ export default function CreateGroup () {
                 </div>
                 <div className={styles.mainSection}>
                     <div className={styles.create}>
-                        <Create groupName={groupName} description={description} photo={photo} coverPhoto={coverPhoto} handleName={handleName} handleDescription={handleDescription} handlePhoto={handlePhoto} handleCoverPhoto={handleCoverPhoto}/>
+                        <Create groupName={groupName} description={description} photo={photo} coverPhoto={coverPhoto} handleName={handleName} handleDescription={handleDescription} handlePhoto={handlePhoto} handleCoverPhoto={handleCoverPhoto} handleSubmit={handleGroupCreate}/>
                     </div>
                 </div>
             </div>

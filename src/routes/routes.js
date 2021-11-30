@@ -29,9 +29,9 @@ export default function AppRoutes () {
                 <Route path='/' element={<Home />} />
                 <Route path='profile/:id' element={<Profile />} />
                 <Route path='people' element={<People />} />
-                <Route path='groups' element={<AllGroups/>} />
                 <Route path='meetups' element={<AllMeetups />} />
                 <Route path='group/create' element={<CreateGroup />} />
+                <Route path='groups' element={<AllGroups/>} />
             </Routes>
                 : null}
         </BrowserRouter>
