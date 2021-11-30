@@ -1,9 +1,9 @@
 import styles from "./ProfileHeader.module.scss";
-import { userState } from "../../recoil/atom";
-import { useRecoilState } from "recoil";
 
-export default function ProfileHeader () {
-    const user = useRecoilState(userState)[0]
+
+export default function ProfileHeader (props) {
+    const user = props.user
+    console.log(user)
 
     return (
         <div className={styles.header}>
