@@ -19,8 +19,6 @@ export default function Home () {
     const [imageUrl, setImageUrl] = useState('none')
     const [ghUrl, setGhUrl] = useState('none')
     const [linkUrl, setLinkUrl] = useState('none')
-    const [rerenderLike, setRerenderLike] = useState(false)
-    const [rerenderBulb, setRerenderBulb] = useState(false)
     const [isBusy, setBusy] = useState(true)
     const user = useRecoilState(userState)[0]
 
@@ -83,16 +81,7 @@ export default function Home () {
 
     
     const post = allPosts.map((post, idx) => {
-        const rerenderParentLike = () => {
-            if (rerenderLike === false) setRerenderLike(true)
-            else setRerenderLike(false)
-        }
-    
-        const rerenderParentBulb = () => {
-            if (rerenderBulb === false) setRerenderBulb(true)
-            else setRerenderBulb(false)
-        }
-        return <Post post={post} key={idx} rerenderParentLike={rerenderParentLike} rerenderParentBulb={rerenderParentBulb} liked={rerenderLike} bulbed={rerenderBulb} />
+        return <Post post={post} key={idx}/>
     })
 
 
