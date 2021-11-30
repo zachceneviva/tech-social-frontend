@@ -41,7 +41,7 @@ export default function CreateGroup () {
             description: description,
             photo: photo,
             coverPhoto: coverPhoto,
-            user: user._id,
+            creator: user._id,
         }).then(res => console.log(res))
         navigate('/groups')
     }
