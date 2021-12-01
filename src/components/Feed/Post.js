@@ -114,7 +114,6 @@ export default function Post(props) {
         setBusy(true)
     };
 
-    console.log(allComments.length);
 
     const comment = allComments.map((comment, idx) => {
         return <Comment comment={comment} key={idx} />;

@@ -38,6 +38,7 @@ export default function AppRoutes () {
                 <Route path='group/create' element={<CreateGroup />} />
                 <Route path='groups/:id' element={<GroupShow/>} />
                 <Route path='groups' element={<AllGroups/>} />
+                <Route path='messages' elements={<People />} />
             </Routes>
                 : null}
         </BrowserRouter>

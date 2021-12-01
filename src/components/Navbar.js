@@ -1,7 +1,7 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./Navbar.module.scss";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap"
-import { FaConnectdevelop } from "react-icons/fa"
+import { FaConnectdevelop, FaTemperatureHigh } from "react-icons/fa"
 import { useRecoilState } from "recoil";
 import { userState } from "../recoil/atom";
 import { useRecoilValue } from "recoil";
@@ -14,6 +14,7 @@ export default function Navigation() {
     const [user, setUser] = useRecoilState(userState)
     const loggedIn = useRecoilValue(loggedInState)
     const navigate = useNavigate()
+    const [close, setClosed] = useState(false)
 
     useEffect(() => {
         if(localStorage.getItem("uid")) {
@@ -34,18 +35,18 @@ export default function Navigation() {
     }
 
     return (
-        <Navbar className={styles.navBar} collapseOnSelect expand="lg" variant="dark" fixed="top">
+        <Navbar className={styles.navBar} collapseOnSelect expand="lg" variant="dark" fixed="top" expanded={close}>
             <Container className={styles.container}>
                 <Navbar.Brand className="mb-1" href="/"><span id={styles.logo}><FaConnectdevelop /></span>Techonnect</Navbar.Brand>
-                <Navbar.Toggle className={styles.navBarCollapse} aria-controls="responsive-navbar-nav" />
+                <Navbar.Toggle className={styles.navBarCollapse} aria-controls="responsive-navbar-nav" onClick={() => setClosed(close ? false : "expanded")}/>
                 <Navbar.Collapse className={styles.navBarCollapse} id="responsive-navbar-nav">
             {loggedIn ?
                     <Nav className={styles.navLinks}>
-                        <Navbar.Text><Link to="/">Home</Link></Navbar.Text>
-                        <Navbar.Text><Link to="#">Explore</Link></Navbar.Text>
-                        <Navbar.Text><Link to="/groups">Groups</Link></Navbar.Text>
-                        <Navbar.Text><Link to="/meetups">Meetups</Link></Navbar.Text>
-                        <Navbar.Text><Link to="#">Messages</Link></Navbar.Text>
+                        <Navbar.Text><Link onClick={() => setClosed(false)} to="/">Home</Link></Navbar.Text>
+                        <Navbar.Text><Link onClick={() => setClosed(false)} to="#">Explore</Link></Navbar.Text>
+                        <Navbar.Text><Link onClick={() => setClosed(false)} to="/groups">Groups</Link></Navbar.Text>
+                        <Navbar.Text><Link onClick={() => setClosed(false)} to="/meetups">Meetups</Link></Navbar.Text>
+                        <Navbar.Text><Link onClick={() => setClosed(false)} to="/messages">Messages</Link></Navbar.Text>
                         <img className={styles.navUserImage} src={user.avatar} alt="user" />
                         <NavDropdown
                             title={`${user.firstName} ${user.lastName}`}
