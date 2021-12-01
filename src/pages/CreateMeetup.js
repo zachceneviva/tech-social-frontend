@@ -21,7 +21,7 @@ export default function CreateMeetup () {
     const[state, setState] = useState(null)
     const[zip, setZip] = useState(null)
     const [group, setGroup] = useState(null)
-     const navigate = useNavigate()
+    const navigate = useNavigate()
 
     useEffect(() => {
         console.log("fetching...")

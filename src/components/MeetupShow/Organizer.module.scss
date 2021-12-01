@@ -1,0 +1,56 @@
+@import "../partials/variables";
+
+.organizer {
+    width: 100%;
+    min-height: 200px;
+    overflow: auto;
+    background-color: white;
+    text-align: center;
+    border-radius: 5px;
+    color: $primary-dark-text-color;
+
+    img {
+        object-fit: cover;
+        border-radius: 50%;
+        height: 100px;
+        width: 100px;
+        margin-top: 7.5px;
+    }
+
+    h4{
+        font-size: 20px;
+        margin-bottom: 0px;
+    }
+
+    p {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        color: $primary-accent-text-color;
+        font-style: italic;
+        font-size: 12px;
+    }
+
+    a {
+        text-decoration: none;
+        color: $primary-dark-text-color;
+    }
+}
+
+.messageBtn {
+    color: white;
+    background-color: $primary-color;
+    border: none;
+    transition: all 0.5s ease;
+    font-weight: 600;
+    width: 100px;
+    height: 35px;
+    font-size: 15px;
+    border-radius: 50px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+        &:hover {
+            color: $off-white;
+            background-color: $primary-shadow;
+        }
+    }

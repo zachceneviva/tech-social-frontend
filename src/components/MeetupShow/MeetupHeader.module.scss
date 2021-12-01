@@ -6,31 +6,18 @@
     background-repeat: no-repeat;
     background-position: center;
     width: 98%;
-    min-height: 450px;
+    min-height: 300px;
     margin-left: 1%;
     margin-top: 25px;
     border-radius: 5px;
     color: $primary-dark-text-color;
 }  
 
-.bannerImage {
-    width: 100%;
-    height: 300px;
-    border-radius: 5px;
-
-    img {
-        width: 100%;
-        height: 300px;
-        border-radius: 5px;
-        object-fit: cover;
-    }
-}
-
 .headerContent {
     width: 90%;
     margin: 0 auto;
     min-height: 200px;
-    margin-top: -115px;
+    margin-top: 28px;
     margin-bottom: 0px;
     border-radius: 5px;
 }

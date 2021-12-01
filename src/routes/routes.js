@@ -13,6 +13,7 @@ import Navigation from "../components/Navbar";
 import CreateGroup from "../pages/CreateGroup";
 import GroupShow from "../pages/GroupShow";
 import CreateMeetup from "../pages/CreateMeetup";
+import MeetupShow from "../pages/MeetupShow";
 
 
 export default function AppRoutes () {
@@ -32,6 +33,7 @@ export default function AppRoutes () {
                 <Route path='profile/:id' element={<Profile />} />
                 <Route path='people' element={<People />} />
                 <Route path='meetups/create' element={<CreateMeetup/>} />
+                <Route path='meetup/:id' element={<MeetupShow />} />
                 <Route path='meetups' element={<AllMeetups />} />
                 <Route path='group/create' element={<CreateGroup />} />
                 <Route path='groups/:id' element={<GroupShow/>} />
