@@ -57,3 +57,35 @@
         margin-bottom: 10px;
     }
 }
+
+.chatArea {
+    margin: 0;
+    width: 100%;
+    height: 95%;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.messagesContainer {
+    margin: 0;
+    padding-top: 20px;
+    width: 100%;
+    height: 85%;
+    overflow: hidden;
+}
+
+.messageList {
+    list-style: none;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.messageListItem {
+    width: 95%;
+    margin: 0;
+    padding-top: 15px;
+    overflow: auto;
+}
