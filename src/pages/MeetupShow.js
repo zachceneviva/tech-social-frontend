@@ -5,6 +5,7 @@ import { useParams } from "react-router";
 import MeetupHeader from "../components/MeetupShow/MeetupHeader";
 import About from "../components/GroupShow/About";
 import Organizer from "../components/MeetupShow/Organizer";
+import MeetupDescription from "../components/MeetupShow/MeetupDescription";
 
 
 export default function MeetupShow () {
@@ -36,8 +37,7 @@ export default function MeetupShow () {
                     {foundMeetup === null ? "Loading..." : <Organizer meetup={foundMeetup} />}
                 </div>
                 <div className={styles.mainSection}>
-                    
-                    <div style={{ width: "100%", height: "100px" }} />
+                    {foundMeetup === null  ? "Loading..." : <MeetupDescription meetup={foundMeetup} />}
                 </div>
                 <div className={styles.rightSection}>
                     {/* {isBusy && !foundMeetup ? null : (

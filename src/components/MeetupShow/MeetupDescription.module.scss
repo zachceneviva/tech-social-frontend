@@ -1,0 +1,19 @@
+@import "../partials/variables";
+
+.description {
+    width: 100%;
+    background-color: white;
+    border-radius: 5px;
+    overflow: auto;
+    padding: 15px;
+    min-height: 220px;
+    color: $primary-dark-text-color;
+
+    h2 {
+        font-size: 22.5px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+}

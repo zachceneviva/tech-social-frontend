@@ -2,7 +2,7 @@
 
 .organizer {
     width: 100%;
-    min-height: 200px;
+    min-height: 220px;
     overflow: auto;
     background-color: white;
     text-align: center;
@@ -14,7 +14,7 @@
         border-radius: 50%;
         height: 100px;
         width: 100px;
-        margin-top: 7.5px;
+        margin-top: 15px;
     }
 
     h4{
@@ -46,7 +46,7 @@
     height: 35px;
     font-size: 15px;
     border-radius: 50px;
-    margin-top: 5px;
+    margin-top: 10px;
     margin-bottom: 5px;
 
         &:hover {
