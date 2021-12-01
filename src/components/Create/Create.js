@@ -68,25 +68,24 @@ export default function Create(props) {
                         <Form.Control
                             onChange={props.handleName}
                             name="groupName"
-                            placeholder="e.g. JS Rocks"
+                            placeholder="e.g. Code and Coffee"
                             autoComplete="off"
                             value={props.meetupName}
                         />
                     </Form.Group>
 
-                    <Form.Group controlId="formGridName" className="mb-3">
+                    <Form.Group controlId="formGridDate" className="mb-3">
                         <Form.Label>Date*</Form.Label>
                         <Form.Control
                             onChange={props.handleDate}
                             type="date"
-                            name="groupName"
-                            placeholder="e.g. JS Rocks"
+                            name="date"
                             autoComplete="off"
                             value={props.date}
                         />
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="formGridEmail">
+                    <Form.Group className="mb-3" controlId="formGridDescription">
                         <Form.Label>Description*</Form.Label>
                         <Form.Control
                             className={styles.description}
@@ -110,51 +109,61 @@ export default function Create(props) {
                             />
                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formGridCoverPhoto">
-                            <Form.Label>Address</Form.Label>
+                        <Form.Group className="mb-3" controlId="formGridAddress">
+                            <Form.Label>Address*</Form.Label>
                             <Form.Control
                                 placeholder="e.g. 1200 Rainbow Rd"
                                 autoComplete="off"
-                                name="coverPhoto"
+                                name="address"
                                 value={props.address}
                                 onChange={props.handleAddress}
                             />
                         </Form.Group>
 
                     <Row className="mb-3">
-                        <Form.Group as={Col} controlId="formGridAvatar">
+                        <Form.Group as={Col} controlId="formGridCity">
                             <Form.Label>City</Form.Label>
                             <Form.Control
                                 placeholder="New York City"
                                 autoComplete="off"
-                                name="photo"
+                                name="city"
                                 value={props.city}
                                 onChange={props.handleCity}
                             />
                         </Form.Group>
 
-                        <Form.Group as={Col} controlId="formGridCoverPhoto">
+                        <Form.Group as={Col} controlId="formGridState">
                             <Form.Label>State</Form.Label>
                             <Form.Control
                                 placeholder="NY"
                                 autoComplete="off"
-                                name="coverPhoto"
+                                name="state"
                                 value={props.state}
                                 onChange={props.handleState}
                             />
                         </Form.Group>
 
-                        <Form.Group as={Col} controlId="formGridCoverPhoto">
+                        <Form.Group as={Col} controlId="formGridZip">
                             <Form.Label>Zipcode</Form.Label>
                             <Form.Control
                                 placeholder="10001"
                                 autoComplete="off"
-                                name="coverPhoto"
+                                name="zip"
                                 value={props.zip}
                                 onChange={props.handleZip}
                             />
                         </Form.Group>
                     </Row>
+
+                    <Form.Group className="mb-3" controlId="formGridGroup">
+                        <Form.Label>Group</Form.Label>
+                        <Form.Select onChange={props.handleGroup} value={props.group}>
+                            <option value={undefined}>Choose a group...</option>
+                            {props.groups.map((group, idx) => {
+                                return <option key={idx} value={group._id}>{group.name}</option>
+                            })}
+                        </Form.Select>
+                    </Form.Group>
 
                     <Button className={styles.submitBtn} type="submit">
                         Create
