@@ -20,7 +20,7 @@ export default function Conversation() {
         .then(res => setAllMessages(res.data))
         setBusy(false)
         console.log("fetched")
-    },[busy])
+    },[busy, params.id])
 
     const handleSend = (e) => {
         e.preventDefault()
@@ -50,7 +50,7 @@ export default function Conversation() {
         <div className={styles.chatArea}>
             <div className={styles.messagesContainer}>
                 <ul className={styles.messageList}>
-                    {!allMessage ? "Loading" : messages}
+                    {!allMessage && busy ? "Loading" : messages}
                 </ul>
             </div>
             <div className={styles.messageInput}>
