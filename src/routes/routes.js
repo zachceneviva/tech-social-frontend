@@ -15,6 +15,7 @@ import GroupShow from "../pages/GroupShow";
 import CreateMeetup from "../pages/CreateMeetup";
 import MeetupShow from "../pages/MeetupShow";
 import Messages from "../pages/Messages";
+import Conversation from "../pages/Conversation";
 
 
 export default function AppRoutes () {
@@ -39,7 +40,10 @@ export default function AppRoutes () {
                 <Route path='group/create' element={<CreateGroup />} />
                 <Route path='groups/:id' element={<GroupShow/>} />
                 <Route path='groups' element={<AllGroups/>} />
-                <Route path='messages' element={<Messages />} />
+                <Route path='messages' element={<Messages />} >
+                    <Route path=':id' element={<Conversation />} />
+                </Route>
+
             </Routes>
                 : null}
         </BrowserRouter>

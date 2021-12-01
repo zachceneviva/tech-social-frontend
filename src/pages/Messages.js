@@ -6,6 +6,8 @@ import { userState } from "../recoil/atom"
 import { useRecoilState } from "recoil"
 import ChatInput from "../components/Message/ChatInput"
 import axios from "axios"
+import { Outlet} from "react-router"
+import { Link } from "react-router-dom"
 
 
 export default function Messages () {
@@ -19,7 +21,11 @@ export default function Messages () {
     }, [])
 
     const convos = allConvos.map((convo, idx) => {
-        return <ChatCard convo={convo} key="idx" />
+        return (
+            <Link style={{textDecoration: "none"}} to={`/messages/${convo._id}`}>
+                <ChatCard convo={convo} key="idx" />
+            </Link>
+        )   
     })
     return (
         <div className={styles.mainContainer}>
@@ -31,7 +37,8 @@ export default function Messages () {
                     </div>    
                 </div>
                 <div className={styles.mainSection}>
-                    <div className={styles.chatArea}>
+                <Outlet />
+                    {/* <div className={styles.chatArea}>
                         <div className={styles.messagesContainer}>
                             <ul className={styles.messageList}>
                                 <li className={styles.messageListItem}>
@@ -45,7 +52,7 @@ export default function Messages () {
                         <div className={styles.messageInput}>
                             <ChatInput />
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
