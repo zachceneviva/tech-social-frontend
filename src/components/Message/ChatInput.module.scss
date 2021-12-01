@@ -1,0 +1,28 @@
+@import "../partials/variables";
+
+
+.messageForm {
+    width: 92%;
+    height: 100%;
+    margin: 0 auto;
+    margin-left: 3%;
+}
+
+.sendButton {
+    color: white;
+    background-color: $primary-color;
+    border: none;
+    transition: all 0.5s ease;
+    font-weight: 600;
+    width: 75px;
+    height: 35px;
+    font-size: 15px;
+    border-radius: 50px;
+    margin-left: -17.5px;
+    margin-top: -45px;
+
+    &:hover {
+        color: $off-white;
+        background-color: $primary-shadow;
+    }
+}

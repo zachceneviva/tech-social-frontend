@@ -4,6 +4,7 @@ import ConversationMessage from "../components/Message/ConversationMessage"
 import styles from "./Messages.module.scss"
 import { userState } from "../recoil/atom"
 import { useRecoilState } from "recoil"
+import ChatInput from "../components/Message/ChatInput"
 
 
 export default function Messages () {
@@ -28,6 +29,9 @@ export default function Messages () {
                                     <ConversationMessage />
                                 </li>
                             </ul>
+                        </div>
+                        <div className={styles.messageInput}>
+                            <ChatInput />
                         </div>
                     </div>
                 </div>
