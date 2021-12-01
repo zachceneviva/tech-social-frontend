@@ -1,21 +1,33 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import ChatCard from "../components/Message/ChatCard"
 import ConversationMessage from "../components/Message/ConversationMessage"
 import styles from "./Messages.module.scss"
 import { userState } from "../recoil/atom"
 import { useRecoilState } from "recoil"
 import ChatInput from "../components/Message/ChatInput"
+import axios from "axios"
 
 
 export default function Messages () {
+    const [allConvos, setAllConvos] = useState([])
+    const user = useRecoilState(userState)[0]
 
+    useEffect(() => {
+        axios.get(`http://localhost:4000/api/v1/techonnect/conversations/${user._id}`)
+        .then(res => setAllConvos(res.data.allConversations))
+        console.log("fetched")
+    }, [])
+
+    const convos = allConvos.map((convo, idx) => {
+        return <ChatCard convo={convo} key="idx" />
+    })
     return (
         <div className={styles.mainContainer}>
             <div className={styles.mainContentContainer}>
                 <div className={styles.leftSection} >
                     <div className={styles.allChats}>
                         <h1>All Chats</h1>
-                        <ChatCard />
+                            {convos ? convos : "Loading"}
                     </div>    
                 </div>
                 <div className={styles.mainSection}>

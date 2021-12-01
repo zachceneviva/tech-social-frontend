@@ -1,16 +1,17 @@
 
 import styles from './ChatCard.module.scss'
+import {format} from 'date-fns'
 
 export default function ChatCard (props) {
 
     return (
         <div className={styles.chatCard}>
                 <div className={styles.chatUserImage}>
-                    <img src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png" alt="user" />
+                    <img src={props.convo.members[1].avatar} alt="user" />
                 </div>
                 <div className={styles.chatUserName}>
-                    <h4>Zach Ceneviva</h4>
-                    <p>Last Messaged 11/15/21</p>
+                    <h4>{props.convo.members[1].firstName} {props.convo.members[1].lastName}</h4>
+                    <p>Started {format(new Date(props.convo.createdAt), 'MM/dd/yyyy')}</p>
                 </div>
             </div>
     )
