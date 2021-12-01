@@ -7,7 +7,7 @@ import { useRecoilState } from "recoil"
 import ChatInput from "../components/Message/ChatInput"
 import axios from "axios"
 import { Outlet} from "react-router"
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 
 
 export default function Messages () {
@@ -22,9 +22,9 @@ export default function Messages () {
 
     const convos = allConvos.map((convo, idx) => {
         return (
-            <Link style={{textDecoration: "none"}} to={`/messages/${convo._id}`}>
+            <NavLink style={{textDecoration: "none"}} to={`/messages/${convo._id}`}>
                 <ChatCard convo={convo} key="idx" />
-            </Link>
+            </NavLink>
         )   
     })
     return (

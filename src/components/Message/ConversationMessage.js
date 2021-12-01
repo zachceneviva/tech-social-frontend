@@ -1,29 +1,36 @@
+import React, {useState, useEffect} from "react";
 import styles from "./ConversationMessage.module.scss";
+import { userState } from "../../recoil/atom";
+import { useRecoilState } from "recoil";
 
 export default function ConversationMessage(props) {
+    const user = useRecoilState(userState)[0]
+
+
     return (
         <>
-        {props.userMessage ?
+        {props.message.sender._id === user._id ?
             <div className={styles.userTextCard}>
                 <div className={styles.userMessageText}>
-                    <p>Text content </p>
+                    <p>{props.message.text}</p>
                 </div>
                 <div className={styles.userMessengerImage}>
-                    <img src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png" alt="messenger" />
+                    <img src={props.message.sender.avatar} alt="messenger" />
                 </div>
             </div> :
 
         <div className={styles.textCard}>
             <div className={styles.messengerImage}>
                 <img
-                    src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png"
+                    src={props.message.sender.avatar}
                     alt="messenger"
                 />
             </div>
             <div className={styles.messageText}>
-                <p>Text content</p>
+                <p>{props.message.text}</p>
             </div>
-        </div> }
+        </div>}
+        
         </>
     );
 }

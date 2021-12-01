@@ -6,13 +6,15 @@ export default function ChatInput (props) {
 
     return(
         <div className={styles.messageForm}>
-            <Form>
+            <Form onSubmit={props.handleSend}>
                 <Row className="align-items-center">
                     <Col xs={11}>
                         <Form.Label htmlFor="inlineFormInput" visuallyHidden>
                             Name
                         </Form.Label>
                         <Form.Control
+                            value={props.message}
+                            onChange={props.handleChange}
                             as="textarea"
                             rows="3"
                             className="mt-2"
