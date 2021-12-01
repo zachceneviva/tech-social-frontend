@@ -1,0 +1,69 @@
+@import "../partials/variables";
+
+.chatCard {
+    width: 100%;
+    height: 65px;
+    margin: 0 auto;
+    background-color: white;
+    color: $primary-dark-text-color;
+    display: flex;
+    transition: all .5s ease;
+    align-items: center;
+    flex-direction: row;
+    justify-content: start;
+
+    &:hover {
+        background-color: $primary-color;
+        cursor: pointer;
+        color: white;
+    }
+}
+
+.activeChatCard {
+    width: 100%;
+    height: 65px;
+    margin: 0 auto;
+    display: flex;
+    transition: all .5s ease;
+    align-items: center;
+    flex-direction: row;
+    justify-content: start;
+    color: white;
+    background-color: $primary-color;
+}
+
+.chatUserImage {
+    margin-left: 10px;
+    margin-right: 5px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-color: white;
+
+    img {
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        margin: 0;
+        object-fit: cover;
+    }
+}
+
+.chatUserName {
+    padding-top: 2.5px;
+    height:50px;
+    width: 200px;
+    margin: 0;
+    margin-left: 5px;
+
+    h4 {
+        margin: 0;
+        font-size: 14px;
+    }
+
+    p {
+        margin: 0;
+        font-size: 10px;
+        font-style:italic;
+    }
+}
