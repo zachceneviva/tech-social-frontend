@@ -3,7 +3,7 @@ import styles from "./MeetupShow.module.scss"
 import axios from "axios";
 import { useParams } from "react-router";
 import MeetupHeader from "../components/MeetupShow/MeetupHeader";
-import About from "../components/GroupShow/About";
+import MeetupDetails from "../components/MeetupShow/MeetupDetails";
 import Organizer from "../components/MeetupShow/Organizer";
 import MeetupDescription from "../components/MeetupShow/MeetupDescription";
 
@@ -40,14 +40,12 @@ export default function MeetupShow () {
                     {foundMeetup === null  ? "Loading..." : <MeetupDescription meetup={foundMeetup} />}
                 </div>
                 <div className={styles.rightSection}>
-                    {/* {isBusy && !foundMeetup ? null : (
-                        <About
+                    {foundMeetup === null ? null : (
+                        <MeetupDetails
                             callBack={callBack}
                             meetup={foundMeetup}
-                            buttonJoin="Attend"
-                            buttonLeave="Can't Go"
                         />
-                    )} */}
+                    )}
                 </div>
             </div>
         </div>
