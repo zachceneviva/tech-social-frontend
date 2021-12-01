@@ -41,7 +41,6 @@
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background-color: antiquewhite;
     margin-right: 10px;
 
     img {
@@ -64,6 +63,16 @@
     height: 85px;
     border: none;
     white-space: pre-wrap;
+}
+
+.additonalInput {
+    color: $primary-dark-text-color;
+    
+    h4 {
+        font-size: 15px;
+        margin-left: 6px;
+        margin-bottom: 2.5px;
+    }
 }
 
 .submitPost {

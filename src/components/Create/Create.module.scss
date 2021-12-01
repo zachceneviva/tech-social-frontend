@@ -1,0 +1,24 @@
+@import "../partials/variables";
+
+.formCreate {
+    width: 95%;
+}
+
+.submitBtn {
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    border-radius: 25px;
+
+    &:hover {
+        background-color: $primary-shadow;
+
+    }
+}
+
+.description {
+    width: 100%;
+    resize: none;
+    height: 200px;
+    white-space: pre-wrap;
+}

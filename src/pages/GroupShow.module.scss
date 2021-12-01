@@ -1,0 +1,51 @@
+@import '../components/partials/variables';
+
+.mainContainer {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.topContainer {
+    width: 90%;
+    margin: 0 auto;
+    height: 475px;
+    display: flex;
+}
+
+
+.mainContentContainer {
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-shrink: inherit;
+    margin-top: 25px;
+}
+
+.mainSection {
+    width: 50%;
+    height: 100%;
+    margin: 0 auto;
+    overflow-y: scroll;
+}
+
+.leftSection {
+    width: 22.5%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.rightSection {
+    width: 22.5%;
+    height: 100%;
+    margin: 0 auto;
+}

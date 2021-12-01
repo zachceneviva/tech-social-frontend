@@ -1,0 +1,56 @@
+@import "../partials/variables";
+
+.about {
+    width: 100%;
+    min-height: 85px;
+    overflow: auto;
+    background-color: white;
+    text-align: center;
+    border-radius: 5px;
+    color: $primary-dark-text-color;
+    padding: 7.5px;
+
+    h3 {
+        font-size: 20px;
+        margin-bottom: 3px;
+    }
+
+    hr {
+        margin: 0 auto;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        width:100px;
+    }
+
+    h6 {
+        font-weight: normal;
+        font-size: 12px;
+        margin-top: 3px;
+    }
+
+    p {
+        font-size: 10px;
+        margin-top: 3px;
+        margin-bottom: 3px;
+        font-style: italic;
+        color: $primary-accent-text-color;
+    }
+
+    button {
+    color: white;
+    background-color: $primary-color;
+    border: none;
+    transition: all 0.5s ease;
+    font-weight: 600;
+    width: 75px;
+    height: 35px;
+    font-size: 15px;
+    border-radius: 50px;
+    margin-bottom: 5px;
+
+        &:hover {
+            color: $off-white;
+            background-color: $primary-shadow;
+        }
+    }
+}

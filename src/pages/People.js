@@ -1,11 +1,23 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import styles from "./People.module.scss"
 import BannerProfileCard from "../components/Feed/BannerProfileCard"
 import AllPeople from "../components/People/AllPeople"
+import axios from "axios"
 
 
 export default function People (props) {
+    const [allPeople, setAllPeople] = useState([])
 
+    useEffect(() => {
+        axios.get(`http://localhost:4000/api/v1/techonnect/users`, {
+            headers: {authorization: `Bearer ${localStorage.uid}`},
+        }).then((res) => res.data).then(res => setAllPeople(res.allUsers))
+    }, [])
+    
+
+    const people = allPeople.map((person, idx) => {
+        return <AllPeople person={person} key={idx}/>
+    })
     return (
         <div className={styles.mainContainer}>
             <div className={styles.mainContentContainer}>
@@ -13,7 +25,9 @@ export default function People (props) {
                     <BannerProfileCard location="/people"/>
                 </div>
                 <div className={styles.mainSection}>
-                    <AllPeople />
+                    <div className={styles.allPeople}>
+                        {!allPeople ? "Loading" : people}
+                    </div>
                 </div>
             </div>
         </div>
