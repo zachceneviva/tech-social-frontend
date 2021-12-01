@@ -8,6 +8,7 @@ import { useRecoilValue } from "recoil";
 import { loggedInState } from "../recoil/selector";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 export default function Navigation() {
     const [user, setUser] = useRecoilState(userState)
@@ -40,11 +41,11 @@ export default function Navigation() {
                 <Navbar.Collapse className={styles.navBarCollapse} id="responsive-navbar-nav">
             {loggedIn ?
                     <Nav className={styles.navLinks}>
-                        <Navbar.Text><a href="/">Home</a></Navbar.Text>
-                        <Navbar.Text><a href="#">Explore</a></Navbar.Text>
-                        <Navbar.Text><a href="/groups">Groups</a></Navbar.Text>
-                        <Navbar.Text><a href="/meetups">Meetups</a></Navbar.Text>
-                        <Navbar.Text><a href="#">Messages</a></Navbar.Text>
+                        <Navbar.Text><Link to="/">Home</Link></Navbar.Text>
+                        <Navbar.Text><Link to="#">Explore</Link></Navbar.Text>
+                        <Navbar.Text><Link to="/groups">Groups</Link></Navbar.Text>
+                        <Navbar.Text><Link to="/meetups">Meetups</Link></Navbar.Text>
+                        <Navbar.Text><Link to="#">Messages</Link></Navbar.Text>
                         <img className={styles.navUserImage} src={user.avatar} alt="user" />
                         <NavDropdown
                             title={`${user.firstName} ${user.lastName}`}

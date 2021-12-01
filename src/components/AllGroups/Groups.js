@@ -1,5 +1,6 @@
 import styles from "./Groups.module.scss"
 import { Button } from "react-bootstrap"
+import { Link } from "react-router-dom"
 
 
 export default function Groups (props) {
@@ -11,7 +12,9 @@ export default function Groups (props) {
                         <h4>{props.group.name}</h4>
                         <h6>{props.group.members.length} members</h6>
                     </div>
-                <Button className={styles.viewBtn} href={`/groups/${props.group._id}`}>View</Button>
+                <Link to={`/groups/${props.group._id}`}>
+                    <Button className={styles.viewBtn}>View</Button>
+                </Link>
                 </div>
             </div>
     )

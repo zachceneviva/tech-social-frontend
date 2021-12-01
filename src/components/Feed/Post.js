@@ -13,6 +13,7 @@ import axios from "axios";
 import CreateComment from "./CreateComment";
 import { userState } from "../../recoil/atom";
 import { useRecoilState } from "recoil";
+import { Link } from "react-router-dom";
 
 export default function Post(props) {
     const user = useRecoilState(userState)[0]
@@ -129,7 +130,7 @@ export default function Post(props) {
                     />
                 </div>
                 <div className={styles.postUserName}>
-                    <h4><a href={`/profile/${props.post.user._id}`}>{props.post.user.firstName} {props.post.user.lastName}</a></h4>
+                    <h4><Link to={`/profile/${props.post.user._id}`}>{props.post.user.firstName} {props.post.user.lastName}</Link></h4>
                     <p>
                         {formatDistanceToNow(new Date(props.post.createdAt))}{" "}
                         ago
