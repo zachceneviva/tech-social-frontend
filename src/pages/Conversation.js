@@ -13,7 +13,6 @@ export default function Conversation() {
     const params = useParams()
     const [allMessage, setAllMessages] = useState([])
     const [newMessage, setNewMessage] = useState('')
-    const [busy, setBusy] = useState(true)
     const [arrivalMessage, setArrivalMessage] = useState(null)
     const [currentChat, setCurrentChat] = useState(null)
     const socket = useRef()
@@ -69,23 +68,21 @@ export default function Conversation() {
             }
         };
         getMessages()
-        setBusy(false)
     }, [currentChat])
-
-
 
 
     const handleSend = async (e) => {
         e.preventDefault()
         
         const receiverId = currentChat.members.find((member) => member !== user._id)
-        socket.current.emit("sendMessage", {
-            senderId: user._id,
-            avatar: user.avatar,
-            fullName: `${user.firstName} ${user.lastName}`,
-            receiverId,
-            text: newMessage,
-        })
+            socket.current.emit("sendMessage", {
+                senderId: user._id,
+                avatar: user.avatar,
+                fullName: `${user.firstName} ${user.lastName}`,
+                receiverId,
+                text: newMessage,
+            }) 
+        
         try {
             const res = await axios.post(`http://localhost:4000/api/v1/techonnect/messages`, {
                 conversationId: params.id,
@@ -99,7 +96,6 @@ export default function Conversation() {
             setAllMessages([...allMessage, res.data.newMessage])
             console.log(allMessage)
             setNewMessage('')
-            setBusy(true)
         } catch (err) {
             console.log(err)
         }
