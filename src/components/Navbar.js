@@ -37,7 +37,7 @@ export default function Navigation() {
     return (
         <Navbar className={styles.navBar} collapseOnSelect expand="lg" variant="dark" fixed="top" expanded={close}>
             <Container className={styles.container}>
-                <Navbar.Brand className="mb-1" href="/"><span id={styles.logo}><FaConnectdevelop /></span>Techonnect</Navbar.Brand>
+                <Navbar.Brand className="mb-1" href={user ? "/home" : "/"}><span id={styles.logo}><FaConnectdevelop /></span>Techonnect</Navbar.Brand>
                 <Navbar.Toggle className={styles.navBarCollapse} aria-controls="responsive-navbar-nav" onClick={() => setClosed(close ? false : "expanded")}/>
                 <Navbar.Collapse className={styles.navBarCollapse} id="responsive-navbar-nav">
             {loggedIn ?
