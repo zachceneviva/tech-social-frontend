@@ -20,6 +20,16 @@ export default function ProfileHeader (props) {
         }
     }
 
+    const techonnect = async (e) => {
+        e.preventDefault()
+        let newTechonnections = [...currentUser.techonnections];
+        newTechonnections.push(user._id)
+        console.log(newTechonnections)
+        await axios.put(`http://localhost:4000/api/v1/techonnect/users/${currentUser._id}`, {techonnections: newTechonnections}, {headers: {authorization: `Bearer ${localStorage.uid}`}})
+        .then(res => console.log(res.data))
+        props.callBack()
+    }
+
     return (
         <div className={styles.header}>
             <div className={styles.bannerImage}>
@@ -36,7 +46,7 @@ export default function ProfileHeader (props) {
                     </div>
                     <div className={styles.buttons}>
                         {currentUser.techonnections.includes(user._id) || currentUser._id === user._id ? null :
-                        <Button className={styles.connect}>Techonnect</Button>
+                        <Button className={styles.connect} onClick={techonnect}>Techonnect</Button>
                         }
                         {currentUser.conversationsWith.includes(user._id) || currentUser._id === user._id ? null :
                         <Link to="/messages">     
