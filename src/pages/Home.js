@@ -9,6 +9,7 @@ import axios from "axios"
 import MeetupBanner from "../components/Feed/MeetupBanner"
 import { userState } from "../recoil/atom"
 import { useRecoilState } from "recoil";
+import AllGroups from "./AllGroups"
 
 export default function Home () {
     const [postContent, setPostContent] = useState('')
@@ -20,6 +21,7 @@ export default function Home () {
     const [ghUrl, setGhUrl] = useState('none')
     const [linkUrl, setLinkUrl] = useState('none')
     const [isBusy, setBusy] = useState(true)
+    const [groups, setGroups] = useState([])
     const user = useRecoilState(userState)[0]
 
 
@@ -28,6 +30,10 @@ export default function Home () {
         setBusy(false)
         console.log('this is fetching my data')
     },[isBusy])
+
+useEffect(() => {
+    axios.get('http://localhost:4000/api/v1/techonnect/groups/home').then((res) => setGroups(res.data.groups))
+}, [])
 
 
     const fetchData = () => {
@@ -98,8 +104,8 @@ export default function Home () {
                     <div style={{width: "100%", height: "100px"}}/>
                 </div>
                 <div className={styles.rightSection} >
-                    <MeetupBanner title="Upcoming Meetups"/>
-                    <GroupsBanner title="Top Groups"/>
+                    {!groups ? null : <MeetupBanner title="Upcoming Meetups"/>}
+                    {!groups ? null : <GroupsBanner title="Top Groups" groups={groups}/>}
                 </div>
             </div>
         </div>
