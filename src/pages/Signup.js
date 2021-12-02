@@ -14,6 +14,10 @@ export default function Signin(props) {
     const [state, setState] = useState('')
     const [avatar, setAvatar] = useState('')
     const [coverPhoto, setCoverPhoto] = useState('')
+    const [role, setRole] = useState('')
+    const [company, setCompany] = useState('')
+    const [github, setGithub] = useState('')
+    const [portfolio, setPortfolio] = useState('')
     const navigate = useNavigate();
 
 
@@ -63,6 +67,22 @@ export default function Signin(props) {
         setCoverPhoto(e.target.value)
     }
 
+    const handleRole= (e) => {
+        setRole(e.target.value)
+    }
+
+    const handleCompany = (e) => {
+        setCompany(e.target.value)
+    }
+
+    const handleGithub = (e) => {
+        setGithub(e.target.value)
+    }
+
+    const handlePortfolio = (e) => {
+        setPortfolio(e.target.value)
+    }
+
 
     return (
         <div className={styles.mainAuthBody}>
@@ -108,8 +128,7 @@ export default function Signin(props) {
                         />
                     </Form.Group>
 
-                    <Row className="mb-3">
-                        <Form.Group as={Col} controlId="formGridPassword">
+                        <Form.Group className="mb-3" controlId="formGridPassword">
                             <Form.Label>Password *</Form.Label>
                             <Form.Control
                             onChange={handlePassword}
@@ -122,8 +141,8 @@ export default function Signin(props) {
                         </Form.Group>
 
                         <Form.Group
-                            as={Col}
                             controlId="formGridConfirmPassword"
+                            className="mb-3"
                         >
                             <Form.Label>Confirm Password *</Form.Label>
                             <Form.Control
@@ -134,33 +153,70 @@ export default function Signin(props) {
                                 valeu={confirmPassword}
                             />
                         </Form.Group>
-                    </Row>
+
+                        
 
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formGridCity">
                             <Form.Label>City *</Form.Label>
-                            <Form.Control autoComplete="off" name="city" value={city} onChange={handleCity}/>
+                            <Form.Control autoComplete="off" name="city" value={city} onChange={handleCity} placeholder="e.g. New York City"/>
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formGridState">
                             <Form.Label>State *</Form.Label>
-                            <Form.Control autoComplete="off" name="state" value={state} onChange={handleState}/>
+                            <Form.Control autoComplete="off" name="state" value={state} onChange={handleState} placeholder="e.g. NY"/>
                         </Form.Group>
                     </Row>
+
+                    <Form.Group className="mb-3" controlId="formGridRole">
+                        <Form.Label>Role *</Form.Label>
+                        <Form.Control
+                        onChange={handleRole}
+                            placeholder="e.g. Software Engineer"
+                            name="role"
+                            autoComplete="off"
+                            value={role}
+                        />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="formGridCompany">
+                        <Form.Label>Company</Form.Label>
+                        <Form.Control
+                        onChange={handleCompany}
+                            placeholder="e.g. Google"
+                            name="company"
+                            autoComplete="off"
+                            value={company}
+                        />
+                    </Form.Group>
 
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formGridAvatar">
                             <Form.Label>Avatar</Form.Label>
-                            <Form.Control autoComplete="off" name="avatar" value={avatar} onChange={handleAvatar}/>
+                            <Form.Control autoComplete="off" name="avatar" value={avatar} onChange={handleAvatar} placeholder="https://"/>
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formGridCoverPhoto">
                             <Form.Label>Cover Photo</Form.Label>
-                            <Form.Control autoComplete="off" name="coverPhoto" value={coverPhoto} onChange={handleCoverPhoto}/>
+                            <Form.Control autoComplete="off" name="coverPhoto" value={coverPhoto} onChange={handleCoverPhoto} placeholder="https://"/>
                         </Form.Group>
                     </Row>
 
-                    <Button className={styles.submitBtn} type="submit">
+                    <Row className="mb-3">
+                        <Form.Group as={Col} controlId="formGridGh">
+                            <Form.Label>Github</Form.Label>
+                            <Form.Control autoComplete="off" name="gh" value={github} onChange={handleGithub} placeholder="https://github.com/john-smith"/>
+                        </Form.Group>
+
+                        <Form.Group as={Col} controlId="formGridPort">
+                            <Form.Label>Portfolio</Form.Label>
+                            <Form.Control autoComplete="off" name="portfolio" value={portfolio} onChange={handlePortfolio} placeholder="https://johnsmith.com"/>
+                        </Form.Group>
+                    </Row>
+
+                    
+
+                    <Button className={styles.submitBtn}  type="submit">
                         Submit
                     </Button>
                 </Form>
