@@ -4,12 +4,11 @@ import { userState } from "../../recoil/atom";
 import { useRecoilState } from "recoil";
 
 export default function ConversationMessage(props) {
-    const user = useRecoilState(userState)[0]
-
-
+    
     return (
         <>
-        {props.message.sender._id === user._id ?
+        {}
+        {props.own ?
             <div className={styles.userTextCard}>
                 <div className={styles.userMessageText}>
                     <p>{props.message.text}</p>
