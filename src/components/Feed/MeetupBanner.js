@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 
 export default function MeetupBanner (props) {
 
+
     const meetup = props.meetups.map((meetup, idx) => {
         return (
             <div className={styles.people}>
@@ -26,7 +27,7 @@ export default function MeetupBanner (props) {
         <div className={styles.peopleBannerCard}>
             <h2>{props.title}</h2>
             <hr/>
-            {meetup}
+            {props.meetups.length > 0 ? meetup : <h6>No meetups yet</h6>}
         </div>
     )
 }
