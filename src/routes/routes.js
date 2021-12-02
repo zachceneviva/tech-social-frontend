@@ -16,6 +16,7 @@ import CreateMeetup from "../pages/CreateMeetup";
 import MeetupShow from "../pages/MeetupShow";
 import Messages from "../pages/Messages";
 import Conversation from "../pages/Conversation";
+import ProfileUpdate from "../pages/ProfileUpdate";
 
 
 export default function AppRoutes () {
@@ -33,6 +34,7 @@ export default function AppRoutes () {
             <Routes>
                 <Route path='/home' element={<Home />} />
                 <Route path='profile/:id' element={<Profile />} />
+                <Route path='profile/:id/edit' element={<ProfileUpdate />} />
                 <Route path='people' element={<People />} />
                 <Route path='meetups/create' element={<CreateMeetup/>} />
                 <Route path='meetup/:id' element={<MeetupShow />} />

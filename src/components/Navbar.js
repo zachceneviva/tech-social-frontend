@@ -55,7 +55,7 @@ export default function Navigation() {
                             <NavDropdown.Item href={`/profile/${user._id}`}>
                                 My Profile
                             </NavDropdown.Item>
-                            <NavDropdown.Item href="#">
+                            <NavDropdown.Item href={`/profile/${user._id}/edit`}>
                                 Edit Profile
                             </NavDropdown.Item>
                             <NavDropdown.Divider />
