@@ -29,7 +29,7 @@ export default function Signin(props) {
             email: email,
             city: city,
             state: state,
-        }).then(res => console.log(res));
+        }).then(res => res);
         navigate('/login')
     }
 

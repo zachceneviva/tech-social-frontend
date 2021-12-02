@@ -28,7 +28,6 @@ export default function Login () {
         })
         .then(res => res.data)
         .then(res => {
-            console.log(res)
             setUser(res.user)
             navigate('/')
         })

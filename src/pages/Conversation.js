@@ -5,7 +5,7 @@ import { userState } from "../recoil/atom";
 import { useRecoilState } from "recoil";
 import ChatInput from "../components/Message/ChatInput";
 import axios from "axios";
-import { useParams, useResolvedPath } from "react-router";
+import { useParams } from "react-router";
 import {io} from "socket.io-client"
 
 export default function Conversation() {

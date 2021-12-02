@@ -1,10 +1,9 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import styles from "./ConversationMessage.module.scss";
-import { userState } from "../../recoil/atom";
-import { useRecoilState } from "recoil";
+
 
 export default function ConversationMessage(props) {
-    
+
     return (
         <>
         {}
