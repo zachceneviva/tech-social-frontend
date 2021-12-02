@@ -1,8 +1,6 @@
 import React from "react";
 import styles from "./GroupHeader.module.scss"
-import { userState } from "../../recoil/atom";
-import { useRecoilState } from "recoil";
-import { style } from "dom-helpers";
+
 
 export default function GroupHeader (props) {
 

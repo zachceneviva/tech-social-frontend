@@ -38,7 +38,7 @@ export default function Signin(props) {
             github: github,
             portfolio: portfolio,
         }).then(res => res);
-        navigate('/login')
+        navigate('/')
     }
 
     const handleFName = (e) => {

@@ -26,12 +26,12 @@ export default function AppRoutes () {
         <BrowserRouter>
             <Navigation/>
             <Routes>
+                <Route path='/' element={<Login/>} />
                 <Route path='register' element={<Signup/>} />
-                <Route path='login' element={<Login/>} />
             </Routes>
                 {loggedIn ?
             <Routes>
-                <Route path='/' element={<Home />} />
+                <Route path='/home' element={<Home />} />
                 <Route path='profile/:id' element={<Profile />} />
                 <Route path='people' element={<People />} />
                 <Route path='meetups/create' element={<CreateMeetup/>} />

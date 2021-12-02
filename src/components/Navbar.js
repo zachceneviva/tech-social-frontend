@@ -31,7 +31,7 @@ export default function Navigation() {
     const logout = () => {
         setUser(null);
         localStorage.clear();
-        navigate('/login')
+        navigate('/')
     }
 
     return (
@@ -42,7 +42,7 @@ export default function Navigation() {
                 <Navbar.Collapse className={styles.navBarCollapse} id="responsive-navbar-nav">
             {loggedIn ?
                     <Nav className={styles.navLinks}>
-                        <Navbar.Text><Link onClick={() => setClosed(false)} to="/">Home</Link></Navbar.Text>
+                        <Navbar.Text><Link onClick={() => setClosed(false)} to="/home">Home</Link></Navbar.Text>
                         <Navbar.Text><Link onClick={() => setClosed(false)} to="#">Explore</Link></Navbar.Text>
                         <Navbar.Text><Link onClick={() => setClosed(false)} to="/groups">Groups</Link></Navbar.Text>
                         <Navbar.Text><Link onClick={() => setClosed(false)} to="/meetups">Meetups</Link></Navbar.Text>

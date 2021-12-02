@@ -29,7 +29,7 @@ export default function Login () {
         .then(res => res.data)
         .then(res => {
             setUser(res.user)
-            navigate('/')
+            navigate('/home')
         })
     }
 

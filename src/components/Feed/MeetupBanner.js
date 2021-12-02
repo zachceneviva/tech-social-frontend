@@ -1,4 +1,4 @@
-import { propTypes } from "react-bootstrap/esm/Image"
+
 import styles from "./Meetup.module.scss"
 
 export default function MeetupBanner (props) {
