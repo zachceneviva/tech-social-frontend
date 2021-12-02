@@ -14,6 +14,7 @@ import CreateComment from "./CreateComment";
 import { userState } from "../../recoil/atom";
 import { useRecoilState } from "recoil";
 import { Link } from "react-router-dom";
+import { BsThreeDots } from "react-icons/bs";
 
 export default function Post(props) {
     const user = useRecoilState(userState)[0]
@@ -122,19 +123,22 @@ export default function Post(props) {
     return (
         <div className={styles.post}>
             <div className={styles.postHeader}>
-                <div className={styles.postUserImage}>
-                    <img
-                        src={props.post.user.avatar}
-                        alt="user"
-                    />
+                <div className={styles.postUserInfo}>
+                    <div className={styles.postUserImage}>
+                        <img
+                            src={props.post.user.avatar}
+                            alt="user"
+                        />
+                    </div>
+                    <div className={styles.postUserName}>
+                        <h4><Link to={`/profile/${props.post.user._id}`}>{props.post.user.firstName} {props.post.user.lastName}</Link></h4>
+                        <p>
+                            {formatDistanceToNow(new Date(props.post.createdAt))}{" "}
+                            ago
+                        </p>
+                    </div>
                 </div>
-                <div className={styles.postUserName}>
-                    <h4><Link to={`/profile/${props.post.user._id}`}>{props.post.user.firstName} {props.post.user.lastName}</Link></h4>
-                    <p>
-                        {formatDistanceToNow(new Date(props.post.createdAt))}{" "}
-                        ago
-                    </p>
-                </div>
+                <BsThreeDots className={styles.menuToggle}/>
             </div>
             <div className={styles.postTextContent}>
                 <p>{props.post.content}</p>

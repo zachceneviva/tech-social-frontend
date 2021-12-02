@@ -19,6 +19,15 @@
 
 .postHeader {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    margin-bottom: 7.5px;
+}
+
+.postUserInfo {
+    display: flex;
     justify-content: flex-start;
     align-items: center;
     width: 100%;
@@ -135,5 +144,17 @@
     p {
         font-size: 8px;
         color: $primary-dark-text-color;
+    }
+}
+
+.menuToggle {
+    margin-top: -40px;
+    font-size: 22.5px;
+    margin-left: 5px;
+    color: $primary-accent-text-color;
+    background-color: transparent;
+
+    &:hover {
+        cursor: pointer;
     }
 }
