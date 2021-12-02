@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styles from './Login.module.scss'
 import {Form, Button} from "react-bootstrap"
 import axios from 'axios';
@@ -14,7 +14,9 @@ export default function Login () {
     const navigate = useNavigate();
     const [user, setUser] = useRecoilState(userState)
 
-    
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
 
 
     const handleSubmit = async (e) => {

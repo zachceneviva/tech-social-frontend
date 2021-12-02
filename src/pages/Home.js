@@ -9,7 +9,7 @@ import axios from "axios"
 import MeetupBanner from "../components/Feed/MeetupBanner"
 import { userState } from "../recoil/atom"
 import { useRecoilState } from "recoil";
-import AllGroups from "./AllGroups"
+
 
 export default function Home () {
     const [postContent, setPostContent] = useState('')
@@ -25,6 +25,9 @@ export default function Home () {
     const [groups, setGroups] = useState([])
     const user = useRecoilState(userState)[0]
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
 
     useEffect(() => {
         fetchData()

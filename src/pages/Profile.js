@@ -19,11 +19,17 @@ export default function Profile () {
     const params = useParams()
     const user = useRecoilState(userState)[0]
 
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
+
     useEffect(() => {
         fetchData()
         console.log('this is fetching my data')
         setBusy(false)
-    },[busy])
+    },[busy, params.id])
 
     const fetchData = async () => {
         await axios.get(`http://localhost:4000/api/v1/techonnect/posts/${params.id}`).then((res) => setAllPosts(res.data.posts));

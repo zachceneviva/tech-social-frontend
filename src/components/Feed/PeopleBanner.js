@@ -7,10 +7,12 @@ import { Link } from "react-router-dom"
 export default function PeopleBanner () {
     const user = useRecoilState(userState)[0]
     const [userTechonnections, setTechonnections] = useState([])
+    const [busy, setBusy] = useState(true)
 
     useEffect(() => {
         setTechonnections(user.techonnections.slice(0, 4))
         console.log(`set`)
+        setBusy(false)
     }, [])
 
     const techonnection = userTechonnections.map((techonnect, idx) => {
@@ -31,7 +33,8 @@ export default function PeopleBanner () {
         <div className={styles.peopleBannerCard}>
             <h2>Check-In</h2>
             <hr/>
-            {!userTechonnections ? null : techonnection}
+            {busy ? null :
+            user.techonnections.length > 0 ? techonnection : <p>No techonnections yet</p>}
         </div>
     )
 }

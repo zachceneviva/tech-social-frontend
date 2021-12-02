@@ -57,7 +57,7 @@
         color: $primary-dark-text-color;
         text-decoration: none;
     }
-    
+
     h4 {
         font-size: 15px;
         margin-bottom: 0px;
@@ -70,6 +70,15 @@
         margin-top: 0px;
         color: $primary-accent-text-color;
         font-style: italic;
+    }
+
+    p {  
+        color: rgb(238, 237, 237);
+        font-size: 25px;
+        font-weight: lighter;
+        font-style: italic;
+        margin-top: 5px;
+
     }
 
 }

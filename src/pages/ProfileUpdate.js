@@ -30,6 +30,7 @@ export default function ProfileUpdate () {
         }
     }, [])
 
+
     const handleSubmit = (e) => {
         e.preventDefault()
         axios.put(`http://localhost:4000/api/v1/techonnect/users/${params.id}`, 
