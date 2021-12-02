@@ -64,7 +64,7 @@
     }
 
     h5 {
-        margin-top: -2.5px;
+        margin-top: -1.5px;
         margin-bottom: 0px;
         font-size: 17.5px;
         font-style: italic;
@@ -72,14 +72,18 @@
     }
 
     h6 {
-        margin-top: 0px;
+        margin-top: 3px;
         margin-bottom: 0px;
         font-size: 20px;
     }
 
+    span {
+        color: $primary-color;
+    }
+
     p {
         font-size: 15px;
-        margin-top: 5px;
+        margin-top: 7.5px;
         margin-bottom: 0px;
         color: $primary-dark-text-color;
     }

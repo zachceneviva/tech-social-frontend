@@ -19,7 +19,7 @@ export default function GroupsBanner(props) {
         <div className={styles.peopleBannerCard}>
             <h2>{props.title}</h2>
             <hr />
-            {group}
+            {props.groups.length > 0 ? group : <h6>No groups yet</h6>}
         </div>
     );
 }

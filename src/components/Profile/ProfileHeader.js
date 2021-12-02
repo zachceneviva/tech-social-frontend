@@ -30,7 +30,7 @@ export default function ProfileHeader (props) {
                 <div className={styles.headerInformation}>
                     <div className={styles.userInfo}>
                         <h2>{user.firstName} {user.lastName}</h2>
-                        <h6>{user.role} @ {user.company}</h6>
+                        <h6>{user.role} <span>@</span> {user.company}</h6>
                         <h5>{user.city}, {user.state}</h5>
                         <p>{user.techonnections.length} Techonnections</p>
                     </div>

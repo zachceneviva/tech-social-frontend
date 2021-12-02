@@ -11,6 +11,8 @@ import { useParams } from "react-router";
 export default function Profile () {
     const [allPosts, setAllPosts] = useState([])
     const [foundUser, setFoundUser] = useState(null)
+    const [meetups, setMeetups] = useState([])
+    const [groups, setGroups] = useState([])
     const params = useParams()
 
     useEffect(() => {
@@ -23,6 +25,8 @@ export default function Profile () {
         await axios.get(`http://localhost:4000/api/v1/techonnect/users/${params.id}`, {
             headers: {authorization: `Bearer ${localStorage.uid}`},
         }).then((res) => res.data).then(res => setFoundUser(res.user))
+        await axios.get(`http://localhost:4000/api/v1/techonnect/groups/profile/${params.id}`).then((res) => setGroups(res.data.groups));
+        await axios.get(`http://localhost:4000/api/v1/techonnect/meetups/profile/${params.id}`).then((res) => setMeetups(res.data.meetups));
     }
     
     
@@ -44,8 +48,8 @@ export default function Profile () {
                     <div style={{width: "100%", height: "100px"}}/>
                 </div>
                 <div className={styles.rightSection} >
-                    {foundUser === null ? "Loading" : <MeetupBanner title={`${foundUser.firstName}'s Meetups`}/>}
-                    {foundUser === null ? "Loading" : <GroupsBanner title={`${foundUser.firstName}'s Groups`}/>}
+                    {foundUser === null ? null : <MeetupBanner meetups={meetups} title={`${foundUser.firstName}'s Meetups`}/>}
+                    {foundUser === null ? null : <GroupsBanner groups={groups} title={`${foundUser.firstName}'s Groups`}/>}
                 </div>
             </div>
         </div>
