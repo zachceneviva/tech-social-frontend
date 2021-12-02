@@ -33,6 +33,10 @@ export default function Signin(props) {
             email: email,
             city: city,
             state: state,
+            role: role,
+            company: company,
+            github: github,
+            portfolio: portfolio,
         }).then(res => res);
         navigate('/login')
     }
