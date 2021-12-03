@@ -25,6 +25,11 @@ export default function GroupShow() {
     const [meetups, setMeetups] = useState([])
     const user = useRecoilState(userState)[0];
 
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+    
     useEffect(() => {
         axios
             .get(`http://localhost:4000/api/v1/techonnect/groups/${params.id}`)

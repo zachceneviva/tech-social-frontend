@@ -8,6 +8,11 @@ export default function AllGroups () {
     const [allGroups, setAllGroups] = useState([])
     const [busy, setBusy] = useState(true)
 
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+    
     useEffect(() => {
         console.log("fetching...")
         axios.get(`http://localhost:4000/api/v1/techonnect/groups`).then((res) => res.data).then(res => setAllGroups(res.groups))

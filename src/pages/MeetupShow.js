@@ -14,6 +14,10 @@ export default function MeetupShow () {
     const params = useParams()
 
     useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+    
+    useEffect(() => {
         console.log("Fetching...")
         axios.get(`http://localhost:4000/api/v1/techonnect/meetups/${params.id}`).then(res => setFoundMeetup(res.data.meetup))
         setBusy(false)
