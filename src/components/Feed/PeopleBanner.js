@@ -1,17 +1,28 @@
 import styles from "./PeopleBanner.module.scss"
+import { Link } from "react-router-dom"
 
-export default function PeopleBanner () {
+export default function PeopleBanner (props) {
+
+
+    const techonnection = props.user.techonnections.map((techonnect, idx) => {
+        return (
+            <div className={styles.people} key={idx}>
+                <img src={techonnect.avatar} alt="user" />
+                <div className={styles.userInfo}>
+                    <Link to={`/profile/${techonnect._id}`}>
+                        <h4>{techonnect.firstName} {techonnect.lastName}</h4>
+                    </Link>
+                    <h6>{techonnect.city}, {techonnect.state}</h6>
+                </div>
+            </div>
+        )
+    }) 
+
     return (
         <div className={styles.peopleBannerCard}>
             <h2>Check-In</h2>
             <hr/>
-            <div className={styles.people}>
-                <img src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png" alt="user" />
-                <div className={styles.userInfo}>
-                    <h4>Matthew Ceneviva</h4>
-                    <h6>Philadelphia, PA</h6>
-                </div>
-            </div>
+            {props.user.techonnections.length > 0 ? techonnection : <p>No techonnections yet</p>}
         </div>
     )
 }

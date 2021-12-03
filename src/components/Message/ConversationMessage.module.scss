@@ -1,0 +1,91 @@
+@import "../partials/variables";
+
+.textCard {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.messengerImage {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin: 0;
+
+    img {
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        margin: 0;
+        object-fit: cover;
+    }
+}
+
+.messageText {
+    margin-left: 5px;
+    max-width: 90%;
+    min-width: 20%;
+    min-height: 50px;
+    max-height: fit-content;
+    background-color: whitesmoke;
+    border-radius: 5px;
+
+    p {
+        color: $primary-dark-text-color;
+        font-size: 13.5px;
+        margin: 10px;
+        margin-top: 5px;
+    }
+}
+
+// When current user sends a message
+.userTextCard {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+.userMessengerImage {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin: 0;
+    margin-left: 5px;
+
+    img {
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        margin: 0;
+        object-fit: cover;
+    }
+}
+
+.userMessageText {
+    margin-left: 5px;
+    max-width: 90%;
+    min-width: 20%;
+    min-height: 50px;
+    max-height: fit-content;
+    background-color: $primary-color;
+    border-radius: 5px;
+
+    p {
+        color: white;
+        font-size: 13.5px;
+        margin: 10px;
+        margin-top: 5px;
+    }
+}
+
+.messageInput {
+    width: 100%;
+    height: 15%;
+    background-color: white;
+}

@@ -22,6 +22,7 @@ export default function GroupShow() {
     const [ghUrl, setGhUrl] = useState("none");
     const [linkUrl, setLinkUrl] = useState("none");
     const [isBusy, setBusy] = useState(true);
+    const [meetups, setMeetups] = useState([])
     const user = useRecoilState(userState)[0];
 
     useEffect(() => {
@@ -34,6 +35,10 @@ export default function GroupShow() {
                 console.log("this is fetching my data");
             });
     }, [isBusy]);
+
+    useEffect(() => {
+        axios.get(`http://localhost:4000/api/v1/techonnect/meetups/groups/${params.id}`).then((res) => setMeetups(res.data.meetups))
+    }, [])
 
     const handlePost = async (e) => {
         e.preventDefault();
@@ -107,7 +112,7 @@ export default function GroupShow() {
             </div>
             <div className={styles.mainContentContainer}>
                 <div className={styles.leftSection}>
-                    <MeetupBanner title="Group Meetups" />
+                    {!meetups ? null : <MeetupBanner meetups={meetups} title="Group Meetups" />}
                 </div>
                 <div className={styles.mainSection}>
                     {!isBusy ? (

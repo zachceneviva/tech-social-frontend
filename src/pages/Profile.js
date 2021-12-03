@@ -7,45 +7,66 @@ import GroupsBanner from "../components/Feed/GroupsBanner";
 import axios from "axios";
 import MeetupBanner from "../components/Feed/MeetupBanner";
 import { useParams } from "react-router";
+import { userState } from "../recoil/atom";
+import { useRecoilState } from "recoil";
 
 export default function Profile () {
     const [allPosts, setAllPosts] = useState([])
     const [foundUser, setFoundUser] = useState(null)
+    const [meetups, setMeetups] = useState([])
+    const [groups, setGroups] = useState([])
+    const [busy, setBusy] = useState(true)
+    const[connectUser, setConnectUser] = useState(null)
     const params = useParams()
+    const user = useRecoilState(userState)[0]
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
 
     useEffect(() => {
         fetchData()
         console.log('this is fetching my data')
-    },[])
+        setBusy(false)
+    },[busy, params.id])
 
     const fetchData = async () => {
         await axios.get(`http://localhost:4000/api/v1/techonnect/posts/${params.id}`).then((res) => setAllPosts(res.data.posts));
         await axios.get(`http://localhost:4000/api/v1/techonnect/users/${params.id}`, {
             headers: {authorization: `Bearer ${localStorage.uid}`},
         }).then((res) => res.data).then(res => setFoundUser(res.user))
+        await axios.get(`http://localhost:4000/api/v1/techonnect/groups/profile/${params.id}`).then((res) => setGroups(res.data.groups));
+        await axios.get(`http://localhost:4000/api/v1/techonnect/meetups/profile/${params.id}`).then((res) => setMeetups(res.data.meetups));
+        await axios.get(`http://localhost:4000/api/v1/techonnect/users/profile/connections`, {headers: {authorization: `Bearer ${localStorage.uid}`}})
+        .then(res => setConnectUser(res.data.user))
     }
     
+    const callBack = () => {
+        setBusy(true)
+    }
     
     const post = allPosts.map((post, idx) => {
         return <Post post={post} key={idx} />
     })
-    
+
     return (
         <div className={styles.mainContainer}>
             <div className={styles.topContainer}>
-                {foundUser === null ? "Loading" : <ProfileHeader user={foundUser}/>}
+                {foundUser === null || busy ? "Loading" : <ProfileHeader user={foundUser} callBack={callBack}/>}
             </div>
             <div className={styles.mainContentContainer}>
                 <div className={styles.leftSection} >
-                    <PeopleBanner />
+                    {foundUser === null ? null : <GroupsBanner groups={groups} title={`${foundUser.firstName}'s Groups`}/>}
+                    { connectUser === null ? null :
+                    foundUser._id === user._id ? <PeopleBanner user={connectUser}/> : null}
                 </div>
                 <div className={styles.mainSection}>
-                    {post}
+                    {allPosts.length > 0 ? post : <h2>No Posts to Show</h2>}
                     <div style={{width: "100%", height: "100px"}}/>
                 </div>
                 <div className={styles.rightSection} >
-                    {foundUser === null ? "Loading" : <MeetupBanner title={`${foundUser.firstName}'s Meetups`}/>}
-                    {foundUser === null ? "Loading" : <GroupsBanner title={`${foundUser.firstName}'s Groups`}/>}
+                    {foundUser === null ? null : <MeetupBanner meetups={meetups} title={`${foundUser.firstName}'s Meetups`}/>}
                 </div>
             </div>
         </div>

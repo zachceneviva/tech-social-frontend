@@ -14,6 +14,9 @@ import CreateGroup from "../pages/CreateGroup";
 import GroupShow from "../pages/GroupShow";
 import CreateMeetup from "../pages/CreateMeetup";
 import MeetupShow from "../pages/MeetupShow";
+import Messages from "../pages/Messages";
+import Conversation from "../pages/Conversation";
+import ProfileUpdate from "../pages/ProfileUpdate";
 
 
 export default function AppRoutes () {
@@ -24,13 +27,14 @@ export default function AppRoutes () {
         <BrowserRouter>
             <Navigation/>
             <Routes>
+                <Route path='/' element={<Login/>} />
                 <Route path='register' element={<Signup/>} />
-                <Route path='login' element={<Login/>} />
             </Routes>
                 {loggedIn ?
             <Routes>
-                <Route path='/' element={<Home />} />
+                <Route path='/home' element={<Home />} />
                 <Route path='profile/:id' element={<Profile />} />
+                <Route path='profile/:id/edit' element={<ProfileUpdate />} />
                 <Route path='people' element={<People />} />
                 <Route path='meetups/create' element={<CreateMeetup/>} />
                 <Route path='meetup/:id' element={<MeetupShow />} />
@@ -38,6 +42,10 @@ export default function AppRoutes () {
                 <Route path='group/create' element={<CreateGroup />} />
                 <Route path='groups/:id' element={<GroupShow/>} />
                 <Route path='groups' element={<AllGroups/>} />
+                <Route path='messages' element={<Messages />} >
+                    <Route path=':id' element={<Conversation />} />
+                </Route>
+
             </Routes>
                 : null}
         </BrowserRouter>

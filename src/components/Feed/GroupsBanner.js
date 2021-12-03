@@ -1,18 +1,25 @@
-import React from "react"
-import styles from "./GroupsBanner.module.scss"
+import React from "react";
+import styles from "./GroupsBanner.module.scss";
+import { Link } from "react-router-dom";
 
-export default function GroupsBanner (props) {
+export default function GroupsBanner(props) {
+
+    const group = props.groups.map((group, idx) => {
+        return (
+        <div className={styles.people} key={idx}>
+            <img src={group.photo} alt="group" />
+            <div className={styles.userInfo}>
+                <Link to={`/groups/${group._id}`}>
+                    <h4>{group.name}</h4>
+                </Link>
+            </div>
+        </div>
+    )})
     return (
         <div className={styles.peopleBannerCard}>
-            <h2>{ props.title }</h2>
-            <hr/>
-            <div className={styles.people}>
-                <img src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png" alt="user" />
-                <div className={styles.userInfo}>
-                    <h4>willCodeForFood</h4>
-                </div>
-            </div>
-            
+            <h2>{props.title}</h2>
+            <hr />
+            {props.groups.length > 0 ? group : <h6>No groups yet</h6>}
         </div>
-    )
+    );
 }

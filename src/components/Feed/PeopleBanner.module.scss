@@ -4,12 +4,17 @@
     margin-top: 25px;
     width: 100%;
     min-height: 85px;
-    overflow: auto;
+    max-height: 290px;
+    overflow: scroll;
     background-color: white;
     text-align: center;
     border-radius: 5px;
     color: $primary-dark-text-color;
     padding-bottom: 5px;
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
 
     h2 {
         font-size: 20px;
@@ -53,6 +58,11 @@
     margin-left: 7.5px;
     text-align: left;
 
+    a {
+        color: $primary-dark-text-color;
+        text-decoration: none;
+    }
+
     h4 {
         font-size: 15px;
         margin-bottom: 0px;
@@ -65,6 +75,15 @@
         margin-top: 0px;
         color: $primary-accent-text-color;
         font-style: italic;
+    }
+
+    p {  
+        color: rgb(238, 237, 237);
+        font-size: 25px;
+        font-weight: lighter;
+        font-style: italic;
+        margin-top: 5px;
+
     }
 
 }

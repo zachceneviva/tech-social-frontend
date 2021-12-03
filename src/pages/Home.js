@@ -10,6 +10,7 @@ import MeetupBanner from "../components/Feed/MeetupBanner"
 import { userState } from "../recoil/atom"
 import { useRecoilState } from "recoil";
 
+
 export default function Home () {
     const [postContent, setPostContent] = useState('')
     const [allPosts, setAllPosts] = useState([])
@@ -20,14 +21,27 @@ export default function Home () {
     const [ghUrl, setGhUrl] = useState('none')
     const [linkUrl, setLinkUrl] = useState('none')
     const [isBusy, setBusy] = useState(true)
+    const [meetups, setMeetups] = useState([])
+    const [groups, setGroups] = useState([])
     const user = useRecoilState(userState)[0]
+    const [foundUser, setFoundUser] = useState(null)
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
 
     useEffect(() => {
         fetchData()
         setBusy(false)
         console.log('this is fetching my data')
     },[isBusy])
+
+useEffect(() => {
+    axios.get('http://localhost:4000/api/v1/techonnect/groups/home').then((res) => setGroups(res.data.groups))
+    axios.get('http://localhost:4000/api/v1/techonnect/meetups/home').then((res) => setMeetups(res.data.meetups))
+    axios.get(`http://localhost:4000/api/v1/techonnect/users/profile/connections`, {headers: {authorization: `Bearer ${localStorage.uid}`}})
+        .then(res => setFoundUser(res.data.user))
+}, [])
 
 
     const fetchData = () => {
@@ -90,7 +104,7 @@ export default function Home () {
             <div className={styles.mainContentContainer}>
                 <div className={styles.leftSection} >
                     <BannerProfileCard />
-                    <PeopleBanner />
+                    {foundUser === null ? null : <PeopleBanner user={foundUser}/> }
                 </div>
                 <div className={styles.mainSection}>
                     <CreatePost handlePost={handlePost} text={postContent} handleChange={handleChange} postImage={postImage} postGh={postGh} postLink={postLink} handleImageChange={handleImageChange} handleGhChange={handleGhChange} handleLinkChange={handleLinkChange} showGhUrl={showGhUrl} showImageUrl={showImageUrl} showLinkUrl={showLinkUrl} imageUrl={imageUrl} ghUrl={ghUrl} linkUrl={linkUrl}/>
@@ -98,8 +112,8 @@ export default function Home () {
                     <div style={{width: "100%", height: "100px"}}/>
                 </div>
                 <div className={styles.rightSection} >
-                    <MeetupBanner title="Upcoming Meetups"/>
-                    <GroupsBanner title="Top Groups"/>
+                    {!meetups ? null : <MeetupBanner title="Upcoming Meetups" meetups={meetups}/>}
+                    {!groups ? null : <GroupsBanner title="Top Groups" groups={groups}/>}
                 </div>
             </div>
         </div>

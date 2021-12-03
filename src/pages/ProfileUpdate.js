@@ -1,31 +1,40 @@
-import React, { useState } from "react";
-import styles from "./Signup.module.scss";
-import axios from "axios";
-import { Form, Button, Row, Col } from "react-bootstrap";
-import {useNavigate} from "react-router-dom"
+import React, {useState, useEffect} from 'react'
+import styles from './ProfileUpdate.module.scss'
+import { userState } from '../recoil/atom'
+import { useRecoilState } from 'recoil'
+import ProfileHeader from "../components/Profile/ProfileHeader";
+import { useParams } from 'react-router';
+import { useNavigate } from 'react-router';
+import {Form, Row, Col, Button } from "react-bootstrap"
+import axios from 'axios';
 
-export default function Signin(props) {
-    const [fName, setFName] = useState('')
-    const [lName, setLName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
-    const [city, setCity] = useState('')
-    const [state, setState] = useState('')
-    const [avatar, setAvatar] = useState('')
-    const [coverPhoto, setCoverPhoto] = useState('')
-    const [role, setRole] = useState('')
-    const [company, setCompany] = useState('')
-    const [github, setGithub] = useState('')
-    const [portfolio, setPortfolio] = useState('')
-    const navigate = useNavigate();
+export default function ProfileUpdate () {
+    const [user, setUser] = useRecoilState(userState)
+    const params = useParams()
+    const navigate = useNavigate()
+    const [fName, setFName] = useState(user.firstName)
+    const [lName, setLName] = useState(user.lastName)
+    const [email, setEmail] = useState(user.email)
+    const [city, setCity] = useState(user.city)
+    const [state, setState] = useState(user.state)
+    const [avatar, setAvatar] = useState(user.avatar)
+    const [coverPhoto, setCoverPhoto] = useState(user.coverPhoto)
+    const [role, setRole] = useState(user.role)
+    const [company, setCompany] = useState(user.company)
+    const [github, setGithub] = useState(user.github)
+    const [portfolio, setPortfolio] = useState(user.portfolio)
+
+    useEffect(() => {
+        if (user._id !== params.id) {
+            navigate(`/profile/${params.id}`)
+        }
+    }, [])
 
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post("http://localhost:4000/api/v1/techonnect/users/register", 
+        axios.put(`http://localhost:4000/api/v1/techonnect/users/${params.id}`, 
         {
-            password: password,
             avatar: avatar,
             coverPhoto: coverPhoto,
             firstName: fName,
@@ -37,8 +46,13 @@ export default function Signin(props) {
             company: company,
             github: github,
             portfolio: portfolio,
-        }).then(res => res);
-        navigate('/')
+        }, {
+            headers: {authorization: `Bearer ${localStorage.uid}`},
+        }).then(res => res.data)
+        .then(res => {
+            setUser(res.updatedUser)
+            navigate(`/profile/${params.id}`)
+        });
     }
 
     const handleFName = (e) => {
@@ -50,12 +64,7 @@ export default function Signin(props) {
     const handleEmail = (e) => {
         setEmail(e.target.value)
     }
-    const handlePassword = (e) => {
-        setPassword(e.target.value)
-    }
-    const handleConfirmPassword = (e) => {
-        setConfirmPassword(e.target.value)
-    }
+   
     const handleCity = (e) => {
         setCity(e.target.value)
     }
@@ -89,11 +98,11 @@ export default function Signin(props) {
 
 
     return (
-        <div className={styles.mainAuthBody}>
-            <div className={styles.authHeader}>
-                <h1>Sign Up</h1>
-                <hr />
+        <div className={styles.mainContainer}>
+            <div className={styles.topContainer}>
+                <ProfileHeader user={user} />
             </div>
+            <div className={styles.mainContentContainer}>
             <div className={styles.authForm}>
                 <Form onSubmit={handleSubmit}>
                     <Row className="mb-3">
@@ -131,33 +140,7 @@ export default function Signin(props) {
                             value={email}
                         />
                     </Form.Group>
-
-                        <Form.Group className="mb-3" controlId="formGridPassword">
-                            <Form.Label>Password *</Form.Label>
-                            <Form.Control
-                            onChange={handlePassword}
-                                name="password"
-                                type="password"
-                                placeholder="Password"
-                                autoComplete="off"
-                                value={password}
-                            />
-                        </Form.Group>
-
-                        <Form.Group
-                            controlId="formGridConfirmPassword"
-                            className="mb-3"
-                        >
-                            <Form.Label>Confirm Password *</Form.Label>
-                            <Form.Control
-                            onChange={handleConfirmPassword}
-                                type="password"
-                                placeholder="Password"
-                                autoComplete="off"
-                                valeu={confirmPassword}
-                            />
-                        </Form.Group>
-
+                    
                         
 
                     <Row className="mb-3">
@@ -221,11 +204,12 @@ export default function Signin(props) {
                     
 
                     <Button className={styles.submitBtn}  type="submit">
-                        Submit
+                        Update
                     </Button>
                 </Form>
             </div>
-            <div style={{width: "100%", height: "100px"}}/>
+                <div style={{width: "100%", height: "100px"}}/>
+            </div>
         </div>
-    );
+    )
 }
