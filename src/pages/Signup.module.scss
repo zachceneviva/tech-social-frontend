@@ -1,0 +1,35 @@
+@import '../components/partials/variables';
+
+
+.mainAuthBody {
+    margin: 0 auto;
+    width: 50%;
+    background-color: white;
+    padding: 20px;
+    margin-top: 50px;
+    border-radius: 5px;
+    color: $primary-dark-text-color;
+    margin-bottom: 50px;
+}
+
+.authHeader {
+    text-align: center;
+
+    hr {
+        margin: 0 auto;
+        width: 175px;
+        margin-bottom: 20px;
+    }
+}
+
+.submitBtn {
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    border-radius: 25px;
+
+    &:hover {
+        background-color: $primary-shadow;
+
+    }
+}

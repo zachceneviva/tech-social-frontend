@@ -1,0 +1,160 @@
+@import "../partials/variables";
+
+
+.post {
+    width: 100%;
+    margin-top: 25px;
+    background-color: white;
+    border-radius: 5px;
+    overflow: auto;
+    padding: 15px;
+    min-height: 200px;
+    color: $primary-dark-text-color;
+
+    hr {
+        margin-top: 5px;
+        color: $primary-accent-text-color;
+    }
+}
+
+.postHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    margin-bottom: 7.5px;
+}
+
+.postUserInfo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    margin-bottom: 7.5px;
+}
+
+.postUserImage {
+    width: 50px;
+    height: 50px;
+    margin: 0;
+    border-radius: 50%;
+
+    img {
+        width: 50px;
+        height: 50px;
+        margin: 0;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+}
+
+.postUserName {
+    margin-left: 5px;
+    margin-top: 5px;
+
+    h4 {
+        font-size: 17.5px;
+        margin-bottom: 0px;
+
+        a {
+            text-decoration: none;
+            color: $primary-dark-text-color
+        }
+    }
+
+    p {
+        font-size: 10px;
+        margin-top: -2px;
+        font-style: italic;
+        color: $primary-accent-text-color;
+    }
+
+}
+
+
+.postTextContent {
+    min-height: 50px;
+    font-size: 14px;
+    margin-bottom: 10px;
+
+    p {
+        white-space: pre-wrap;
+    }
+
+    a {
+        text-decoration: none;
+        color: $primary-color;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    h6 {
+        font-size: 17.5px;
+        display: inline;
+        margin-right: 25px;
+    }
+}
+
+.postImage {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+
+    img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+}
+
+.postInteract {
+    width: 100%;
+    min-height: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: -15px;
+    margin-bottom: -5px;
+
+    span {
+        font-size: 15px;
+        margin-left: 10px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .heart {
+        color: red;
+        margin-left: 40px;
+        padding-top: 2px;
+    }
+
+    .light {
+        margin-left: 40px;
+        color: rgb(216, 216, 77);
+    }
+
+    p {
+        font-size: 8px;
+        color: $primary-dark-text-color;
+    }
+}
+
+.menuToggle {
+    margin-top: -40px;
+    font-size: 22.5px;
+    margin-left: 5px;
+    color: $primary-accent-text-color;
+    background-color: transparent;
+
+    &:hover {
+        cursor: pointer;
+    }
+}

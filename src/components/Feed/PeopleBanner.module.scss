@@ -1,0 +1,89 @@
+@import "../partials/variables";
+
+.peopleBannerCard {
+    margin-top: 25px;
+    width: 100%;
+    min-height: 85px;
+    max-height: 290px;
+    overflow: scroll;
+    background-color: white;
+    text-align: center;
+    border-radius: 5px;
+    color: $primary-dark-text-color;
+    padding-bottom: 5px;
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin-bottom: 3px;
+        margin-top: 7.5px;
+    }
+
+    hr {
+        margin: 0 auto;
+        color: $primary-accent-text-color;
+        margin-top: 2px;
+        margin-bottom: 0px;
+        width: 50%;
+    }
+}
+
+.people {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    transition: all 0.5s ease;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    img {
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+        margin-left: 10px;
+    }
+}
+
+.userInfo {
+    margin-bottom: 0px;
+    margin-left: 7.5px;
+    text-align: left;
+
+    a {
+        color: $primary-dark-text-color;
+        text-decoration: none;
+    }
+
+    h4 {
+        font-size: 15px;
+        margin-bottom: 0px;
+        margin-top: 0px;
+    }
+
+    h6 {
+        font-size: 10px;
+        margin-bottom: 0px;
+        margin-top: 0px;
+        color: $primary-accent-text-color;
+        font-style: italic;
+    }
+
+    p {  
+        color: rgb(238, 237, 237);
+        font-size: 25px;
+        font-weight: lighter;
+        font-style: italic;
+        margin-top: 5px;
+
+    }
+
+}

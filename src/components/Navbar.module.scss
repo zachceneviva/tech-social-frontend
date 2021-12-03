@@ -1,0 +1,58 @@
+@import './partials/variables';
+
+.navBar {
+    background-color: $primary-color;
+    color: white !important;
+    height: 60px;
+    border: none;
+
+}
+
+#logo {
+    font-size: 22.5px;
+    margin-right: 2px;
+}
+
+.navUserImage {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-left: 15px;
+
+    @media screen and (max-width: 992px) {
+        display: none;
+    }
+}
+
+.navBarCollapse {
+    background-color: $primary-color;
+    color: white !important;
+    margin-bottom: 5px;
+    border: none;
+}
+
+.container {
+    background-color: $primary-color;
+    color: white !important;
+    border-radius: 5px;
+    max-width: 90%;
+    border: none;
+}
+
+.navLinks {
+    background-color: $primary-color;
+    margin-left: auto;
+    color: white !important;
+    border: none;
+    
+    a {
+        margin-right: 17.5px;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
