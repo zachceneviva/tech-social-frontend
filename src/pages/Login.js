@@ -16,6 +16,9 @@ export default function Login () {
 
     useEffect(() => {
         window.scrollTo(0, 0)
+        if (user) {
+            navigate("/home")
+        }
     }, [])
 
 
