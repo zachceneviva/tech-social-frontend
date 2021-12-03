@@ -32,13 +32,13 @@ export default function Profile () {
     },[busy, params.id])
 
     const fetchData = async () => {
-        await axios.get(`http://localhost:4000/api/v1/techonnect/posts/${params.id}`).then((res) => setAllPosts(res.data.posts));
-        await axios.get(`http://localhost:4000/api/v1/techonnect/users/${params.id}`, {
+        await axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/posts/${params.id}`).then((res) => setAllPosts(res.data.posts));
+        await axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/users/${params.id}`, {
             headers: {authorization: `Bearer ${localStorage.uid}`},
         }).then((res) => res.data).then(res => setFoundUser(res.user))
-        await axios.get(`http://localhost:4000/api/v1/techonnect/groups/profile/${params.id}`).then((res) => setGroups(res.data.groups));
-        await axios.get(`http://localhost:4000/api/v1/techonnect/meetups/profile/${params.id}`).then((res) => setMeetups(res.data.meetups));
-        await axios.get(`http://localhost:4000/api/v1/techonnect/users/profile/connections`, {headers: {authorization: `Bearer ${localStorage.uid}`}})
+        await axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/groups/profile/${params.id}`).then((res) => setGroups(res.data.groups));
+        await axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/meetups/profile/${params.id}`).then((res) => setMeetups(res.data.meetups));
+        await axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/users/profile/connections`, {headers: {authorization: `Bearer ${localStorage.uid}`}})
         .then(res => setConnectUser(res.data.user))
     }
     

@@ -18,7 +18,7 @@ export default function AllPeople (props) {
         let newTechonnections = [...user.techonnections];
         newTechonnections.push(props.person._id)
         console.log(newTechonnections)
-        await axios.put(`http://localhost:4000/api/v1/techonnect/users/${user._id}`, {techonnections: newTechonnections}, {headers: {authorization: `Bearer ${localStorage.uid}`}})
+        await axios.put(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/users/${user._id}`, {techonnections: newTechonnections}, {headers: {authorization: `Bearer ${localStorage.uid}`}})
         .then(res => setUser(res.data.updatedUser))
         props.callBack()
         setBusy(true)

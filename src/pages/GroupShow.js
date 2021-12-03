@@ -32,7 +32,7 @@ export default function GroupShow() {
     
     useEffect(() => {
         axios
-            .get(`http://localhost:4000/api/v1/techonnect/groups/${params.id}`)
+            .get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/groups/${params.id}`)
             .then((res) => {
                 setFoundGroup(res.data.group);
                 setAllPosts(res.data.posts);
@@ -42,13 +42,13 @@ export default function GroupShow() {
     }, [isBusy]);
 
     useEffect(() => {
-        axios.get(`http://localhost:4000/api/v1/techonnect/meetups/groups/${params.id}`).then((res) => setMeetups(res.data.meetups))
+        axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/meetups/groups/${params.id}`).then((res) => setMeetups(res.data.meetups))
     }, [])
 
     const handlePost = async (e) => {
         e.preventDefault();
         await axios
-            .post("http://localhost:4000/api/v1/techonnect/posts", {
+            .post("https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/posts", {
                 content: postContent,
                 image: `https://${postImage}`,
                 github: `https://github.com/${postGh}`,

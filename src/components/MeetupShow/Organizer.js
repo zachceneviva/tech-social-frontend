@@ -10,8 +10,8 @@ export default function Organizer (props) {
 
     const createConvo = async () => {
         try {
-            const createdConversation = await axios.post('http://localhost:4000/api/v1/techonnect/conversations', {members: [user._id, props.meetup.creator._id]})
-            const updateUser = await axios.put(`http://localhost:4000/api/v1/techonnect/users/${user._id}`, {conversationsWith: [props.meetup.creator._id, ...user.conversationsWith]}, {headers: {authorization: `Bearer ${localStorage.uid}`}})
+            const createdConversation = await axios.post('https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/conversations', {members: [user._id, props.meetup.creator._id]})
+            const updateUser = await axios.put(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/users/${user._id}`, {conversationsWith: [props.meetup.creator._id, ...user.conversationsWith]}, {headers: {authorization: `Bearer ${localStorage.uid}`}})
             .then(res => setUser(res.data.updatedUser))
         } catch (err) {
             console.log(err)

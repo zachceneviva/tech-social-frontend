@@ -15,7 +15,7 @@ export default function AllGroups () {
     
     useEffect(() => {
         console.log("fetching...")
-        axios.get(`http://localhost:4000/api/v1/techonnect/groups`).then((res) => res.data).then(res => setAllGroups(res.groups))
+        axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/groups`).then((res) => res.data).then(res => setAllGroups(res.groups))
         setBusy(false)
     }, [busy])
     

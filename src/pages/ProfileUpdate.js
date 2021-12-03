@@ -33,7 +33,7 @@ export default function ProfileUpdate () {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.put(`http://localhost:4000/api/v1/techonnect/users/${params.id}`, 
+        axios.put(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/users/${params.id}`, 
         {
             avatar: avatar,
             coverPhoto: coverPhoto,

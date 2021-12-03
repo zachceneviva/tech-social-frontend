@@ -13,7 +13,7 @@ export default function Messages () {
     const user = useRecoilState(userState)[0]
 
     useEffect(() => {
-        axios.get(`http://localhost:4000/api/v1/techonnect/conversations/${user._id}`)
+        axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/conversations/${user._id}`)
         .then(res => setAllConvos(res.data.allConversations))
         console.log("fetched")
     }, [])

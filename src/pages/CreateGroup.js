@@ -36,7 +36,7 @@ export default function CreateGroup () {
 
     const handleGroupCreate = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:4000/api/v1/techonnect/groups', {
+        axios.post('https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/groups', {
             name: groupName,
             description: description,
             photo: photo,

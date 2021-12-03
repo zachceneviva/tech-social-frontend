@@ -37,20 +37,20 @@ export default function Home () {
     },[isBusy])
 
 useEffect(() => {
-    axios.get('http://localhost:4000/api/v1/techonnect/groups/home').then((res) => setGroups(res.data.groups))
-    axios.get('http://localhost:4000/api/v1/techonnect/meetups/home').then((res) => setMeetups(res.data.meetups))
-    axios.get(`http://localhost:4000/api/v1/techonnect/users/profile/connections`, {headers: {authorization: `Bearer ${localStorage.uid}`}})
+    axios.get('https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/groups/home').then((res) => setGroups(res.data.groups))
+    axios.get('https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/meetups/home').then((res) => setMeetups(res.data.meetups))
+    axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/users/profile/connections`, {headers: {authorization: `Bearer ${localStorage.uid}`}})
         .then(res => setFoundUser(res.data.user))
 }, [])
 
 
     const fetchData = () => {
-        axios.get('http://localhost:4000/api/v1/techonnect/posts').then((res) => setAllPosts(res.data.posts))
+        axios.get('https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/posts').then((res) => setAllPosts(res.data.posts))
     }
 
     const handlePost = async (e) => {
         e.preventDefault()
-        await axios.post('http://localhost:4000/api/v1/techonnect/posts',
+        await axios.post('https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/posts',
         {content: postContent, image: `https://${postImage}`, github: `https://github.com/${postGh}`, link: `https://${postLink}`, user: user}).then( res => setAllPosts([res.data.post, ...allPosts]))
         setPostContent('')
         setPostImage('')

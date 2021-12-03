@@ -38,7 +38,7 @@ export default function Post(props) {
             newLikes.push(user._id)
             axios
                 .put(
-                    `http://localhost:4000/api/v1/techonnect/posts/${props.post._id}`,
+                    `https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/posts/${props.post._id}`,
                     {likes: newLikes},
                     { "Content-Type": "application/json" }
                 )
@@ -49,7 +49,7 @@ export default function Post(props) {
             newLikes.splice(index,1)
             axios
                 .put(
-                    `http://localhost:4000/api/v1/techonnect/posts/${props.post._id}`,
+                    `https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/posts/${props.post._id}`,
                     {likes: newLikes},
                     { "Content-Type": "application/json" }
                 )
@@ -64,7 +64,7 @@ export default function Post(props) {
             newLights.push(user._id)
             axios
                 .put(
-                    `http://localhost:4000/api/v1/techonnect/posts/${props.post._id}`,
+                    `https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/posts/${props.post._id}`,
                     { lightbulbs: newLights},
                     { "Content-Type": "application/json" }
                 )
@@ -75,7 +75,7 @@ export default function Post(props) {
             newLights.splice(index, 1)
             axios
                 .put(
-                    `http://localhost:4000/api/v1/techonnect/posts/${props.post._id}`,
+                    `https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/posts/${props.post._id}`,
                     { lightbulbs: newLights},
                     { "Content-Type": "application/json" }
                 )
@@ -87,7 +87,7 @@ export default function Post(props) {
     const fetchComments = async () => {
         await axios
             .get(
-                `http://localhost:4000/api/v1/techonnect/comments/${props.post._id}`
+                `https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/comments/${props.post._id}`
             )
             .then((res) => setAllComments(res.data.comments));
     };
@@ -106,7 +106,7 @@ export default function Post(props) {
         e.preventDefault();
         axios
             .post(
-                `http://localhost:4000/api/v1/techonnect/comments/${props.post._id}`,
+                `https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/comments/${props.post._id}`,
                 { content: commentText, post: props.post._id, user: user }
             )
             .then((res) => setAllComments([res.data.comment, ...allComments]));

@@ -17,7 +17,7 @@ export default function MeetupDetails (props) {
         e.preventDefault()
         let newAttend = props.meetup.usersAttending
         newAttend.push(user._id)
-        axios.put(`http://localhost:4000/api/v1/techonnect/meetups/${params.id}`, {usersAttending: newAttend}).then(res => console.log(res))
+        axios.put(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/meetups/${params.id}`, {usersAttending: newAttend}).then(res => console.log(res))
         props.callBack()
         setMembers(member + 1)
     }
@@ -28,7 +28,7 @@ export default function MeetupDetails (props) {
         let newAttend = props.meetup.usersAttending
         newAttend.splice(index,1)
         console.log(newAttend)
-        axios.put(`http://localhost:4000/api/v1/techonnect/meetups/${params.id}`, {usersAttending: newAttend}).then(res => console.log(res))
+        axios.put(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/meetups/${params.id}`, {usersAttending: newAttend}).then(res => console.log(res))
         props.callBack()
         setMembers(member - 1)
     }

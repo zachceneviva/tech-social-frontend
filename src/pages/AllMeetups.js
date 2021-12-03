@@ -10,7 +10,7 @@ export default function AllMeetups () {
 
     useEffect(() => {
         console.log("fetching...")
-        axios.get(`http://localhost:4000/api/v1/techonnect/meetups`).then((res) => res.data).then(res => setAllMeetups(res.meetups))
+        axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/meetups`).then((res) => res.data).then(res => setAllMeetups(res.meetups))
         setBusy(false)
     }, [busy])
     

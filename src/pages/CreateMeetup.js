@@ -25,7 +25,7 @@ export default function CreateMeetup () {
 
     useEffect(() => {
         console.log("fetching...")
-        axios.get(`http://localhost:4000/api/v1/techonnect/groups`).then((res) => res.data).then(res => setAllGroups(res.groups))
+        axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/groups`).then((res) => res.data).then(res => setAllGroups(res.groups))
         setBusy(false)
     }, [isBusy])
 
@@ -68,7 +68,7 @@ export default function CreateMeetup () {
 
     const handleMeetupCreate = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:4000/api/v1/techonnect/meetups', {
+        axios.post('https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/meetups', {
             name: meetupName,
             date: date,
             description: description,

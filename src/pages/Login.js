@@ -22,12 +22,12 @@ export default function Login () {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await axios.post("http://localhost:4000/api/v1/techonnect/users/login", {email: email, password: password})
+        await axios.post("https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/users/login", {email: email, password: password})
         .then(res => res.data)
         .then((response) => {
             localStorage.setItem("uid", response.token);
         });
-        await axios.get("http://localhost:4000/api/v1/techonnect/users/profile", {
+        await axios.get("https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/users/profile", {
             headers: {authorization: `Bearer ${localStorage.uid}`},
         })
         .then(res => res.data)

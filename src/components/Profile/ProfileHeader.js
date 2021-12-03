@@ -13,8 +13,8 @@ export default function ProfileHeader (props) {
 
     const createConvo = async () => {
         try {
-            const createdConversation = await axios.post('http://localhost:4000/api/v1/techonnect/conversations', {members: [currentUser._id, user._id]})
-            const updateUser = await axios.put(`http://localhost:4000/api/v1/techonnect/users/${user._id}`, {conversationsWith: [user._id, ...currentUser.conversationsWith]}, {headers: {authorization: `Bearer ${localStorage.uid}`}})
+            const createdConversation = await axios.post('https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/conversations', {members: [currentUser._id, user._id]})
+            const updateUser = await axios.put(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/users/${user._id}`, {conversationsWith: [user._id, ...currentUser.conversationsWith]}, {headers: {authorization: `Bearer ${localStorage.uid}`}})
             .then(res => setUser(res.data.updatedUser))
         } catch (err) {
             console.log(err)
@@ -26,7 +26,7 @@ export default function ProfileHeader (props) {
         let newTechonnections = [...currentUser.techonnections];
         newTechonnections.push(user._id)
         console.log(newTechonnections)
-        await axios.put(`http://localhost:4000/api/v1/techonnect/users/${currentUser._id}`, {techonnections: newTechonnections}, {headers: {authorization: `Bearer ${localStorage.uid}`}})
+        await axios.put(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/users/${currentUser._id}`, {techonnections: newTechonnections}, {headers: {authorization: `Bearer ${localStorage.uid}`}})
         .then(res => setUser(res.data.updatedUser))
         props.callBack()
     }

@@ -49,7 +49,7 @@ export default function Conversation() {
     useEffect(() => {
         const getConversation = async () => {
             try {
-                const res = await axios.get(`http://localhost:4000/api/v1/techonnect/conversations/find/${params.id}`)
+                const res = await axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/conversations/find/${params.id}`)
                 setCurrentChat(res.data)
             } catch (err) {
                 console.log(err)
@@ -61,7 +61,7 @@ export default function Conversation() {
     useEffect(() => {
         const getMessages = async () => {
             try {
-                const res = await axios.get(`http://localhost:4000/api/v1/techonnect/messages/${params.id}`)
+                const res = await axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/messages/${params.id}`)
                 setAllMessages(res.data)
             } catch (err) {
                 console.log(err)
@@ -84,7 +84,7 @@ export default function Conversation() {
             }) 
         
         try {
-            const res = await axios.post(`http://localhost:4000/api/v1/techonnect/messages`, {
+            const res = await axios.post(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/messages`, {
                 conversationId: params.id,
                 sender: {
                     _id: user._id,

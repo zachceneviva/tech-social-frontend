@@ -10,7 +10,7 @@ export default function People (props) {
     const [busy, setBusy] = useState(true)
 
     useEffect(() => {
-        axios.get(`http://localhost:4000/api/v1/techonnect/users`, {
+        axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/users`, {
             headers: {authorization: `Bearer ${localStorage.uid}`},
         }).then((res) => res.data).then(res => setAllPeople(res.allUsers))
         setBusy(false)

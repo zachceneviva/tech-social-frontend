@@ -18,7 +18,7 @@ export default function Navigation() {
 
     useEffect(() => {
         if(localStorage.getItem("uid")) {
-            axios.get("http://localhost:4000/api/v1/techonnect/users/profile", {
+            axios.get("https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/users/profile", {
             headers: {authorization: `Bearer ${localStorage.uid}`},
         })
         .then(res => res.data)

@@ -19,7 +19,7 @@ export default function MeetupShow () {
     
     useEffect(() => {
         console.log("Fetching...")
-        axios.get(`http://localhost:4000/api/v1/techonnect/meetups/${params.id}`).then(res => setFoundMeetup(res.data.meetup))
+        axios.get(`https://whispering-castle-56104.herokuapp.com/${params.id}`).then(res => setFoundMeetup(res.data.meetup))
         setBusy(false)
     }, [isBusy])
 

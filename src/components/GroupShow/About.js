@@ -16,7 +16,7 @@ export default function About (props) {
         e.preventDefault()
         let newMember = props.group.members
         newMember.push(user._id)
-        axios.put(`http://localhost:4000/api/v1/techonnect/groups/${params.id}`, {members: newMember}).then(res => console.log(res))
+        axios.put(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/groups/${params.id}`, {members: newMember}).then(res => console.log(res))
         props.callBack()
         setMembers(member + 1)
     }
@@ -26,7 +26,7 @@ export default function About (props) {
         let index = props.group.members.indexOf(user._id)
         let newMember = props.group.members
         newMember.splice(index,1)
-        axios.put(`http://localhost:4000/api/v1/techonnect/groups/${params.id}`, {members: newMember}).then(res => console.log(res))
+        axios.put(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/groups/${params.id}`, {members: newMember}).then(res => console.log(res))
         props.callBack()
         setMembers(member - 1)
     }

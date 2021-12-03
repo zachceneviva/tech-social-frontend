@@ -23,7 +23,7 @@ export default function Signin(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post("http://localhost:4000/api/v1/techonnect/users/register", 
+        axios.post("https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/users/register", 
         {
             password: password,
             avatar: avatar,
