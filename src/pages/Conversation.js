@@ -20,7 +20,7 @@ export default function Conversation() {
 
 
     useEffect(() => {
-        socket.current = io("ws://localhost:8000");
+        socket.current = io("ws://damp-journey-84088.herokuapp.com");
         socket.current.on("getMessage", (data) => {
             setArrivalMessage({
                 sender: {
