@@ -24,6 +24,7 @@ export default function Home () {
     const [meetups, setMeetups] = useState([])
     const [groups, setGroups] = useState([])
     const user = useRecoilState(userState)[0]
+    const [foundUser, setFoundUser] = useState(null)
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -38,6 +39,8 @@ export default function Home () {
 useEffect(() => {
     axios.get('http://localhost:4000/api/v1/techonnect/groups/home').then((res) => setGroups(res.data.groups))
     axios.get('http://localhost:4000/api/v1/techonnect/meetups/home').then((res) => setMeetups(res.data.meetups))
+    axios.get(`http://localhost:4000/api/v1/techonnect/users/profile/connections`, {headers: {authorization: `Bearer ${localStorage.uid}`}})
+        .then(res => setFoundUser(res.data.user))
 }, [])
 
 
@@ -101,7 +104,7 @@ useEffect(() => {
             <div className={styles.mainContentContainer}>
                 <div className={styles.leftSection} >
                     <BannerProfileCard />
-                    <PeopleBanner />
+                    {foundUser === null ? null : <PeopleBanner user={foundUser}/> }
                 </div>
                 <div className={styles.mainSection}>
                     <CreatePost handlePost={handlePost} text={postContent} handleChange={handleChange} postImage={postImage} postGh={postGh} postLink={postLink} handleImageChange={handleImageChange} handleGhChange={handleGhChange} handleLinkChange={handleLinkChange} showGhUrl={showGhUrl} showImageUrl={showImageUrl} showLinkUrl={showLinkUrl} imageUrl={imageUrl} ghUrl={ghUrl} linkUrl={linkUrl}/>

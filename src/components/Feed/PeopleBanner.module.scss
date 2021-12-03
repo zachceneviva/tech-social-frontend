@@ -4,12 +4,17 @@
     margin-top: 25px;
     width: 100%;
     min-height: 85px;
-    overflow: auto;
+    max-height: 290px;
+    overflow: scroll;
     background-color: white;
     text-align: center;
     border-radius: 5px;
     color: $primary-dark-text-color;
     padding-bottom: 5px;
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
 
     h2 {
         font-size: 20px;

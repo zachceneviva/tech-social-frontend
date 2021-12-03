@@ -16,9 +16,9 @@ export default function Profile () {
     const [meetups, setMeetups] = useState([])
     const [groups, setGroups] = useState([])
     const [busy, setBusy] = useState(true)
+    const[connectUser, setConnectUser] = useState(null)
     const params = useParams()
     const user = useRecoilState(userState)[0]
-
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -38,6 +38,8 @@ export default function Profile () {
         }).then((res) => res.data).then(res => setFoundUser(res.user))
         await axios.get(`http://localhost:4000/api/v1/techonnect/groups/profile/${params.id}`).then((res) => setGroups(res.data.groups));
         await axios.get(`http://localhost:4000/api/v1/techonnect/meetups/profile/${params.id}`).then((res) => setMeetups(res.data.meetups));
+        await axios.get(`http://localhost:4000/api/v1/techonnect/users/profile/connections`, {headers: {authorization: `Bearer ${localStorage.uid}`}})
+        .then(res => setConnectUser(res.data.user))
     }
     
     const callBack = () => {
@@ -47,7 +49,7 @@ export default function Profile () {
     const post = allPosts.map((post, idx) => {
         return <Post post={post} key={idx} />
     })
-    
+
     return (
         <div className={styles.mainContainer}>
             <div className={styles.topContainer}>
@@ -56,11 +58,11 @@ export default function Profile () {
             <div className={styles.mainContentContainer}>
                 <div className={styles.leftSection} >
                     {foundUser === null ? null : <GroupsBanner groups={groups} title={`${foundUser.firstName}'s Groups`}/>}
-                    { foundUser === null ? null :
-                    foundUser._id === user._id ? <PeopleBanner /> : null}
+                    { connectUser === null ? null :
+                    foundUser._id === user._id ? <PeopleBanner user={connectUser}/> : null}
                 </div>
                 <div className={styles.mainSection}>
-                    {post}
+                    {allPosts.length > 0 ? post : <h2>No Posts to Show</h2>}
                     <div style={{width: "100%", height: "100px"}}/>
                 </div>
                 <div className={styles.rightSection} >

@@ -1,21 +1,10 @@
 import styles from "./PeopleBanner.module.scss"
-import { userState } from "../../recoil/atom"
-import { useRecoilState } from "recoil"
-import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 
-export default function PeopleBanner () {
-    const user = useRecoilState(userState)[0]
-    const [userTechonnections, setTechonnections] = useState([])
-    const [busy, setBusy] = useState(true)
+export default function PeopleBanner (props) {
 
-    useEffect(() => {
-        setTechonnections(user.techonnections.slice(0, 4))
-        console.log(`set`)
-        setBusy(false)
-    }, [])
 
-    const techonnection = userTechonnections.map((techonnect, idx) => {
+    const techonnection = props.user.techonnections.map((techonnect, idx) => {
         return (
             <div className={styles.people} key={idx}>
                 <img src={techonnect.avatar} alt="user" />
@@ -33,8 +22,7 @@ export default function PeopleBanner () {
         <div className={styles.peopleBannerCard}>
             <h2>Check-In</h2>
             <hr/>
-            {busy ? null :
-            user.techonnections.length > 0 ? techonnection : <p>No techonnections yet</p>}
+            {props.user.techonnections.length > 0 ? techonnection : <p>No techonnections yet</p>}
         </div>
     )
 }

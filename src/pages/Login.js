@@ -24,7 +24,6 @@ export default function Login () {
         await axios.post("http://localhost:4000/api/v1/techonnect/users/login", {email: email, password: password})
         .then(res => res.data)
         .then((response) => {
-            console.log(response);
             localStorage.setItem("uid", response.token);
         });
         await axios.get("http://localhost:4000/api/v1/techonnect/users/profile", {

@@ -7,14 +7,15 @@ import axios from "axios";
 
 
 export default function ProfileHeader (props) {
-    const currentUser = useRecoilState(userState)[0]
+    const [currentUser, setUser] = useRecoilState(userState)
     const user = props.user
 
 
     const createConvo = async () => {
         try {
             const createdConversation = await axios.post('http://localhost:4000/api/v1/techonnect/conversations', {members: [currentUser._id, user._id]})
-            const updateUser = await axios.put(`http://localhost:4000/api/v1/techonnect/users/${user._id}`, {conversationsWith: [...currentUser.conversationsWith, user._id]}, {headers: {authorization: `Bearer ${localStorage.uid}`}})
+            const updateUser = await axios.put(`http://localhost:4000/api/v1/techonnect/users/${user._id}`, {conversationsWith: [user._id, ...currentUser.conversationsWith]}, {headers: {authorization: `Bearer ${localStorage.uid}`}})
+            .then(res => setUser(res.data.updatedUser))
         } catch (err) {
             console.log(err)
         }
@@ -26,7 +27,7 @@ export default function ProfileHeader (props) {
         newTechonnections.push(user._id)
         console.log(newTechonnections)
         await axios.put(`http://localhost:4000/api/v1/techonnect/users/${currentUser._id}`, {techonnections: newTechonnections}, {headers: {authorization: `Bearer ${localStorage.uid}`}})
-        .then(res => console.log(res.data))
+        .then(res => setUser(res.data.updatedUser))
         props.callBack()
     }
 
@@ -40,7 +41,10 @@ export default function ProfileHeader (props) {
                 <div className={styles.headerInformation}>
                     <div className={styles.userInfo}>
                         <h2>{user.firstName} {user.lastName}</h2>
+                        {user.company ? 
                         <h6>{user.role} <span>@</span> {user.company}</h6>
+                        : 
+                        <h6>{user.role}</h6>}
                         <h5>{user.city}, {user.state}</h5>
                         <p>{user.techonnections.length} Techonnections</p>
                     </div>

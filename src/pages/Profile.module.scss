@@ -35,6 +35,14 @@
     height: 100%;
     margin: 0 auto;
     overflow-y: scroll;
+
+    h2 {
+        text-align: center;
+        font-size: 50px;
+        color: rgb(219, 219, 219);
+        font-style: italic;
+        margin-top: 40px;
+    }
 }
 
 .leftSection {
