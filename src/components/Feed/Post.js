@@ -31,6 +31,10 @@ export default function Post(props) {
         console.log("Fetching....")
     }, [props.post, busy]);
 
+    const deletePost = () => {
+        axios.delete(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/posts/${props.post._id}`)
+        props.callBack()
+    }
 
     const updateLikes = () => {
         let newLikes = props.post.likes
@@ -138,7 +142,7 @@ export default function Post(props) {
                         </p>
                     </div>
                 </div>
-                <BsThreeDots className={styles.menuToggle}/>
+                <BsThreeDots onClick={deletePost} className={styles.menuToggle}/>
             </div>
             <div className={styles.postTextContent}>
                 <p>{props.post.content}</p>

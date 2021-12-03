@@ -93,9 +93,12 @@ useEffect(() => {
         else setLinkUrl('none')
     }
 
-    
+    const callBack = () => {
+        setBusy(true)
+    }
+
     const post = allPosts.map((post, idx) => {
-        return <Post post={post} key={idx}/>
+        return <Post post={post} key={idx} callBack={callBack}/>
     })
 
 
