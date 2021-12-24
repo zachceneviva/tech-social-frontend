@@ -33,10 +33,13 @@ export default function Post(props) {
         console.log("Fetching....")
     }, [props.post, busy]);
 
+
     const deletePost = () => {
+        console.log('hi')
         if (user._id === props.post.user._id) {
             axios.delete(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/posts/${props.post._id}`)
             props.callBack()
+            setShowMenu(false)
         }
     }
 
@@ -152,7 +155,7 @@ export default function Post(props) {
                     </div>
                 </div>
                 {user._id === props.post.user._id ? <BsThreeDots onClick={toggleMenu} className={styles.menuToggle} stlye={showMenu && {backgroundColor: "whitesmoke"}} /> : null}
-                {user._id === props.post.user._id ? <PostMenuToggle isVisible={showMenu}/> : null}
+                {user._id === props.post.user._id ? <PostMenuToggle isVisible={showMenu} deletePost={deletePost}/> : null}
             </div>
             <div className={styles.postTextContent}>
                 <p>{props.post.content}</p>
