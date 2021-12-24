@@ -154,7 +154,7 @@ export default function Post(props) {
                         </p>
                     </div>
                 </div>
-                {user._id === props.post.user._id ? <BsThreeDots onClick={toggleMenu} className={styles.menuToggle} stlye={showMenu && {backgroundColor: "whitesmoke"}} /> : null}
+                {user._id === props.post.user._id ? <BsThreeDots onClick={toggleMenu} className={showMenu ? styles.menuToggleActive : styles.menuToggle} /> : null}
                 {user._id === props.post.user._id ? <PostMenuToggle isVisible={showMenu} deletePost={deletePost}/> : null}
             </div>
             <div className={styles.postTextContent}>
