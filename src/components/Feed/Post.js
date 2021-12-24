@@ -15,6 +15,7 @@ import { userState } from "../../recoil/atom";
 import { useRecoilState } from "recoil";
 import { Link } from "react-router-dom";
 import { BsThreeDots } from "react-icons/bs";
+import PostMenuToggle from "./PostMenuToggle";
 
 export default function Post(props) {
     const user = useRecoilState(userState)[0]
@@ -24,6 +25,7 @@ export default function Post(props) {
     const [busy, setBusy] = useState(true)
     const [likes, setLikes] = useState(props.post.likes.length)
     const [lights, setLights] = useState(props.post.lightbulbs.length)
+    const [showMenu, setShowMenu] = useState(false)
 
     useEffect(() => {
         fetchComments();
@@ -32,9 +34,12 @@ export default function Post(props) {
     }, [props.post, busy]);
 
     const deletePost = () => {
-        axios.delete(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/posts/${props.post._id}`)
-        props.callBack()
+        if (user._id === props.post.user._id) {
+            axios.delete(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/posts/${props.post._id}`)
+            props.callBack()
+        }
     }
+
 
     const updateLikes = () => {
         let newLikes = props.post.likes
@@ -124,6 +129,10 @@ export default function Post(props) {
         return <Comment comment={comment} key={idx} />;
     });
 
+    const toggleMenu = () => {
+        showMenu ? setShowMenu(false) : setShowMenu(true)
+    }
+
     return (
         <div className={styles.post}>
             <div className={styles.postHeader}>
@@ -142,7 +151,8 @@ export default function Post(props) {
                         </p>
                     </div>
                 </div>
-                <BsThreeDots onClick={deletePost} className={styles.menuToggle}/>
+                {user._id === props.post.user._id ? <BsThreeDots onClick={toggleMenu} className={styles.menuToggle} stlye={showMenu && {backgroundColor: "whitesmoke"}} /> : null}
+                {user._id === props.post.user._id ? <PostMenuToggle isVisible={showMenu}/> : null}
             </div>
             <div className={styles.postTextContent}>
                 <p>{props.post.content}</p>
