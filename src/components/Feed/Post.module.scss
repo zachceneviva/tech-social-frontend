@@ -10,6 +10,7 @@
     padding: 15px;
     min-height: 200px;
     color: $primary-dark-text-color;
+    position: relative;
 
     hr {
         margin-top: 5px;
@@ -152,7 +153,7 @@
     font-size: 22.5px;
     margin-left: 5px;
     color: $primary-accent-text-color;
-    background-color: transparent;
+    border-radius: 50%;
 
     &:hover {
         cursor: pointer;
