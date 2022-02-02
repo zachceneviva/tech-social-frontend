@@ -7,12 +7,14 @@ import { userState } from '../recoil/atom';
 import { useRecoilState } from 'recoil';
 import { FaConnectdevelop } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import Spinner from '../components/Spinner';
 
 export default function Login () {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate();
     const [user, setUser] = useRecoilState(userState)
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -22,6 +24,7 @@ export default function Login () {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        setLoading(true)
         await axios.post("https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/users/login", {email: email, password: password})
         .then(res => res.data)
         .then((response) => {
@@ -32,6 +35,7 @@ export default function Login () {
         })
         .then(res => res.data)
         .then(res => {
+            setLoading(false)
             setUser(res.user)
             navigate('/home')
         })
@@ -85,7 +89,7 @@ export default function Login () {
                             </Form.Group>
 
                         <Button className={styles.submitBtn} type="submit">
-                            Login
+                            {loading ? <Spinner /> : 'Login'}
                         </Button>
                     </Form>
                     <p>Don't have an account? <Link to="/register">Sign up here!</Link></p>

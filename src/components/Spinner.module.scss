@@ -1,0 +1,11 @@
+.spinner {
+  animation: rotating .5s infinite linear;
+  color: white;
+  font-size: 20px;
+  margin-bottom: 2px;
+}
+
+@keyframes rotating {
+  0% {transform:  rotate(0deg);}
+  100% {transform: rotate(360deg);}
+}

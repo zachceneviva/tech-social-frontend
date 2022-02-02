@@ -159,3 +159,18 @@
         cursor: pointer;
     }
 }
+
+
+.menuToggleActive {
+    margin-top: -40px;
+    font-size: 22.5px;
+    margin-left: 5px;
+    color: $primary-accent-text-color;
+    border-radius: 50%;
+    background-color: whitesmoke;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+}
