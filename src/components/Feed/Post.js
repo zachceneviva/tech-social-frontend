@@ -26,6 +26,7 @@ export default function Post(props) {
     const [likes, setLikes] = useState(props.post.likes.length)
     const [lights, setLights] = useState(props.post.lightbulbs.length)
     const [showMenu, setShowMenu] = useState(false)
+    const [isEditing, setIsEditing] = useState(false)
 
     useEffect(() => {
         fetchComments();
@@ -155,7 +156,7 @@ export default function Post(props) {
                     </div>
                 </div>
                 {user._id === props.post.user._id ? <BsThreeDots onClick={toggleMenu} className={showMenu ? styles.menuToggleActive : styles.menuToggle} /> : null}
-                {user._id === props.post.user._id ? <PostMenuToggle isVisible={showMenu} deletePost={deletePost}/> : null}
+                {user._id === props.post.user._id ? <PostMenuToggle isVisible={showMenu} deletePost={deletePost} setIsEditing={setIsEditing}/> : null}
             </div>
             <div className={styles.postTextContent}>
                 <p>{props.post.content}</p>
@@ -179,7 +180,7 @@ export default function Post(props) {
                 <div className={styles.postImage}>
                     <img src={props.post.image} alt="post" />
                 </div>
-            ) : null}
+            ) : null} 
 
             <hr />
             <div className={styles.postInteract}>
