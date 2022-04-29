@@ -6,6 +6,7 @@ import { userState } from "../recoil/atom";
 import { useRecoilState } from "recoil";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { createMeetup, getAllGroups } from "../lib/ApiCalls";
 
 
 export default function CreateMeetup () {
@@ -24,10 +25,18 @@ export default function CreateMeetup () {
     const navigate = useNavigate()
 
     useEffect(() => {
-        console.log("fetching...")
-        axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/groups`).then((res) => res.data).then(res => setAllGroups(res.groups))
+        fetchAllGroups()
         setBusy(false)
     }, [isBusy])
+
+    const fetchAllGroups = async () => {
+        try {
+            let res = await getAllGroups()
+            setAllGroups(res.groups)
+        } catch (e) {
+            console.log(e)
+        }
+    }
 
     const handleName = (e) => {
         setMeetupName(e.target.value)
@@ -66,21 +75,25 @@ export default function CreateMeetup () {
     }
 
 
-    const handleMeetupCreate = (e) => {
-        e.preventDefault()
-        axios.post('https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/meetups', {
-            name: meetupName,
-            date: date,
-            description: description,
-            photo: photo,
-            group: group,
-            address: address,
-            zip: zip,
-            city: city,
-            state: state,
-            creator: user._id,
-        }).then(res => console.log(res))
-        navigate('/meetups')
+    const handleMeetupCreate = async (e) => {
+        try {
+            e.preventDefault()
+            await createMeetup({
+                name: meetupName,
+                date: date,
+                description: description,
+                photo: photo,
+                group: group,
+                address: address,
+                zip: zip,
+                city: city,
+                state: state,
+                creator: user._id,
+            })
+            navigate('/meetups')
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     return(

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styles from "./Signup.module.scss";
-import axios from "axios";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import {useNavigate} from "react-router-dom"
+import { registerNewUser } from "../lib/ApiCalls";
 
 export default function Signin(props) {
     const [fName, setFName] = useState('')
@@ -21,24 +21,29 @@ export default function Signin(props) {
     const navigate = useNavigate();
 
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        axios.post("https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/users/register", 
-        {
-            password: password,
-            avatar: avatar,
-            coverPhoto: coverPhoto,
-            firstName: fName,
-            lastName: lName,
-            email: email,
-            city: city,
-            state: state,
-            role: role,
-            company: company,
-            github: github,
-            portfolio: portfolio,
-        }).then(res => res);
-        navigate('/')
+    const handleSubmit = async (e) => {
+        try {
+            e.preventDefault()
+            let res = await registerNewUser(
+                {
+                    password: password,
+                    avatar: avatar,
+                    coverPhoto: coverPhoto,
+                    firstName: fName,
+                    lastName: lName,
+                    email: email,
+                    city: city,
+                    state: state,
+                    role: role,
+                    company: company,
+                    github: github,
+                    portfolio: portfolio,
+                }
+            )
+            navigate('/')
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     const handleFName = (e) => {

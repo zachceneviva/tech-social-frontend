@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react"
 import styles from "./People.module.scss"
 import BannerProfileCard from "../components/Feed/BannerProfileCard"
 import AllPeople from "../components/People/AllPeople"
-import axios from "axios"
+import { getAllUsers } from "../lib/ApiCalls"
 
 
 export default function People (props) {
@@ -10,12 +10,19 @@ export default function People (props) {
     const [busy, setBusy] = useState(true)
 
     useEffect(() => {
-        axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/users`, {
-            headers: {authorization: `Bearer ${localStorage.uid}`},
-        }).then((res) => res.data).then(res => setAllPeople(res.allUsers))
+        getPeople()
         setBusy(false)
     }, [busy])
     
+    const getPeople = async () => {
+        try {
+            let allUsers = await getAllUsers()
+            setAllPeople(allUsers)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     const callBack = () => {
         setBusy(true)
     }

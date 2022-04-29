@@ -4,8 +4,8 @@ import BannerProfileCard from "../components/Feed/BannerProfileCard";
 import Create from "../components/Create/Create";
 import { userState } from "../recoil/atom";
 import { useRecoilState } from "recoil";
-import axios from "axios";
 import { useNavigate } from "react-router";
+import { createGroup } from "../lib/ApiCalls";
 
 
 export default function CreateGroup () {
@@ -34,16 +34,20 @@ export default function CreateGroup () {
     }
 
 
-    const handleGroupCreate = (e) => {
-        e.preventDefault()
-        axios.post('https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/groups', {
-            name: groupName,
-            description: description,
-            photo: photo,
-            coverPhoto: coverPhoto,
-            creator: user._id,
-        }).then(res => console.log(res))
-        navigate('/groups')
+    const handleGroupCreate = async (e) => {
+        try {
+            e.preventDefault()
+            await createGroup({
+                name: groupName,
+                description: description,
+                photo: photo,
+                coverPhoto: coverPhoto,
+                creator: user._id,
+            })
+            navigate('/groups')
+        } catch(e) {
+            console.log(e)
+        }
     }
 
     return(

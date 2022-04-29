@@ -6,7 +6,7 @@ import ProfileHeader from "../components/Profile/ProfileHeader";
 import { useParams } from 'react-router';
 import { useNavigate } from 'react-router';
 import {Form, Row, Col, Button } from "react-bootstrap"
-import axios from 'axios';
+import { updateProfile } from '../lib/ApiCalls';
 
 export default function ProfileUpdate () {
     const [user, setUser] = useRecoilState(userState)
@@ -31,28 +31,30 @@ export default function ProfileUpdate () {
     }, [])
 
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        axios.put(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/users/${params.id}`, 
-        {
-            avatar: avatar,
-            coverPhoto: coverPhoto,
-            firstName: fName,
-            lastName: lName,
-            email: email,
-            city: city,
-            state: state,
-            role: role,
-            company: company,
-            github: github,
-            portfolio: portfolio,
-        }, {
-            headers: {authorization: `Bearer ${localStorage.uid}`},
-        }).then(res => res.data)
-        .then(res => {
-            setUser(res.updatedUser)
+    const handleSubmit = async (e) => {
+        try {
+            e.preventDefault()
+            let updatedUser = await updateProfile(
+                params.id, 
+                {
+                    avatar: avatar,
+                    coverPhoto: coverPhoto,
+                    firstName: fName,
+                    lastName: lName,
+                    email: email,
+                    city: city,
+                    state: state,
+                    role: role,
+                    company: company,
+                    github: github,
+                    portfolio: portfolio,
+                }
+            )
+            setUser(updatedUser)
             navigate(`/profile/${params.id}`)
-        });
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     const handleFName = (e) => {

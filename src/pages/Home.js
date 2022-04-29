@@ -9,6 +9,7 @@ import axios from "axios"
 import MeetupBanner from "../components/Feed/MeetupBanner"
 import { userState } from "../recoil/atom"
 import { useRecoilState } from "recoil";
+import { createNewPost, getAllGroups, getAllMeetups, getAllPosts, getUserConnections } from "../lib/ApiCalls"
 
 
 export default function Home () {
@@ -31,35 +32,62 @@ export default function Home () {
     }, [])
 
     useEffect(() => {
-        fetchData()
+        fetchPosts()
         setBusy(false)
         console.log('this is fetching my data')
     },[isBusy])
 
-useEffect(() => {
-    axios.get('https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/groups/home').then((res) => setGroups(res.data.groups))
-    axios.get('https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/meetups/home').then((res) => setMeetups(res.data.meetups))
-    axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/users/profile/connections`, {headers: {authorization: `Bearer ${localStorage.uid}`}})
-        .then(res => setFoundUser(res.data.user))
-}, [])
+    useEffect(() => {
+        fetchData()
+    }, [])
 
+    const fetchData = async () => {
+        try {
+            let [groups, meetups, user] = await Promise.all([
+                getAllGroups(),
+                getAllMeetups(),
+                getUserConnections()
+            ])
 
-    const fetchData = () => {
-        axios.get('https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/posts').then((res) => setAllPosts(res.data.posts))
+            setGroups(groups.groups)
+            setMeetups(meetups.meetups)
+            setFoundUser(user)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const fetchPosts = async () => {
+        try {
+            let res = await getAllPosts()
+            setAllPosts(res.posts)
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     const handlePost = async (e) => {
-        e.preventDefault()
-        await axios.post('https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/posts',
-        {content: postContent, image: `https://${postImage}`, github: `https://github.com/${postGh}`, link: `https://${postLink}`, user: user}).then( res => setAllPosts([res.data.post, ...allPosts]))
-        setPostContent('')
-        setPostImage('')
-        setPostGh('')
-        setPostLink('')
-        setImageUrl('none')
-        setGhUrl('none')
-        setLinkUrl('none')
-        setBusy(true)
+        try {
+            e.preventDefault()
+            let res = await createNewPost({
+                content: postContent, 
+                image: `https://${postImage}`, 
+                github: `https://github.com/${postGh}`, 
+                link: `https://${postLink}`, 
+                user: user
+            })
+            setAllPosts([res.post, ...allPosts])
+            setPostContent('')
+            setPostImage('')
+            setPostGh('')
+            setPostLink('')
+            setImageUrl('none')
+            setGhUrl('none')
+            setLinkUrl('none')
+            setBusy(true)
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     const handleChange = (e) => {

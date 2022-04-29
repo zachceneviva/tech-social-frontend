@@ -6,6 +6,7 @@ import MeetupHeader from "../components/MeetupShow/MeetupHeader";
 import MeetupDetails from "../components/MeetupShow/MeetupDetails";
 import Organizer from "../components/MeetupShow/Organizer";
 import MeetupDescription from "../components/MeetupShow/MeetupDescription";
+import {getMeetup} from '../lib/ApiCalls'
 
 
 export default function MeetupShow () {
@@ -18,10 +19,18 @@ export default function MeetupShow () {
     }, [])
     
     useEffect(() => {
-        console.log("Fetching...")
-        axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/meetups/${params.id}`).then(res => setFoundMeetup(res.data.meetup))
+        fetchMeetup()
         setBusy(false)
     }, [isBusy])
+
+    const fetchMeetup = async () => {
+        try {
+            let meetup = await getMeetup(params.id)
+            setFoundMeetup(meetup)
+        } catch (e) {
+            console.log(e)
+        }
+    }
 
     const callBack = () => {
         setBusy(true)

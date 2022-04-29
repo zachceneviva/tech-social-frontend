@@ -3,6 +3,7 @@ import styles from "./AllGroups.module.scss"
 import BannerProfileCard from "../components/Feed/BannerProfileCard"
 import Groups from "../components/AllGroups/Groups"
 import axios from "axios"
+import {getAllGroups} from '../lib/ApiCalls'
 
 export default function AllGroups () {
     const [allGroups, setAllGroups] = useState([])
@@ -14,11 +15,18 @@ export default function AllGroups () {
     }, [])
     
     useEffect(() => {
-        console.log("fetching...")
-        axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/groups`).then((res) => res.data).then(res => setAllGroups(res.groups))
+        fetchAllGroups()
         setBusy(false)
     }, [busy])
     
+    const fetchAllGroups = async() => {
+        try {
+            let res = await getAllGroups()
+            setAllGroups(res.groups)
+        } catch(e) {
+            console.log(e)
+        }
+    }
 
     const group = allGroups.map((group, idx) => {
         return <Groups group={group} key={idx}/>

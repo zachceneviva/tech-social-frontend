@@ -7,6 +7,7 @@ import ChatInput from "../components/Message/ChatInput";
 import axios from "axios";
 import { useParams } from "react-router";
 import {io} from "socket.io-client"
+import { getConversationMessages, getConversation, createNewMessage } from "../lib/ApiCalls";
 
 export default function Conversation() {
     const user = useRecoilState(userState)[0];
@@ -20,7 +21,7 @@ export default function Conversation() {
 
 
     useEffect(() => {
-        socket.current = io("https://damp-journey-84088.herokuapp.com", { transports : ['websocket'] });
+        socket.current = io(process.env.REACT_APP_WEBSOCKET, { transports : ['websocket'] });
         socket.current.on("getMessage", (data) => {
             setArrivalMessage({
                 sender: {
@@ -47,22 +48,22 @@ export default function Conversation() {
     },[user])
 
     useEffect(() => {
-        const getConversation = async () => {
+        const getCurrConversation = async () => {
             try {
-                const res = await axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/conversations/find/${params.id}`)
-                setCurrentChat(res.data)
+                const res = await getConversation(params.id)
+                setCurrentChat(res)
             } catch (err) {
                 console.log(err)
             }
         };
-        getConversation()
+        getCurrConversation()
     },[params.id])
 
     useEffect(() => {
         const getMessages = async () => {
             try {
-                const res = await axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/messages/${params.id}`)
-                setAllMessages(res.data)
+                const res = await getConversationMessages(params.id)
+                setAllMessages(res)
             } catch (err) {
                 console.log(err)
             }
@@ -84,7 +85,7 @@ export default function Conversation() {
             }) 
         
         try {
-            const res = await axios.post(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/messages`, {
+            const res = await createNewMessage({
                 conversationId: params.id,
                 sender: {
                     _id: user._id,
@@ -93,7 +94,7 @@ export default function Conversation() {
                 },
                 text: newMessage,
             })
-            setAllMessages([...allMessage, res.data.newMessage])
+            setAllMessages([...allMessage, res.newMessage])
             console.log(allMessage)
             setNewMessage('')
         } catch (err) {

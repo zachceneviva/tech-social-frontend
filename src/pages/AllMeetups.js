@@ -2,17 +2,25 @@ import React, {useState, useEffect} from "react"
 import styles from "./AllMeetups.module.scss"
 import BannerProfileCard from "../components/Feed/BannerProfileCard"
 import Meetups from "../components/AllMeetups/Meetups"
-import axios from "axios"
+import { getAllMeetups } from "../lib/ApiCalls"
 
 export default function AllMeetups () {
     const [allMeetups, setAllMeetups] = useState([])
     const [busy, setBusy] = useState(true)
 
     useEffect(() => {
-        console.log("fetching...")
-        axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/meetups`).then((res) => res.data).then(res => setAllMeetups(res.meetups))
+        fetchMeetups()
         setBusy(false)
     }, [busy])
+
+    const fetchMeetups = async () => {
+        try {
+            let res = await getAllMeetups()
+            setAllMeetups(res.meetups)
+        } catch(e) {
+            console.log(e)
+        }
+    }
     
 
     const meetup = allMeetups.map((meetup, idx) => {

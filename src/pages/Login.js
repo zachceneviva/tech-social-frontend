@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import styles from './Login.module.scss'
 import {Form, Button} from "react-bootstrap"
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { userState } from '../recoil/atom';
 import { useRecoilState } from 'recoil';
 import { FaConnectdevelop } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Spinner from '../components/Spinner';
+import { getUserProfile, login } from '../lib/ApiCalls';
 
 export default function Login () {
     const [email, setEmail] = useState('')
@@ -23,22 +23,24 @@ export default function Login () {
 
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        setLoading(true)
-        await axios.post("https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/users/login", {email: email, password: password})
-        .then(res => res.data)
-        .then((response) => {
-            localStorage.setItem("uid", response.token);
-        });
-        await axios.get("https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/users/profile", {
-            headers: {authorization: `Bearer ${localStorage.uid}`},
-        })
-        .then(res => res.data)
-        .then(res => {
+        try {
+            e.preventDefault()
+            setLoading(true)
+            let res = await login(
+                {
+                email: email, 
+                password: password
+                }
+            )
+
+            let resUser = await getUserProfile()
+            setUser(resUser.user)
             setLoading(false)
-            setUser(res.user)
             navigate('/home')
-        })
+        } catch(e) {
+            console.log(e)
+            setLoading(false)
+        }
     }
 
     const handleEmail = (e) => {

@@ -9,6 +9,7 @@ import { userState } from "../recoil/atom";
 import { useRecoilState } from "recoil";
 import MeetupBanner from "../components/Feed/MeetupBanner";
 import About from "../components/GroupShow/About";
+import { createNewPost, getGroup } from "../lib/ApiCalls";
 
 export default function GroupShow() {
     const [foundGroup, setFoundGroup] = useState(null);
@@ -31,24 +32,37 @@ export default function GroupShow() {
     }, [])
     
     useEffect(() => {
-        axios
-            .get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/groups/${params.id}`)
-            .then((res) => {
-                setFoundGroup(res.data.group);
-                setAllPosts(res.data.posts);
-                setBusy(false);
-                console.log("this is fetching my data");
-            });
+        fetchGroup()
+        setBusy(false);
     }, [isBusy]);
 
     useEffect(() => {
-        axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/meetups/groups/${params.id}`).then((res) => setMeetups(res.data.meetups))
+        fetchGroupMeetups()
     }, [])
 
+    const fetchGroup = async() => {
+        try {
+            let res = await getGroup(params.id)
+            setFoundGroup(res.group)
+            setAllPosts(res.posts)
+        } catch(e) {
+            console.log(e)
+        }
+    }
+
+    const fetchGroupMeetups = async () => {
+        try {
+            let res = await getGroup(params.id)
+            setMeetups(res.meetups)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     const handlePost = async (e) => {
-        e.preventDefault();
-        await axios
-            .post("https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/posts", {
+        try {
+            e.preventDefault();
+            let res = await createNewPost({
                 content: postContent,
                 image: `https://${postImage}`,
                 github: `https://github.com/${postGh}`,
@@ -56,15 +70,17 @@ export default function GroupShow() {
                 user: user,
                 group: params.id,
             })
-            .then((res) => console.log(res));
-        setPostContent("");
-        setPostImage("");
-        setPostGh("");
-        setPostLink("");
-        setImageUrl("none");
-        setGhUrl("none");
-        setLinkUrl("none");
-        setBusy(true);
+            setPostContent("");
+            setPostImage("");
+            setPostGh("");
+            setPostLink("");
+            setImageUrl("none");
+            setGhUrl("none");
+            setLinkUrl("none");
+            setBusy(true);
+        } catch (e) {
+            console.log(e)
+        }
     };
 
     const callBack = () => {

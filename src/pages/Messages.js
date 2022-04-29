@@ -6,6 +6,7 @@ import { useRecoilState } from "recoil"
 import axios from "axios"
 import { Outlet} from "react-router"
 import { NavLink } from "react-router-dom"
+import { getAllConversations } from "../lib/ApiCalls"
 
 
 export default function Messages () {
@@ -13,10 +14,17 @@ export default function Messages () {
     const user = useRecoilState(userState)[0]
 
     useEffect(() => {
-        axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/conversations/${user._id}`)
-        .then(res => setAllConvos(res.data.allConversations))
-        console.log("fetched")
+        getConvos()
     }, [])
+
+    const getConvos = async () => {
+        try {
+            let allConvos = await getAllConversations(user._id)
+            setAllConvos(allConvos)
+        } catch(e) {
+            console.log(e)
+        }
+    }
 
     const convos = allConvos.map((convo, idx) => {
         return (
