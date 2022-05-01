@@ -4,6 +4,7 @@ import { userState } from "../../recoil/atom"
 import { useRecoilState } from "recoil"
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { updateProfile } from "../../lib/ApiCalls"
 
 export default function AllPeople (props) {
     const [user, setUser] = useRecoilState(userState)
@@ -14,14 +15,19 @@ export default function AllPeople (props) {
     }, [busy])
 
     const techonnect = async (e) => {
-        e.preventDefault()
-        let newTechonnections = [...user.techonnections];
-        newTechonnections.push(props.person._id)
-        console.log(newTechonnections)
-        await axios.put(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/users/${user._id}`, {techonnections: newTechonnections}, {headers: {authorization: `Bearer ${localStorage.uid}`}})
-        .then(res => setUser(res.data.updatedUser))
-        props.callBack()
-        setBusy(true)
+        try {
+            e.preventDefault()
+            let newTechonnections = [...user.techonnections];
+            newTechonnections.push(props.person._id)
+            const updatedUser = await updateProfile(user._id, {
+                techonnections: newTechonnections
+            })
+            setUser(updatedUser)
+            props.callBack()
+            setBusy(true)
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     return (

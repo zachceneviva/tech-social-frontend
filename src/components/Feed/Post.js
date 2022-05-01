@@ -16,6 +16,7 @@ import { useRecoilState } from "recoil";
 import { Link } from "react-router-dom";
 import { BsThreeDots } from "react-icons/bs";
 import PostMenuToggle from "./PostMenuToggle";
+import { updatePost, createComment, getPostComments, deletePost } from "../../lib/ApiCalls";
 
 export default function Post(props) {
     const user = useRecoilState(userState)[0]
@@ -35,74 +36,61 @@ export default function Post(props) {
     }, [props.post, busy]);
 
 
-    const deletePost = () => {
-        console.log('hi')
-        if (user._id === props.post.user._id) {
-            axios.delete(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/posts/${props.post._id}`)
+    const handleDeletePost = async () => {
+        try {
+            if (user._id !== props.post.user._id) return
+            await deletePost(props.post._id)
             props.callBack()
             setShowMenu(false)
+        } catch (e) {
+            console.log(e)
         }
     }
 
 
-    const updateLikes = () => {
-        let newLikes = props.post.likes
-        if (props.post.likes.includes(user._id) === false) {
-            newLikes.push(user._id)
-            axios
-                .put(
-                    `https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/posts/${props.post._id}`,
-                    {likes: newLikes},
-                    { "Content-Type": "application/json" }
-                )
-                .then((res) => console.log(res));
+    const updateLikes = async () => {
+        try {
+            let newLikes = props.post.likes
+            if (!props.post.likes.includes(user._id)) {
+                newLikes.push(user._id)
                 setLikes(likes + 1)
-        } else {
-            let index = props.post.likes.indexOf(user._id)
-            newLikes.splice(index,1)
-            axios
-                .put(
-                    `https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/posts/${props.post._id}`,
-                    {likes: newLikes},
-                    { "Content-Type": "application/json" }
-                )
-                .then((res) => console.log(res));
+                await updatePost(props.post._id, {likes: newLikes})
+            } else {
+                let index = props.post.likes.indexOf(user._id)
+                newLikes.splice(index,1)
                 setLikes(likes - 1)
+                await updatePost(props.post._id, {likes: newLikes})
+            }
+        } catch (e) {
+            console.log(e)
         }
     };
 
-    const updateLightbulb = () => {
-        let newLights = props.post.lightbulbs
-        if (props.post.lightbulbs.includes(user._id) === false) {
-            newLights.push(user._id)
-            axios
-                .put(
-                    `https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/posts/${props.post._id}`,
-                    { lightbulbs: newLights},
-                    { "Content-Type": "application/json" }
-                )
-                .then((res) => console.log(res));
+    const updateLightbulb = async () => {
+        try {
+            let newLights = props.post.lightbulbs
+            if (!props.post.lightbulbs.includes(user._id)) {
+                newLights.push(user._id)
                 setLights(lights + 1)
-        } else {
-            let index = props.post.lightbulbs.indexOf(user._id)
-            newLights.splice(index, 1)
-            axios
-                .put(
-                    `https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/posts/${props.post._id}`,
-                    { lightbulbs: newLights},
-                    { "Content-Type": "application/json" }
-                )
-                .then((res) => console.log(res));
+                await updatePost(props.post._id, {lightbulbs: newLights})
+            } else {
+                let index = props.post.lightbulbs.indexOf(user._id)
+                newLights.splice(index, 1)
                 setLights(lights - 1)
+                await updatePost(props.post._id, {lightbulbs: newLights})
+            }
+        } catch (e) {
+            console.log(e)
         }
     };
 
     const fetchComments = async () => {
-        await axios
-            .get(
-                `https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/comments/${props.post._id}`
-            )
-            .then((res) => setAllComments(res.data.comments));
+        try {
+            const res = await getPostComments(props.post._id)
+            setAllComments(res.comments)
+        } catch (e) {
+            console.log(e)
+        }
     };
 
     const showComments = () => {
@@ -115,17 +103,23 @@ export default function Post(props) {
         setCommentText(e.target.value);
     };
 
-    const handleCommentCreation = (e) => {
-        e.preventDefault();
-        axios
-            .post(
-                `https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/comments/${props.post._id}`,
-                { content: commentText, post: props.post._id, user: user }
+    const handleCommentCreation = async (e) => {
+        try {
+            e.preventDefault();
+            let res = await createComment({
+                content: commentText, 
+                post: props.post._id, 
+                user: user
+                }
             )
-            .then((res) => setAllComments([res.data.comment, ...allComments]));
-        setCommentText("");
-        setCommentDisplay("initial");
-        setBusy(true)
+            setAllComments([res.data.comment, ...allComments])
+            setCommentText("");
+            setCommentDisplay("initial");
+            setBusy(true)
+        } catch (e) {
+            console.log(e)
+        }
+        
     };
 
 
@@ -143,7 +137,7 @@ export default function Post(props) {
                 <div className={styles.postUserInfo}>
                     <div className={styles.postUserImage}>
                         <img
-                            src={props.post.user.avatar}
+                            src={props.post.user?.avatar}
                             alt="user"
                         />
                     </div>
@@ -156,7 +150,7 @@ export default function Post(props) {
                     </div>
                 </div>
                 {user._id === props.post.user._id ? <BsThreeDots onClick={toggleMenu} className={showMenu ? styles.menuToggleActive : styles.menuToggle} /> : null}
-                {user._id === props.post.user._id ? <PostMenuToggle isVisible={showMenu} deletePost={deletePost} setIsEditing={setIsEditing}/> : null}
+                {user._id === props.post.user._id ? <PostMenuToggle isVisible={showMenu} deletePost={handleDeletePost} setIsEditing={setIsEditing}/> : null}
             </div>
             <div className={styles.postTextContent}>
                 <p>{props.post.content}</p>

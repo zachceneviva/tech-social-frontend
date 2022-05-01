@@ -51,7 +51,7 @@ export function postApiRequest(endpoint, params) {
 }
 
 /**
- * put api call
+ * put api call with auth
  * @param {String} endpoint 
  * @param {String} id 
  * @param {Object} params 
@@ -65,6 +65,32 @@ export async function putApiRequest(endpoint, id, params) {
       {
         headers: {authorization: `Bearer ${localStorage.uid}`},
       }
+    )
+  )
+}
+
+/**
+ * put api call no auth
+ * @param {String} endpoint 
+ * @param {String} id 
+ * @param {Object} params 
+ */
+export async function putNoAuthApiRequest(endpoint, id, params) {
+  let url = process.env.REACT_APP_API + endpoint + '/' + id
+  return handleRequest(
+    axios.put(
+      url,
+      params,
+    )
+  )
+}
+
+
+export async function deleteApiRequest(endpoint, id) {
+  let url = process.env.REACT_APP_API + endpoint + '/' + id
+  return handleRequest(
+    axios.delete(
+      url
     )
   )
 }

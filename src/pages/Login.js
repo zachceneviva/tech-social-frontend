@@ -33,6 +33,11 @@ export default function Login () {
                 }
             )
 
+            if (res.status === 'failed') {
+                setLoading(false)
+                return alert(res.message)
+            }
+
             let resUser = await getUserProfile()
             setUser(resUser.user)
             setLoading(false)

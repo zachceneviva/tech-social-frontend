@@ -6,6 +6,7 @@ import { userState } from "../../recoil/atom"
 import { useRecoilState } from "recoil"
 import axios from "axios"
 import { useParams } from "react-router"
+import { updateMeetup } from "../../lib/ApiCalls"
 
 
 export default function MeetupDetails (props) {
@@ -13,24 +14,35 @@ export default function MeetupDetails (props) {
     const [member, setMembers] = useState(0)
     const params = useParams()
 
-    const handleJoin = (e) => {
-        e.preventDefault()
-        let newAttend = props.meetup.usersAttending
-        newAttend.push(user._id)
-        axios.put(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/meetups/${params.id}`, {usersAttending: newAttend}).then(res => console.log(res))
-        props.callBack()
-        setMembers(member + 1)
+    const handleJoin = async (e) => {
+        try {
+            e.preventDefault()
+            let newAttend = props.meetup.usersAttending
+            newAttend.push(user._id)
+            const newMeetup = await updateMeetup(params.id, {
+                usersAttending: newAttend
+            })
+            props.callBack()
+            setMembers(member + 1)
+        } catch (e) {
+            console.log(e)
+        }
     }
     
-    const handleLeave = (e) => {
-        e.preventDefault()
-        let index = props.meetup.usersAttending.indexOf(user._id)
-        let newAttend = props.meetup.usersAttending
-        newAttend.splice(index,1)
-        console.log(newAttend)
-        axios.put(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/meetups/${params.id}`, {usersAttending: newAttend}).then(res => console.log(res))
-        props.callBack()
-        setMembers(member - 1)
+    const handleLeave = async (e) => {
+        try {
+            e.preventDefault()
+            let index = props.meetup.usersAttending.indexOf(user._id)
+            let newAttend = props.meetup.usersAttending
+            newAttend.splice(index,1)
+            const newMeetup = await updateMeetup(params.id, {
+                usersAttending: newAttend
+            })
+            props.callBack()
+            setMembers(member - 1)
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     return (

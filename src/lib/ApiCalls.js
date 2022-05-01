@@ -1,4 +1,4 @@
-import { getApiRequest, postApiRequest, putApiRequest } from "./ApiCallHelper";
+import { getApiRequest, postApiRequest, putApiRequest, putNoAuthApiRequest, deleteApiRequest } from "./ApiCallHelper";
 
 /**
  * Register a new user
@@ -20,6 +20,7 @@ export const registerNewUser = async (params) => {
 export const login = async(params) => {
   try {
     let res = await postApiRequest('/users/login', params)
+    if (res.data.status === 'failed') return res.data
     localStorage.setItem("uid", res.data.token);
     return res.data
   } catch (e) {
@@ -32,7 +33,7 @@ export const login = async(params) => {
  */
 export const getUserProfile = async () => {
   try {
-    let res = await getApiRequest('/users/profile', null, true)
+    let res = await getApiRequest('/users/profile', '', true)
     return res.data
   } catch(e) {
     console.log(e)
@@ -110,7 +111,7 @@ export const getUserMeetups = async(id) => {
  */
 export const getUserConnections = async() => {
   try {
-    let res = await getApiRequest('users/profile/connections', null, true)
+    let res = await getApiRequest('/users/profile/connections', null, true)
     return res.data.user
   } catch (e) {
     console.log(e)
@@ -278,6 +279,102 @@ export const createNewMessage = async(params) => {
     let res = await postApiRequest('/messages', params)
     return res.data
   } catch(e) {
+    console.log(e)
+  }
+}
+
+/**
+ * Create new conversation
+ * @param {Object} params 
+ */
+export const createNewConversation = async(params) => {
+  try {
+    let res = await postApiRequest('/conversations', params)
+    return res.data
+  } catch(e) {
+    console.log(e)
+  }
+}
+
+/**
+ * update a meetup
+ * @param {String} id 
+ * @param {Object} params 
+ */
+export const updateMeetup = async(id, params) => {
+  try {
+    let res = await putNoAuthApiRequest('/meetups', id, params)
+    return res.data
+  } catch(e) {
+    console.log(e)
+  }
+}
+
+
+/**
+ * update a group
+ * @param {String} id 
+ * @param {Object} params 
+ */
+ export const updateGroup = async(id, params) => {
+  try {
+    let res = await putNoAuthApiRequest('/groups', id, params)
+    return res.data
+  } catch(e) {
+    console.log(e)
+  }
+}
+
+/**
+ * Update a post
+ * @param {String} id 
+ * @param {Object} params  
+ */
+export const updatePost = async (id, params) => {
+  try {
+    let res = await putNoAuthApiRequest('/posts', id, params)
+    return res.data
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+
+/**
+ * Create a new comment
+ * @param {Object} params  
+ */
+export const createComment = async (params) => {
+  try {
+    let res = await postApiRequest('/comments', params)
+    return res.data
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+/**
+ * Get comments for a post
+ * @param {String} id 
+ */
+export const getPostComments = async(id) => {
+  try {
+    let res = await getApiRequest('/comments', id)
+    return res.data
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+/**
+ * delete a post
+ * @param {String} id 
+ */
+export const deletePost = async (id) => {
+  try {
+    let res = await deleteApiRequest('/posts', id)
+    return res.data
+  } catch (e) {
     console.log(e)
   }
 }

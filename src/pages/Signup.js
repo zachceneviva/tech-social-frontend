@@ -69,11 +69,11 @@ export default function Signin(props) {
     }
 
     const handleAvatar = (e) => {
-        setAvatar(e.target.value)
+        setAvatar(e.target.files[0])
     }
 
     const handleCoverPhoto = (e) => {
-        setCoverPhoto(e.target.value)
+        setCoverPhoto(e.target.files[0])
     }
 
     const handleRole= (e) => {
@@ -159,7 +159,7 @@ export default function Signin(props) {
                                 type="password"
                                 placeholder="Password"
                                 autoComplete="off"
-                                valeu={confirmPassword}
+                                value={confirmPassword}
                             />
                         </Form.Group>
 
@@ -202,12 +202,12 @@ export default function Signin(props) {
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formGridAvatar">
                             <Form.Label>Avatar</Form.Label>
-                            <Form.Control autoComplete="off" name="avatar" value={avatar} onChange={handleAvatar} placeholder="https://"/>
+                            <Form.Control type="file" name="avatar" accept=".png, .jpg, .jpeg" onChange={handleAvatar}/>
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formGridCoverPhoto">
                             <Form.Label>Cover Photo</Form.Label>
-                            <Form.Control autoComplete="off" name="coverPhoto" value={coverPhoto} onChange={handleCoverPhoto} placeholder="https://"/>
+                            <Form.Control type="file" name="coverPhoto" accept=".png, .jpg, .jpeg" onChange={handleCoverPhoto} />
                         </Form.Group>
                     </Row>
 
