@@ -34,7 +34,7 @@ export default function Profile () {
 
     const fetchData = async () => {
         try {
-            let [allPosts, foundUser, groups, meetups, connections] = await Promise.all([
+            let [posts, foundUser, userGroups, userMeetups, connections] = await Promise.all([
                 getUserPosts(params.id),
                 getUser(params.id),
                 getUserGroups(params.id),
@@ -42,10 +42,10 @@ export default function Profile () {
                 getUserConnections()
             ])
 
-            setAllPosts(allPosts)
+            setAllPosts(posts)
             setFoundUser(foundUser)
-            setGroups(groups)
-            setMeetups(meetups)
+            setGroups(userGroups)
+            setMeetups(userMeetups)
             setConnectUser(connections)
         } catch (e) {
             console.log(e)

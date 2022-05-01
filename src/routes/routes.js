@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../pages/Home";
 import People from "../pages/People";
@@ -7,7 +7,7 @@ import AllGroups from "../pages/AllGroups";
 import AllMeetups from "../pages/AllMeetups";
 import Signup from "../pages/Signup";
 import Login from "../pages/Login"
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
 import { loggedInState } from "../recoil/selector";
 import Navigation from "../components/Navbar";
 import CreateGroup from "../pages/CreateGroup";
@@ -17,11 +17,24 @@ import MeetupShow from "../pages/MeetupShow";
 import Messages from "../pages/Messages";
 import Conversation from "../pages/Conversation";
 import ProfileUpdate from "../pages/ProfileUpdate";
-
+import { userState } from "../recoil/atom";
+import { getUserProfile } from "../lib/ApiCalls";
 
 export default function AppRoutes () {
+    const loggedIn = useRecoilValue(loggedInState),
+            [user, setUser] = useRecoilState(userState);
 
-    const loggedIn = useRecoilValue(loggedInState)
+    useEffect(() => {
+        async function getUser () {
+            try {
+                const currUser = await getUserProfile()
+                setUser(currUser.user)
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        getUser()
+    }, [])
 
     return (
         <BrowserRouter>
