@@ -57,6 +57,9 @@ export default function CreateGroup () {
                     <BannerProfileCard location="/group/create"/>
                 </div>
                 <div className={styles.mainSection}>
+                <div className={styles.smallScreen}>
+                        <BannerProfileCard />
+                    </div>
                     <div className={styles.create}>
                         <Create type="group" groupName={groupName} description={description} photo={photo} coverPhoto={coverPhoto} handleName={handleName} handleDescription={handleDescription} handlePhoto={handlePhoto} handleCoverPhoto={handleCoverPhoto} handleSubmit={handleGroupCreate}/>
                     </div>

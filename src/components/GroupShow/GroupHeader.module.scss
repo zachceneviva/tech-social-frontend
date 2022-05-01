@@ -11,6 +11,11 @@
     margin-top: 25px;
     border-radius: 5px;
     color: $primary-dark-text-color;
+
+    @media (max-width: 480px) {
+        min-height: 200px;
+        padding: 0;
+    }
 }  
 
 .bannerImage {
@@ -24,6 +29,14 @@
         border-radius: 5px;
         object-fit: cover;
     }
+
+    @media (max-width: 480px) {
+        height: 150px;
+
+        img {
+            height: 150px;
+        }
+    }
 }
 
 .headerContent {
@@ -36,21 +49,33 @@
 }
 
 .avatar {
-        margin: 0 auto;
+    margin: 0 auto;
+    height: 200px;
+    width:200px;
+    border-radius: 50%;
+    background-color: white;
+    border: 1px solid whitesmoke;
+
+    img {
         height: 200px;
         width:200px;
+        object-fit: cover;
         border-radius: 50%;
         background-color: white;
         border: 1px solid whitesmoke;
+    }
+
+    @media (max-width: 480px) {
+        height: 125px;
+        width: 125px;
+        margin-top: 45px;
 
         img {
-            height: 200px;
-            width:200px;
-            object-fit: cover;
-            border-radius: 50%;
-            background-color: white;
-            border: 1px solid whitesmoke;
+            height: 125px;
+            width: 125px;
+            margin: 0 auto;
         }
+    }
 }
 
 .headerInformation {

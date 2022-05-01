@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react"
 import styles from "./AllMeetups.module.scss"
 import BannerProfileCard from "../components/Feed/BannerProfileCard"
 import Meetups from "../components/AllMeetups/Meetups"
-import { getAllMeetups } from "../lib/ApiCalls"
+import { getAllMeetupsPage } from "../lib/ApiCalls"
 
 export default function AllMeetups () {
     const [allMeetups, setAllMeetups] = useState([])
@@ -15,7 +15,7 @@ export default function AllMeetups () {
 
     const fetchMeetups = async () => {
         try {
-            let res = await getAllMeetups()
+            let res = await getAllMeetupsPage()
             setAllMeetups(res.meetups)
         } catch(e) {
             console.log(e)
@@ -33,6 +33,9 @@ export default function AllMeetups () {
                     <BannerProfileCard/>
                 </div>
                 <div className={styles.mainSection}>
+                <div className={styles.smallScreen} >
+                    <BannerProfileCard/>
+                </div>
                     <div className={styles.allGroups}>
                         {busy && !allMeetups ? "Loading..." : meetup}
                     </div>

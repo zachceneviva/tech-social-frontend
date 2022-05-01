@@ -27,8 +27,10 @@ export default function AppRoutes () {
     useEffect(() => {
         async function getUser () {
             try {
-                const currUser = await getUserProfile()
-                setUser(currUser.user)
+                if (localStorage.getItem('uid')) {
+                    const currUser = await getUserProfile()
+                    setUser(currUser.user)
+                }
             } catch (e) {
                 console.log(e)
             }

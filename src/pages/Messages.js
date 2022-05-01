@@ -28,8 +28,8 @@ export default function Messages () {
 
     const convos = allConvos.map((convo, idx) => {
         return (
-            <NavLink style={{textDecoration: "none"}} to={`/messages/${convo._id}`}>
-                <ChatCard convo={convo} key="idx" />
+            <NavLink style={{textDecoration: "none"}} to={`/messages/${convo._id}`}  key={idx}>
+                <ChatCard convo={convo}/>
             </NavLink>
         )   
     })
@@ -43,6 +43,12 @@ export default function Messages () {
                     </div>    
                 </div>
                 <div className={styles.mainSection}>
+                    <div className={styles.smallScreen}>
+                        <div className={styles.allChats}>
+                            <h1>All Chats</h1>
+                                {convos ? convos : "Loading"}
+                        </div> 
+                    </div>
                 <Outlet />
                 </div>
             </div>

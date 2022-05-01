@@ -347,6 +347,7 @@ export const updatePost = async (id, params) => {
 export const createComment = async (params) => {
   try {
     let res = await postApiRequest('/comments', params)
+    console.log(res.data)
     return res.data
   } catch (e) {
     console.log(e)
@@ -373,6 +374,34 @@ export const getPostComments = async(id) => {
 export const deletePost = async (id) => {
   try {
     let res = await deleteApiRequest('/posts', id)
+    return res.data
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+export const getAllGroupsPage = async () => {
+  try {
+    let res = await getApiRequest('/groups')
+    return res.data
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+
+export const getAllMeetupsPage = async () => {
+  try {
+    let res = await getApiRequest('/meetups')
+    return res.data
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+export const getGroupMeetups = async(id) => {
+  try {
+    let res = await getApiRequest('/meetups/groups', id)
     return res.data
   } catch (e) {
     console.log(e)

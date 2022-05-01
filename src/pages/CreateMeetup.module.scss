@@ -30,6 +30,10 @@
     margin-top: 25px;
     background-color: whitesmoke;
     border-radius: 5px;
+
+    @media (max-width: 480px) {
+        width: 100%;
+    }
 }
 
 .leftSection {
@@ -37,6 +41,10 @@
     height: 100%;
     margin: 0 auto;
     margin-top: 25px;
+
+    @media (max-width: 480px) {
+        display: none;
+    }
 }
 
 .create {
@@ -49,4 +57,18 @@
     padding: 25px;
     padding-left: 35px;
     padding-right: 35px;
+
+    @media (max-width: 480px) {
+        padding: 10px;
+    }
+}
+
+.smallScreen {
+    display: none;
+
+    @media (max-width: 480px) {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+    }
 }

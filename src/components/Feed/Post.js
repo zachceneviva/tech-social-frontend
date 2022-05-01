@@ -39,9 +39,9 @@ export default function Post(props) {
     const handleDeletePost = async () => {
         try {
             if (user._id !== props.post.user._id) return
-            await deletePost(props.post._id)
             props.callBack()
             setShowMenu(false)
+            await deletePost(props.post._id)
         } catch (e) {
             console.log(e)
         }
@@ -112,7 +112,7 @@ export default function Post(props) {
                 user: user
                 }
             )
-            setAllComments([res.data.comment, ...allComments])
+            setAllComments([res, ...allComments])
             setCommentText("");
             setCommentDisplay("initial");
             setBusy(true)

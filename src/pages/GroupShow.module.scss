@@ -15,6 +15,10 @@
     margin: 0 auto;
     height: 475px;
     display: flex;
+
+    @media (max-width: 480px) {
+        height: 325px;
+    }
 }
 
 
@@ -36,16 +40,38 @@
     height: 100%;
     margin: 0 auto;
     overflow-y: scroll;
+
+    @media (max-width: 480px) {
+        width: 100%;
+    }
 }
 
 .leftSection {
     width: 22.5%;
     height: 100%;
     margin: 0 auto;
+
+    @media (max-width: 480px) {
+        display: none;
+    }
 }
 
 .rightSection {
     width: 22.5%;
     height: 100%;
     margin: 0 auto;
+
+    @media (max-width: 480px) {
+        display: none;
+    }
+}
+
+.smallScreen {
+    display: none;
+
+    @media (max-width: 480px) {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+    }
 }

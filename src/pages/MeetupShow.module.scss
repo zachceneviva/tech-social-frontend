@@ -36,16 +36,42 @@
     height: 100%;
     margin: 0 auto;
     overflow-y: scroll;
+
+    @media (max-width: 480px) {
+        width: 100%;
+    }
 }
 
 .leftSection {
     width: 22.5%;
     height: 100%;
     margin: 0 auto;
+
+    @media (max-width: 480px) {
+        display: none;
+    }
 }
 
 .rightSection {
     width: 22.5%;
     height: 100%;
     margin: 0 auto;
+
+    @media (max-width: 480px) {
+        display: none;
+    }
+}
+
+.smallScreenContainer {
+    display: none;
+
+    @media (max-width: 480px) {
+        display: flex;
+        flex-direction: row;
+        background-color: whitesmoke;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
 }

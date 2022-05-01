@@ -9,7 +9,7 @@ import { userState } from "../recoil/atom";
 import { useRecoilState } from "recoil";
 import MeetupBanner from "../components/Feed/MeetupBanner";
 import About from "../components/GroupShow/About";
-import { createNewPost, getGroup } from "../lib/ApiCalls";
+import { createNewPost, getGroup, getGroupMeetups } from "../lib/ApiCalls";
 
 export default function GroupShow() {
     const [foundGroup, setFoundGroup] = useState(null);
@@ -33,7 +33,6 @@ export default function GroupShow() {
     
     useEffect(() => {
         fetchGroup()
-        setBusy(false);
     }, [isBusy]);
 
     useEffect(() => {
@@ -45,6 +44,7 @@ export default function GroupShow() {
             let res = await getGroup(params.id)
             setFoundGroup(res.group)
             setAllPosts(res.posts)
+            setBusy(false);
         } catch(e) {
             console.log(e)
         }
@@ -52,7 +52,7 @@ export default function GroupShow() {
 
     const fetchGroupMeetups = async () => {
         try {
-            let res = await getGroup(params.id)
+            let res = await getGroupMeetups(params.id)
             setMeetups(res.meetups)
         } catch (e) {
             console.log(e)
@@ -136,8 +136,18 @@ export default function GroupShow() {
                     {!meetups ? null : <MeetupBanner meetups={meetups} title="Group Meetups" />}
                 </div>
                 <div className={styles.mainSection}>
-                    {!isBusy ? (
-                        foundGroup.members.includes(user._id) ? (
+                    <div className={styles.smallScreen}>
+                        {isBusy && !foundGroup ? null : (
+                            <About
+                                callBack={callBack}
+                                group={foundGroup}
+                                buttonJoin="Join"
+                                buttonLeave="Leave"
+                            />
+                        )}
+                    </div>
+                    {!isBusy && foundGroup ? (
+                        foundGroup?.members?.includes(user._id) ? (
                             <CreatePost
                                 handlePost={handlePost}
                                 text={postContent}

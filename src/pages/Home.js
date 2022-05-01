@@ -138,6 +138,9 @@ export default function Home () {
                     {foundUser === null ? null : <PeopleBanner user={foundUser}/> }
                 </div>
                 <div className={styles.mainSection}>
+                    <div className={styles.smallScreen}>
+                        <BannerProfileCard />
+                    </div>
                     <CreatePost handlePost={handlePost} text={postContent} handleChange={handleChange} postImage={postImage} postGh={postGh} postLink={postLink} handleImageChange={handleImageChange} handleGhChange={handleGhChange} handleLinkChange={handleLinkChange} showGhUrl={showGhUrl} showImageUrl={showImageUrl} showLinkUrl={showLinkUrl} imageUrl={imageUrl} ghUrl={ghUrl} linkUrl={linkUrl}/>
                     {isBusy && !allPosts ? "Loading..." : post}
                     <div style={{width: "100%", height: "100px"}}/>

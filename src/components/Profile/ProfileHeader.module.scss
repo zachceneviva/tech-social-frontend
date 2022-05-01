@@ -11,6 +11,11 @@
     margin-top: 25px;
     border-radius: 5px;
     color: $primary-dark-text-color;
+
+    @media (max-width: 480px) {
+        min-height: 200px;
+        padding: 0;
+    }
 }  
 
 .bannerImage {
@@ -23,6 +28,14 @@
         height: 300px;
         border-radius: 5px;
         object-fit: cover;
+    }
+
+    @media (max-width: 480px) {
+        height: 150px;
+
+        img {
+            height: 150px;
+        }
     }
 }
 
@@ -46,6 +59,25 @@
         object-fit: cover;
         border-radius: 50%;
         border: 1px solid whitesmoke;
+    }
+
+    @media (max-width: 480px) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        margin: 0 auto;
+        margin-top: -80px;
+        width: 100%;
+        padding: 15px;
+        padding-bottom: 0;
+        min-height: 150px;
+
+        img {
+            height: 125px;
+            width: 125px;
+            margin: 0 auto;
+        }
     }
 }
 
@@ -87,10 +119,42 @@
         margin-bottom: 0px;
         color: $primary-dark-text-color;
     }
+
+    @media (max-width: 480px) {
+        margin: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        text-align: center;
+        align-items: center;
+
+        h2 {
+            font-size: 22px;
+        }
+    
+        h5 {
+            font-size: 12.5px;
+        }
+    
+        h6 {
+            font-size: 15px;
+        }
+    
+        span {
+            color: $primary-color;
+        }
+    
+        p {
+            font-size: 12px;
+        }
+    }
 }
 
 .buttons {
     padding-top: 15px;
+    
 }
 
 .message, .connect {
@@ -109,6 +173,10 @@
         &:hover {
             color: $off-white;
             background-color: $primary-shadow;
+        }
+    
+        @media (max-width: 480px) {
+            padding-bottom: 5px;
         }
 }
 

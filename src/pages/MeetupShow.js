@@ -47,9 +47,20 @@ export default function MeetupShow () {
             </div>
             <div className={styles.mainContentContainer}>
                 <div className={styles.leftSection}>
-                    {foundMeetup === null ? "Loading..." : <Organizer meetup={foundMeetup} />}
+                    {foundMeetup === null ? "Loading..." : 
+                        <Organizer meetup={foundMeetup} />
+                    }
                 </div>
                 <div className={styles.mainSection}>
+                {foundMeetup === null ? "Loading..." : 
+                    <div className={styles.smallScreenContainer}>
+                        <Organizer meetup={foundMeetup} />
+                        <MeetupDetails
+                            callBack={callBack}
+                            meetup={foundMeetup}
+                        />
+                    </div>
+                    }
                     {foundMeetup === null  ? "Loading..." : <MeetupDescription meetup={foundMeetup} />}
                 </div>
                 <div className={styles.rightSection}>

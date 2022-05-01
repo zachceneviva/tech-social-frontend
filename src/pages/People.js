@@ -37,6 +37,9 @@ export default function People (props) {
                     <BannerProfileCard location="/people"/>
                 </div>
                 <div className={styles.mainSection}>
+                    <div className={styles.smallScreen} >
+                        <BannerProfileCard/>
+                    </div>
                     <div className={styles.allPeople}>
                         {!allPeople ? "Loading" : people}
                     </div>

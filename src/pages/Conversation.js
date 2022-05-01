@@ -112,8 +112,8 @@ export default function Conversation() {
 
     const messages = allMessage.map((message, idx) => {
         return (
-            <li className={styles.messageListItem} ref={scrollRef}>
-                <ConversationMessage message={message} own={message.sender._id === user._id} key={idx} />
+            <li className={styles.messageListItem} ref={scrollRef}  key={idx}>
+                <ConversationMessage message={message} own={message.sender._id === user._id} />
             </li>
         )
     })

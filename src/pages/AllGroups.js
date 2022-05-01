@@ -3,7 +3,7 @@ import styles from "./AllGroups.module.scss"
 import BannerProfileCard from "../components/Feed/BannerProfileCard"
 import Groups from "../components/AllGroups/Groups"
 import axios from "axios"
-import {getAllGroups} from '../lib/ApiCalls'
+import {getAllGroupsPage} from '../lib/ApiCalls'
 
 export default function AllGroups () {
     const [allGroups, setAllGroups] = useState([])
@@ -21,7 +21,7 @@ export default function AllGroups () {
     
     const fetchAllGroups = async() => {
         try {
-            let res = await getAllGroups()
+            let res = await getAllGroupsPage()
             setAllGroups(res.groups)
         } catch(e) {
             console.log(e)
@@ -39,6 +39,9 @@ export default function AllGroups () {
                     <BannerProfileCard/>
                 </div>
                 <div className={styles.mainSection}>
+                    <div className={styles.smallScreen} >
+                        <BannerProfileCard/>
+                    </div>
                     <div className={styles.allGroups}>
                         {!allGroups && busy ? "Loading..." : group}
                     </div>

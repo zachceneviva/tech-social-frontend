@@ -103,6 +103,9 @@ export default function CreateMeetup () {
                     <BannerProfileCard location="/meetups/create"/>
                 </div>
                 <div className={styles.mainSection}>
+                <div className={styles.smallScreen}>
+                        <BannerProfileCard />
+                    </div>
                     <div className={styles.create}>
                         {isBusy && !allGroups ? "Loading..." : <Create group={group} handleGroup={handleGroup} zip={zip} handleZip={handleZip} state={state} handleState={handleState} city={city} handleCity={handleCity} date={date} handleDate={handleDate}  groups={allGroups} type="meetup" meetupName={meetupName} description={description} photo={photo} address={address} handleName={handleName} handleDescription={handleDescription} handlePhoto={handlePhoto} handleAddress={handleAddress} handleSubmit={handleMeetupCreate}/>}
                     </div>

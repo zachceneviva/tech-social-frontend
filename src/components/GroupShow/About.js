@@ -1,7 +1,7 @@
 import styles from "./About.module.scss"
 import {Button} from "react-bootstrap"
 import { userState } from "../../recoil/atom"
-import { useRecoilValue } from "recoil"
+import { useRecoilState } from "recoil"
 import axios from "axios"
 import { useParams } from "react-router"
 import { useState } from "react"
@@ -9,10 +9,10 @@ import { updateGroup } from "../../lib/ApiCalls"
 
 
 export default function About (props) {
-    const user = useRecoilValue(userState)[0]
+    const user = useRecoilState(userState)[0]
     const [member, setMembers] = useState(0)
     const params = useParams(),
-        [joined, setJoined] = useState(props.group.members?.includes(user._id))
+        [joined, setJoined] = useState(props.group.members?.includes(user?._id))
 
     const handleJoin = async (e) => {
         try {
