@@ -11,18 +11,20 @@ import { updateGroup } from "../../lib/ApiCalls"
 export default function About (props) {
     const user = useRecoilValue(userState)[0]
     const [member, setMembers] = useState(0)
-    const params = useParams()
+    const params = useParams(),
+        [joined, setJoined] = useState(props.group.members?.includes(user._id))
 
     const handleJoin = async (e) => {
         try {
             e.preventDefault()
+            setMembers(member + 1)
+            setJoined(true)
             let newMember = props.group.members
             newMember.push(user._id)
             const newGroup = await updateGroup(params.id, {
                 members: newMember
             })
             props.callBack()
-            setMembers(member + 1)
         } catch (e) {
             console.log(e)
         }
@@ -31,6 +33,8 @@ export default function About (props) {
     const handleLeave = async (e) => {
         try {
             e.preventDefault()
+            setMembers(member - 1)
+            setJoined(false)
             let index = props.group.members.indexOf(user._id)
             let newMember = props.group.members
             newMember.splice(index,1)
@@ -38,7 +42,6 @@ export default function About (props) {
                 members: newMember
             })
             props.callBack()
-            setMembers(member - 1)
         } catch (e) {
             console.log(e)
         }
@@ -55,7 +58,7 @@ export default function About (props) {
                 <h6>{props.group.description}</h6>
                 <p>{props.group.members.length} members</p>
             </div>
-            {props.group.members.includes(user._id) ? <Button onClick={handleLeave} style={{backgroundColor: "#4da8da"}}>{props.buttonLeave}</Button> : <Button onClick={handleJoin}>{props.buttonJoin}</Button>}
+            {joined ? <Button onClick={handleLeave} style={{backgroundColor: "#4da8da"}}>{props.buttonLeave}</Button> : <Button onClick={handleJoin}>{props.buttonJoin}</Button>}
         </div>
 
     )
