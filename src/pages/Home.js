@@ -78,7 +78,7 @@ export default function Home () {
                 user: user?._id
             }
             for (const [key, value] of Object.entries(payload)) {
-                formdata.append(key, value)
+                formdata.append(`${key}`, value)
             }
             let res = await createNewPost(formdata)
             setAllPosts([res.post, ...allPosts])
@@ -86,7 +86,7 @@ export default function Home () {
             setPostImage('')
             setPostGh('')
             setPostLink('')
-            setImageUrl(null)
+            setImageUrl('none')
             setGhUrl('none')
             setLinkUrl('none')
             setBusy(true)

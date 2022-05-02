@@ -122,7 +122,6 @@ export default function Post(props) {
         
     };
 
-
     const comment = allComments.map((comment, idx) => {
         return <Comment comment={comment} key={idx} />;
     });
@@ -170,9 +169,9 @@ export default function Post(props) {
                 ) : null}
             </div>
 
-            {props.post.image !== "https://" ? (
+            {props.post.image ? (
                 <div className={styles.postImage}>
-                    <img src={props.post.image} alt="post" />
+                    <img src={props.post?.image} alt="post" />
                 </div>
             ) : null} 
 

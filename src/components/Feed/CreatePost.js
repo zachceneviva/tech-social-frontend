@@ -52,6 +52,7 @@ export default function CreatePost(props) {
                             onChange={props.handleImageChange}
                             type="file"
                             accept='.jpg, .jpeg, .svg, .png'
+                            key={props.postImage || ''}
                         />
                     </InputGroup>
                 </div>
