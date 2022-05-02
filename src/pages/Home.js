@@ -69,19 +69,24 @@ export default function Home () {
     const handlePost = async (e) => {
         try {
             e.preventDefault()
-            let res = await createNewPost({
+            let formdata = new FormData()
+            let payload = {
                 content: postContent, 
-                image: `https://${postImage}`, 
+                image: postImage, 
                 github: `https://github.com/${postGh}`, 
                 link: `https://${postLink}`, 
-                user: user
-            })
+                user: user?._id
+            }
+            for (const [key, value] of Object.entries(payload)) {
+                formdata.append(key, value)
+            }
+            let res = await createNewPost(formdata)
             setAllPosts([res.post, ...allPosts])
             setPostContent('')
             setPostImage('')
             setPostGh('')
             setPostLink('')
-            setImageUrl('none')
+            setImageUrl(null)
             setGhUrl('none')
             setLinkUrl('none')
             setBusy(true)
@@ -95,7 +100,7 @@ export default function Home () {
     }
 
     const handleImageChange = (e) => {
-        setPostImage(e.target.value)
+        setPostImage(e.target.files[0])
     }
 
     const handleGhChange = (e) => {

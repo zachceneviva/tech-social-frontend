@@ -45,15 +45,13 @@ export default function CreatePost(props) {
                 <div className={styles.additonalInput} style={{display: props.imageUrl}}>
                     <h4>Image</h4>
                     <InputGroup className="mb-3">
-                        <InputGroup.Text id="basic-addon3">
-                            https://
-                        </InputGroup.Text>
                         <Form.Control
                             id="image"
+                            name="image"
                             aria-describedby="basic-addon3"
                             onChange={props.handleImageChange}
-                            value={props.postImage}
-                            autoComplete="off"
+                            type="file"
+                            accept='.jpg, .jpeg, .svg, .png'
                         />
                     </InputGroup>
                 </div>
