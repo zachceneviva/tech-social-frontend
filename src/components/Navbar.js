@@ -16,17 +16,17 @@ export default function Navigation() {
     const navigate = useNavigate()
     const [close, setClosed] = useState(false)
 
-    useEffect(() => {
-        if(localStorage.getItem("uid")) {
-            axios.get("https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/users/profile", {
-            headers: {authorization: `Bearer ${localStorage.uid}`},
-        })
-        .then(res => res.data)
-        .then((res) => {
-            setUser(res.user)
-            })
-        }
-    },[])
+    // useEffect(() => {
+    //     if(localStorage.getItem("uid")) {
+    //         axios.get("https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/users/profile", {
+    //         headers: {authorization: `Bearer ${localStorage.uid}`},
+    //     })
+    //     .then(res => res.data)
+    //     .then((res) => {
+    //         setUser(res.user)
+    //         })
+    //     }
+    // },[])
 
     const logout = () => {
         setUser(null);
@@ -43,19 +43,18 @@ export default function Navigation() {
             {loggedIn ?
                     <Nav className={styles.navLinks}>
                         <Navbar.Text><Link onClick={() => setClosed(false)} to="/home">Home</Link></Navbar.Text>
-                        <Navbar.Text><Link onClick={() => setClosed(false)} to="#">Explore</Link></Navbar.Text>
                         <Navbar.Text><Link onClick={() => setClosed(false)} to="/groups">Groups</Link></Navbar.Text>
                         <Navbar.Text><Link onClick={() => setClosed(false)} to="/meetups">Meetups</Link></Navbar.Text>
                         <Navbar.Text><Link onClick={() => setClosed(false)} to="/messages">Messages</Link></Navbar.Text>
-                        <img className={styles.navUserImage} src={user.avatar} alt="user" />
+                        <img className={styles.navUserImage} src={user?.avatar} alt="user" />
                         <NavDropdown
-                            title={`${user.firstName} ${user.lastName}`}
+                            title={`${user?.firstName} ${user?.lastName}`}
                             id="collasible-nav-dropdown"
                         >
-                            <NavDropdown.Item href={`/profile/${user._id}`}>
+                            <NavDropdown.Item href={`/profile/${user?._id}`}>
                                 My Profile
                             </NavDropdown.Item>
-                            <NavDropdown.Item href={`/profile/${user._id}/edit`}>
+                            <NavDropdown.Item href={`/profile/${user?._id}/edit`}>
                                 Edit Profile
                             </NavDropdown.Item>
                             <NavDropdown.Divider />

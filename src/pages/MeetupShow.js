@@ -6,6 +6,7 @@ import MeetupHeader from "../components/MeetupShow/MeetupHeader";
 import MeetupDetails from "../components/MeetupShow/MeetupDetails";
 import Organizer from "../components/MeetupShow/Organizer";
 import MeetupDescription from "../components/MeetupShow/MeetupDescription";
+import {getMeetup} from '../lib/ApiCalls'
 
 
 export default function MeetupShow () {
@@ -18,10 +19,18 @@ export default function MeetupShow () {
     }, [])
     
     useEffect(() => {
-        console.log("Fetching...")
-        axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/meetups/${params.id}`).then(res => setFoundMeetup(res.data.meetup))
+        fetchMeetup()
         setBusy(false)
     }, [isBusy])
+
+    const fetchMeetup = async () => {
+        try {
+            let meetup = await getMeetup(params.id)
+            setFoundMeetup(meetup)
+        } catch (e) {
+            console.log(e)
+        }
+    }
 
     const callBack = () => {
         setBusy(true)
@@ -38,9 +47,20 @@ export default function MeetupShow () {
             </div>
             <div className={styles.mainContentContainer}>
                 <div className={styles.leftSection}>
-                    {foundMeetup === null ? "Loading..." : <Organizer meetup={foundMeetup} />}
+                    {foundMeetup === null ? "Loading..." : 
+                        <Organizer meetup={foundMeetup} />
+                    }
                 </div>
                 <div className={styles.mainSection}>
+                {foundMeetup === null ? "Loading..." : 
+                    <div className={styles.smallScreenContainer}>
+                        <Organizer meetup={foundMeetup} />
+                        <MeetupDetails
+                            callBack={callBack}
+                            meetup={foundMeetup}
+                        />
+                    </div>
+                    }
                     {foundMeetup === null  ? "Loading..." : <MeetupDescription meetup={foundMeetup} />}
                 </div>
                 <div className={styles.rightSection}>

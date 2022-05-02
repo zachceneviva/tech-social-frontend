@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styles from "./Signup.module.scss";
-import axios from "axios";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import {useNavigate} from "react-router-dom"
+import { registerNewUser } from "../lib/ApiCalls";
+import Spinner from "../components/Spinner";
 
 export default function Signin(props) {
     const [fName, setFName] = useState('')
@@ -13,32 +14,48 @@ export default function Signin(props) {
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
     const [avatar, setAvatar] = useState('')
-    const [coverPhoto, setCoverPhoto] = useState('')
+    const [cover, setCoverPhoto] = useState('')
     const [role, setRole] = useState('')
     const [company, setCompany] = useState('')
     const [github, setGithub] = useState('')
     const [portfolio, setPortfolio] = useState('')
-    const navigate = useNavigate();
+    const navigate = useNavigate(),
+            [loading, setLoading] = useState(false);
 
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        axios.post("https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/users/register", 
-        {
-            password: password,
-            avatar: avatar,
-            coverPhoto: coverPhoto,
-            firstName: fName,
-            lastName: lName,
-            email: email,
-            city: city,
-            state: state,
-            role: role,
-            company: company,
-            github: github,
-            portfolio: portfolio,
-        }).then(res => res);
-        navigate('/')
+    const handleSubmit = async (e) => {
+        try {
+            e.preventDefault()
+            setLoading(true)
+            const payload = {
+                password: password,
+                avatar: avatar,
+                coverPhoto: cover,
+                firstName: fName,
+                lastName: lName,
+                email: email,
+                city: city,
+                state: state,
+                role: role,
+                company: company,
+                github: github,
+                portfolio: portfolio,
+            }
+            let formdata = new FormData()
+            for (const [key, value] of Object.entries(payload)) {
+                formdata.append(`${key}`, value)
+            }
+            let res = await registerNewUser(formdata)
+            if (res.status !== 201) {
+                setLoading(false)
+                return alert(res.message)
+            }
+            setLoading(false)
+            navigate('/')
+        } catch (e) {
+            console.log(e)
+            setLoading(false)
+        }
     }
 
     const handleFName = (e) => {
@@ -64,11 +81,11 @@ export default function Signin(props) {
     }
 
     const handleAvatar = (e) => {
-        setAvatar(e.target.value)
+        setAvatar(e.target.files[0])
     }
 
     const handleCoverPhoto = (e) => {
-        setCoverPhoto(e.target.value)
+        setCoverPhoto(e.target.files[0])
     }
 
     const handleRole= (e) => {
@@ -87,7 +104,6 @@ export default function Signin(props) {
         setPortfolio(e.target.value)
     }
 
-
     return (
         <div className={styles.mainAuthBody}>
             <div className={styles.authHeader}>
@@ -100,6 +116,7 @@ export default function Signin(props) {
                         <Form.Group as={Col} controlId="formGridFName">
                             <Form.Label>First Name *</Form.Label>
                             <Form.Control
+                                type="text"
                                 onChange={handleFName}
                                 name="firstName"
                                 placeholder="e.g. John"
@@ -111,6 +128,7 @@ export default function Signin(props) {
                         <Form.Group as={Col} controlId="formGridLName">
                             <Form.Label>Last Name *</Form.Label>
                             <Form.Control
+                            type="text"
                             onChange={handleLName}
                                 name="lastName"
                                 placeholder="e.g. Smith"
@@ -154,7 +172,7 @@ export default function Signin(props) {
                                 type="password"
                                 placeholder="Password"
                                 autoComplete="off"
-                                valeu={confirmPassword}
+                                value={confirmPassword}
                             />
                         </Form.Group>
 
@@ -163,23 +181,24 @@ export default function Signin(props) {
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formGridCity">
                             <Form.Label>City *</Form.Label>
-                            <Form.Control autoComplete="off" name="city" value={city} onChange={handleCity} placeholder="e.g. New York City"/>
+                            <Form.Control autoComplete="off" name="city" value={city} onChange={handleCity} placeholder="e.g. New York City" type="text"/>
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formGridState">
                             <Form.Label>State *</Form.Label>
-                            <Form.Control autoComplete="off" name="state" value={state} onChange={handleState} placeholder="e.g. NY"/>
+                            <Form.Control autoComplete="off" name="state" value={state} onChange={handleState} placeholder="e.g. NY" type="text"/>
                         </Form.Group>
                     </Row>
 
                     <Form.Group className="mb-3" controlId="formGridRole">
                         <Form.Label>Role *</Form.Label>
                         <Form.Control
-                        onChange={handleRole}
+                            onChange={handleRole}
                             placeholder="e.g. Software Engineer"
                             name="role"
                             autoComplete="off"
                             value={role}
+                            type="text"
                         />
                     </Form.Group>
 
@@ -191,37 +210,38 @@ export default function Signin(props) {
                             name="company"
                             autoComplete="off"
                             value={company}
+                            type="text"
                         />
                     </Form.Group>
 
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formGridAvatar">
                             <Form.Label>Avatar</Form.Label>
-                            <Form.Control autoComplete="off" name="avatar" value={avatar} onChange={handleAvatar} placeholder="https://"/>
+                            <Form.Control type="file" name="avatar" accept=".png, .jpg, .jpeg" onChange={handleAvatar}/>
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formGridCoverPhoto">
                             <Form.Label>Cover Photo</Form.Label>
-                            <Form.Control autoComplete="off" name="coverPhoto" value={coverPhoto} onChange={handleCoverPhoto} placeholder="https://"/>
+                            <Form.Control type="file" name="coverPhoto" accept=".png, .jpg, .jpeg" onChange={handleCoverPhoto} />
                         </Form.Group>
                     </Row>
 
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formGridGh">
                             <Form.Label>Github</Form.Label>
-                            <Form.Control autoComplete="off" name="gh" value={github} onChange={handleGithub} placeholder="https://github.com/john-smith"/>
+                            <Form.Control autoComplete="off" type="text" name="gh" value={github} onChange={handleGithub} placeholder="https://github.com/john-smith"/>
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formGridPort">
                             <Form.Label>Portfolio</Form.Label>
-                            <Form.Control autoComplete="off" name="portfolio" value={portfolio} onChange={handlePortfolio} placeholder="https://johnsmith.com"/>
+                            <Form.Control autoComplete="off" name="portfolio" type="text" value={portfolio} onChange={handlePortfolio} placeholder="https://johnsmith.com"/>
                         </Form.Group>
                     </Row>
 
                     
 
                     <Button className={styles.submitBtn}  type="submit">
-                        Submit
+                        {loading ? <Spinner /> : 'Submit'}
                     </Button>
                 </Form>
             </div>

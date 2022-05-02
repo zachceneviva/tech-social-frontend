@@ -35,6 +35,11 @@
         color: $primary-accent-text-color;
         margin-top: 0px;
     }
+
+    @media (max-width: 480px) {
+        width: 100%;
+        margin-left: 2.5px;
+    }
 }
 
 .attendBtn {

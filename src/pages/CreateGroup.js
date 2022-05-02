@@ -4,8 +4,8 @@ import BannerProfileCard from "../components/Feed/BannerProfileCard";
 import Create from "../components/Create/Create";
 import { userState } from "../recoil/atom";
 import { useRecoilState } from "recoil";
-import axios from "axios";
 import { useNavigate } from "react-router";
+import { createGroup } from "../lib/ApiCalls";
 
 
 export default function CreateGroup () {
@@ -26,24 +26,33 @@ export default function CreateGroup () {
     }
 
     const handlePhoto = (e) => {
-        setPhoto(e.target.value)
+        setPhoto(e.target.files[0])
     }
 
     const handleCoverPhoto = (e) => {
-        setCoverPhoto(e.target.value)
+        setCoverPhoto(e.target.files[0])
     }
 
 
-    const handleGroupCreate = (e) => {
-        e.preventDefault()
-        axios.post('https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/groups', {
-            name: groupName,
-            description: description,
-            photo: photo,
-            coverPhoto: coverPhoto,
-            creator: user._id,
-        }).then(res => console.log(res))
-        navigate('/groups')
+    const handleGroupCreate = async (e) => {
+        try {
+            e.preventDefault()
+            let payload = {
+                name: groupName,
+                description: description,
+                photo: photo,
+                coverPhoto: coverPhoto,
+                creator: user._id,
+            }
+            let formdata = new FormData()
+            for (const [key, value] of Object.entries(payload)) {
+                formdata.append(key, value)
+            }
+            await createGroup(formdata)
+            navigate('/groups')
+        } catch(e) {
+            console.log(e)
+        }
     }
 
     return(
@@ -53,6 +62,9 @@ export default function CreateGroup () {
                     <BannerProfileCard location="/group/create"/>
                 </div>
                 <div className={styles.mainSection}>
+                <div className={styles.smallScreen}>
+                        <BannerProfileCard />
+                    </div>
                     <div className={styles.create}>
                         <Create type="group" groupName={groupName} description={description} photo={photo} coverPhoto={coverPhoto} handleName={handleName} handleDescription={handleDescription} handlePhoto={handlePhoto} handleCoverPhoto={handleCoverPhoto} handleSubmit={handleGroupCreate}/>
                     </div>

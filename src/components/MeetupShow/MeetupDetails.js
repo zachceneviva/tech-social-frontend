@@ -6,36 +6,51 @@ import { userState } from "../../recoil/atom"
 import { useRecoilState } from "recoil"
 import axios from "axios"
 import { useParams } from "react-router"
+import { updateMeetup } from "../../lib/ApiCalls"
 
 
 export default function MeetupDetails (props) {
     const user = useRecoilState(userState)[0]
     const [member, setMembers] = useState(0)
-    const params = useParams()
+    const params = useParams(),
+        [attending, setAttending] = useState(props.meetup.usersAttending?.includes(user._id))
 
-    const handleJoin = (e) => {
-        e.preventDefault()
-        let newAttend = props.meetup.usersAttending
-        newAttend.push(user._id)
-        axios.put(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/meetups/${params.id}`, {usersAttending: newAttend}).then(res => console.log(res))
-        props.callBack()
-        setMembers(member + 1)
+    const handleJoin = async (e) => {
+        try {
+            e.preventDefault()
+            let newAttend = props.meetup.usersAttending
+            newAttend.push(user._id)
+            setMembers(member + 1)
+            setAttending(true)
+            const newMeetup = await updateMeetup(params.id, {
+                usersAttending: newAttend
+            })
+            props.callBack()
+        } catch (e) {
+            console.log(e)
+        }
     }
     
-    const handleLeave = (e) => {
-        e.preventDefault()
-        let index = props.meetup.usersAttending.indexOf(user._id)
-        let newAttend = props.meetup.usersAttending
-        newAttend.splice(index,1)
-        console.log(newAttend)
-        axios.put(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/meetups/${params.id}`, {usersAttending: newAttend}).then(res => console.log(res))
-        props.callBack()
-        setMembers(member - 1)
+    const handleLeave = async (e) => {
+        try {
+            e.preventDefault()
+            let index = props.meetup.usersAttending.indexOf(user._id)
+            let newAttend = props.meetup.usersAttending
+            newAttend.splice(index,1)
+            setMembers(member - 1)
+            setAttending(false)
+            const newMeetup = await updateMeetup(params.id, {
+                usersAttending: newAttend
+            })
+            props.callBack()
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     return (
         <div className={styles.details}>
-            {props.meetup.usersAttending.includes(user._id) ?
+            {attending ?
             <Button className={styles.attendBtn} onClick={handleLeave} style={{backgroundColor: "#4da8da"}}>Can't Attend</Button> :
             <Button className={styles.attendBtn} onClick={handleJoin}>Attend</Button>
         }

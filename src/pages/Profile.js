@@ -9,6 +9,7 @@ import MeetupBanner from "../components/Feed/MeetupBanner";
 import { useParams } from "react-router";
 import { userState } from "../recoil/atom";
 import { useRecoilState } from "recoil";
+import { getUserConnections, getUserGroups, getUserMeetups, getUser, getUserPosts } from "../lib/ApiCalls";
 
 export default function Profile () {
     const [allPosts, setAllPosts] = useState([])
@@ -32,14 +33,23 @@ export default function Profile () {
     },[busy, params.id])
 
     const fetchData = async () => {
-        await axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/posts/${params.id}`).then((res) => setAllPosts(res.data.posts));
-        await axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/users/${params.id}`, {
-            headers: {authorization: `Bearer ${localStorage.uid}`},
-        }).then((res) => res.data).then(res => setFoundUser(res.user))
-        await axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/groups/profile/${params.id}`).then((res) => setGroups(res.data.groups));
-        await axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/meetups/profile/${params.id}`).then((res) => setMeetups(res.data.meetups));
-        await axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/users/profile/connections`, {headers: {authorization: `Bearer ${localStorage.uid}`}})
-        .then(res => setConnectUser(res.data.user))
+        try {
+            let [posts, foundUser, userGroups, userMeetups, connections] = await Promise.all([
+                getUserPosts(params.id),
+                getUser(params.id),
+                getUserGroups(params.id),
+                getUserMeetups(params.id),
+                getUserConnections()
+            ])
+
+            setAllPosts(posts)
+            setFoundUser(foundUser)
+            setGroups(userGroups)
+            setMeetups(userMeetups)
+            setConnectUser(connections)
+        } catch (e) {
+            console.log(e)
+        }
     }
     
     const callBack = () => {

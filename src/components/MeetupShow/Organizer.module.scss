@@ -34,6 +34,11 @@
         text-decoration: none;
         color: $primary-dark-text-color;
     }
+
+    @media (max-width: 480px) {
+        width: 100%;
+        margin-right: 2.5px;
+    }
 }
 
 .messageBtn {

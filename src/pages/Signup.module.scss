@@ -10,6 +10,11 @@
     border-radius: 5px;
     color: $primary-dark-text-color;
     margin-bottom: 50px;
+
+    @media (max-width: 480px) {
+        width: 95%;
+
+    }
 }
 
 .authHeader {

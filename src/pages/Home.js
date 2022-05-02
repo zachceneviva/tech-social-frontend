@@ -9,6 +9,7 @@ import axios from "axios"
 import MeetupBanner from "../components/Feed/MeetupBanner"
 import { userState } from "../recoil/atom"
 import { useRecoilState } from "recoil";
+import { createNewPost, getAllGroups, getAllMeetups, getAllPosts, getUserConnections } from "../lib/ApiCalls"
 
 
 export default function Home () {
@@ -31,35 +32,67 @@ export default function Home () {
     }, [])
 
     useEffect(() => {
-        fetchData()
+        fetchPosts()
         setBusy(false)
         console.log('this is fetching my data')
     },[isBusy])
 
-useEffect(() => {
-    axios.get('https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/groups/home').then((res) => setGroups(res.data.groups))
-    axios.get('https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/meetups/home').then((res) => setMeetups(res.data.meetups))
-    axios.get(`https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/users/profile/connections`, {headers: {authorization: `Bearer ${localStorage.uid}`}})
-        .then(res => setFoundUser(res.data.user))
-}, [])
+    useEffect(() => {
+        fetchData()
+    }, [])
 
+    const fetchData = async () => {
+        try {
+            let [groups, meetups, user] = await Promise.all([
+                getAllGroups(),
+                getAllMeetups(),
+                getUserConnections()
+            ])
 
-    const fetchData = () => {
-        axios.get('https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/posts').then((res) => setAllPosts(res.data.posts))
+            setGroups(groups.groups)
+            setMeetups(meetups.meetups)
+            setFoundUser(user)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const fetchPosts = async () => {
+        try {
+            let res = await getAllPosts()
+            setAllPosts(res.posts)
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     const handlePost = async (e) => {
-        e.preventDefault()
-        await axios.post('https://whispering-castle-56104.herokuapp.com/api/v1/techonnect/posts',
-        {content: postContent, image: `https://${postImage}`, github: `https://github.com/${postGh}`, link: `https://${postLink}`, user: user}).then( res => setAllPosts([res.data.post, ...allPosts]))
-        setPostContent('')
-        setPostImage('')
-        setPostGh('')
-        setPostLink('')
-        setImageUrl('none')
-        setGhUrl('none')
-        setLinkUrl('none')
-        setBusy(true)
+        try {
+            e.preventDefault()
+            let formdata = new FormData()
+            let payload = {
+                content: postContent, 
+                image: postImage, 
+                github: `https://github.com/${postGh}`, 
+                link: `https://${postLink}`, 
+                user: user?._id
+            }
+            for (const [key, value] of Object.entries(payload)) {
+                formdata.append(`${key}`, value)
+            }
+            let res = await createNewPost(formdata)
+            setAllPosts([res.post, ...allPosts])
+            setPostContent('')
+            setPostImage('')
+            setPostGh('')
+            setPostLink('')
+            setImageUrl('none')
+            setGhUrl('none')
+            setLinkUrl('none')
+            setBusy(true)
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     const handleChange = (e) => {
@@ -67,7 +100,7 @@ useEffect(() => {
     }
 
     const handleImageChange = (e) => {
-        setPostImage(e.target.value)
+        setPostImage(e.target.files[0])
     }
 
     const handleGhChange = (e) => {
@@ -110,6 +143,9 @@ useEffect(() => {
                     {foundUser === null ? null : <PeopleBanner user={foundUser}/> }
                 </div>
                 <div className={styles.mainSection}>
+                    <div className={styles.smallScreen}>
+                        <BannerProfileCard />
+                    </div>
                     <CreatePost handlePost={handlePost} text={postContent} handleChange={handleChange} postImage={postImage} postGh={postGh} postLink={postLink} handleImageChange={handleImageChange} handleGhChange={handleGhChange} handleLinkChange={handleLinkChange} showGhUrl={showGhUrl} showImageUrl={showImageUrl} showLinkUrl={showLinkUrl} imageUrl={imageUrl} ghUrl={ghUrl} linkUrl={linkUrl}/>
                     {isBusy && !allPosts ? "Loading..." : post}
                     <div style={{width: "100%", height: "100px"}}/>

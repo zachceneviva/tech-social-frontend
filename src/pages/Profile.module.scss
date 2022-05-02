@@ -15,6 +15,10 @@
     margin: 0 auto;
     height: 475px;
     display: flex;
+
+    @media (max-width: 480px) {
+        height: 400px;
+    }
 }
 
 
@@ -43,12 +47,20 @@
         font-style: italic;
         margin-top: 40px;
     }
+
+    @media (max-width: 480px) {
+        width: 100%;
+    }
 }
 
 .leftSection {
     width: 22.5%;
     height: 100%;
     margin: 0 auto;
+
+    @media (max-width: 480px) {
+        display: none;
+    }
 }
 
 .rightSection {
@@ -56,4 +68,8 @@
     height: 100%;
     margin: 0 auto;
     margin-top: 25px;
+
+    @media (max-width: 480px) {
+        display: none;
+    }
 }

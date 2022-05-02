@@ -6,6 +6,10 @@
     height: 100%;
     margin: 0 auto;
     margin-left: 3%;
+
+    @media (max-width: 480px) {
+        width: 80%;
+    }
 }
 
 .sendButton {
