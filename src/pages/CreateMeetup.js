@@ -6,22 +6,22 @@ import { userState } from "../recoil/atom";
 import { useRecoilState } from "recoil";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import { createMeetup, getAllGroups } from "../lib/ApiCalls";
+import { createMeetup, getAllGroupsPage } from "../lib/ApiCalls";
 
 
 export default function CreateMeetup () {
     const user = useRecoilState(userState)[0]
     const [meetupName, setMeetupName] = useState('')
     const [description, setDescription] = useState('')
-    const [photo, setPhoto] = useState(null)
-    const [address, setAddress] = useState(null)
+    const [photo, setPhoto] = useState('')
+    const [address, setAddress] = useState('')
     const [isBusy, setBusy] = useState(true)
     const [allGroups, setAllGroups] = useState([])
-    const [date, setDate] = useState(null)
-    const[city, setCity] = useState(null)
-    const[state, setState] = useState(null)
-    const[zip, setZip] = useState(null)
-    const [group, setGroup] = useState(null)
+    const [date, setDate] = useState('')
+    const[city, setCity] = useState('')
+    const[state, setState] = useState('')
+    const[zip, setZip] = useState('')
+    const [group, setGroup] = useState('')
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -31,7 +31,7 @@ export default function CreateMeetup () {
 
     const fetchAllGroups = async () => {
         try {
-            let res = await getAllGroups()
+            let res = await getAllGroupsPage()
             setAllGroups(res.groups)
         } catch (e) {
             console.log(e)
@@ -63,7 +63,7 @@ export default function CreateMeetup () {
     }
 
     const handlePhoto = (e) => {
-        setPhoto(e.target.value)
+        setPhoto(e.target.files[0])
     }
 
     const handleAddress = (e) => {
@@ -78,7 +78,7 @@ export default function CreateMeetup () {
     const handleMeetupCreate = async (e) => {
         try {
             e.preventDefault()
-            await createMeetup({
+            let payload = {
                 name: meetupName,
                 date: date,
                 description: description,
@@ -89,7 +89,12 @@ export default function CreateMeetup () {
                 city: city,
                 state: state,
                 creator: user._id,
-            })
+            }
+            let formdata = new FormData()
+            for (const [key, value] of Object.entries(payload)) {
+                formdata.append(key, value)
+            }
+            await createMeetup(formdata)
             navigate('/meetups')
         } catch (e) {
             console.log(e)

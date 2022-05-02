@@ -17,8 +17,8 @@ export default function ProfileUpdate () {
     const [email, setEmail] = useState(user.email)
     const [city, setCity] = useState(user.city)
     const [state, setState] = useState(user.state)
-    const [avatar, setAvatar] = useState(user.avatar)
-    const [coverPhoto, setCoverPhoto] = useState(user.coverPhoto)
+    const [avatar, setAvatar] = useState('')
+    const [coverPhoto, setCoverPhoto] = useState('')
     const [role, setRole] = useState(user.role)
     const [company, setCompany] = useState(user.company)
     const [github, setGithub] = useState(user.github)
@@ -34,21 +34,26 @@ export default function ProfileUpdate () {
     const handleSubmit = async (e) => {
         try {
             e.preventDefault()
+            let payload = {
+                avatar: avatar,
+                coverPhoto: coverPhoto,
+                firstName: fName,
+                lastName: lName,
+                email: email,
+                city: city,
+                state: state,
+                role: role,
+                company: company,
+                github: github,
+                portfolio: portfolio,
+            }
+            let formdata = new FormData()
+            for (const [key, value] of Object.entries(payload)) {
+                formdata.append(`${key}`, value)
+            }
             let updatedUser = await updateProfile(
                 params.id, 
-                {
-                    avatar: avatar,
-                    coverPhoto: coverPhoto,
-                    firstName: fName,
-                    lastName: lName,
-                    email: email,
-                    city: city,
-                    state: state,
-                    role: role,
-                    company: company,
-                    github: github,
-                    portfolio: portfolio,
-                }
+                formdata
             )
             setUser(updatedUser)
             navigate(`/profile/${params.id}`)
@@ -75,11 +80,11 @@ export default function ProfileUpdate () {
     }
 
     const handleAvatar = (e) => {
-        setAvatar(e.target.value)
+        setAvatar(e.target.files[0])
     }
 
     const handleCoverPhoto = (e) => {
-        setCoverPhoto(e.target.value)
+        setCoverPhoto(e.target.files[0])
     }
 
     const handleRole= (e) => {
@@ -182,12 +187,12 @@ export default function ProfileUpdate () {
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formGridAvatar">
                             <Form.Label>Avatar</Form.Label>
-                            <Form.Control autoComplete="off" name="avatar" value={avatar} onChange={handleAvatar} placeholder="https://"/>
+                            <Form.Control autoComplete="off" name="avatar"  accept='.jpg, .png, .jpeg' type="file" onChange={handleAvatar}/>
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formGridCoverPhoto">
                             <Form.Label>Cover Photo</Form.Label>
-                            <Form.Control autoComplete="off" name="coverPhoto" value={coverPhoto} onChange={handleCoverPhoto} placeholder="https://"/>
+                            <Form.Control autoComplete="off" name="coverPhoto" accept='.jpg, .png, .jpeg' onChange={handleCoverPhoto} type="file"/>
                         </Form.Group>
                     </Row>
 

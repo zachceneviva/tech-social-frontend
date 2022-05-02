@@ -43,7 +43,6 @@ export default function Navigation() {
             {loggedIn ?
                     <Nav className={styles.navLinks}>
                         <Navbar.Text><Link onClick={() => setClosed(false)} to="/home">Home</Link></Navbar.Text>
-                        <Navbar.Text><Link onClick={() => setClosed(false)} to="#">Explore</Link></Navbar.Text>
                         <Navbar.Text><Link onClick={() => setClosed(false)} to="/groups">Groups</Link></Navbar.Text>
                         <Navbar.Text><Link onClick={() => setClosed(false)} to="/meetups">Meetups</Link></Navbar.Text>
                         <Navbar.Text><Link onClick={() => setClosed(false)} to="/messages">Messages</Link></Navbar.Text>

@@ -26,24 +26,29 @@ export default function CreateGroup () {
     }
 
     const handlePhoto = (e) => {
-        setPhoto(e.target.value)
+        setPhoto(e.target.files[0])
     }
 
     const handleCoverPhoto = (e) => {
-        setCoverPhoto(e.target.value)
+        setCoverPhoto(e.target.files[0])
     }
 
 
     const handleGroupCreate = async (e) => {
         try {
             e.preventDefault()
-            await createGroup({
+            let payload = {
                 name: groupName,
                 description: description,
                 photo: photo,
                 coverPhoto: coverPhoto,
                 creator: user._id,
-            })
+            }
+            let formdata = new FormData()
+            for (const [key, value] of Object.entries(payload)) {
+                formdata.append(key, value)
+            }
+            await createGroup(formdata)
             navigate('/groups')
         } catch(e) {
             console.log(e)

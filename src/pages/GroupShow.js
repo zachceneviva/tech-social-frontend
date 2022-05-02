@@ -92,7 +92,7 @@ export default function GroupShow() {
     };
 
     const handleImageChange = (e) => {
-        setPostImage(e.target.value);
+        setPostImage(e.target.files[0]);
     };
 
     const handleGhChange = (e) => {

@@ -35,10 +35,10 @@ export default function Create(props) {
                         <Form.Group as={Col} controlId="formGridAvatar">
                             <Form.Label>Group Photo</Form.Label>
                             <Form.Control
-                                placeholder="https://"
                                 autoComplete="off"
                                 name="photo"
-                                value={props.photo}
+                                type='file'
+                                accept='.png, .jpg, .jpeg'
                                 onChange={props.handlePhoto}
                             />
                         </Form.Group>
@@ -46,10 +46,10 @@ export default function Create(props) {
                         <Form.Group as={Col} controlId="formGridCoverPhoto">
                             <Form.Label>Group Cover Photo</Form.Label>
                             <Form.Control
-                                placeholder="https://"
                                 autoComplete="off"
                                 name="coverPhoto"
-                                value={props.coverPhoto}
+                                type='file'
+                                accept='.png, .jpg, .jpeg'
                                 onChange={props.handleCoverPhoto}
                             />
                         </Form.Group>
@@ -101,10 +101,10 @@ export default function Create(props) {
                         <Form.Group className="mb-3" controlId="formGridAvatar">
                             <Form.Label>Meetup Photo</Form.Label>
                             <Form.Control
-                                placeholder="https://"
                                 autoComplete="off"
                                 name="photo"
-                                value={props.photo}
+                                type='file'
+                                accept='.png, .jpg, .jpeg'
                                 onChange={props.handlePhoto}
                             />
                         </Form.Group>
